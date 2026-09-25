@@ -1,0 +1,1205 @@
+/* ==================== TIMELINE VIEW ====================
+   One self-contained card: header controls, the era ribbon, the lane canvas and
+   the legend footer, followed by the detail card for the selected record.
+   Every colour is a scoped --tl-* token, so the card ships on the app's dark
+   palette and swaps to the light skin at the bottom of this file. */
+
+.timeline-page {
+  animation: fadeUp 0.5s var(--ease) both;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+
+.tlc {
+  /* --- app palette (default) --- */
+  --tl-bg:          var(--panel);
+  --tl-bg-soft:     var(--bg-2);
+  --tl-bg-raised:   var(--panel-2);
+  --tl-fg:          var(--text);
+  --tl-fg-2:        var(--text-2);
+  --tl-fg-3:        var(--muted);
+  --tl-line:        var(--line);
+  --tl-line-2:      var(--line-2);
+  --tl-line-hover:  var(--line-3);
+  --tl-grid:        rgba(52, 246, 193, 0.08);
+  --tl-grid-strong: rgba(52, 246, 193, 0.18);
+
+  /* lane colours — one per category row */
+  --tl-figures:     var(--teal-soft);
+  --tl-companions:  var(--teal);
+  --tl-tabiun:      var(--blue);
+  --tl-scholars:    var(--purple);
+  --tl-books:       var(--gold);
+  --tl-events:      var(--red);
+  --tl-places:      var(--cyan);
+  --tl-dynasties:   var(--orange);
+
+  /* historical period accents (the period bar) */
+  --tl-era-1:       #a49ac4;
+  --tl-era-2:       var(--teal-soft);
+  --tl-era-3:       var(--teal);
+  --tl-era-4:       var(--gold);
+  --tl-era-5:       var(--purple);
+  --tl-era-6:       #b9b2d8;
+
+  --tl-accent:      var(--teal);
+  --tl-switch-off:  rgba(255, 255, 255, 0.18);
+  --tl-sel:         #ffffff;
+  --tl-tip-bg:      rgba(4, 15, 22, 0.97);
+  --tl-tip-fg:      var(--text);
+  --tl-tip-line:    var(--line-2);
+  --tl-tip-mute:    var(--muted);
+
+  /* geometry shared with the renderer (kept in px so JS can read them) */
+  --tl-labels-w:    224px;
+  --tl-side-pad:    18px;
+  --tl-axis-h:      38px;
+  --tl-select-h:    34px;
+  --tlc-pad:        18px;
+
+  background: var(--tl-bg);
+  border: 1px solid var(--tl-line-2);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@keyframes tlFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== HEADER ==================== */
+
+.tlc-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-5);
+  flex-wrap: wrap;
+  padding: 16px var(--tlc-pad);
+  flex: 0 0 auto;
+}
+.tlc-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--tl-fg);
+}
+.tlc-sub {
+  margin-top: 2px;
+  max-width: 62ch;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--tl-fg-3);
+}
+.tlc-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.tlc-btn {
+  height: 34px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--tl-line-2);
+  border-radius: var(--r-sm);
+  background: var(--tl-bg-soft);
+  color: var(--tl-fg);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color var(--t-fast) var(--ease), background var(--t-fast) var(--ease),
+              color var(--t-fast) var(--ease);
+}
+.tlc-btn:hover {
+  border-color: var(--tl-accent);
+  color: var(--tl-accent);
+  background: color-mix(in srgb, var(--tl-accent) 8%, transparent);
+}
+.tlc-caret { font-size: 9px; color: var(--tl-fg-3); }
+
+/* --- category menu --- */
+.tlc-select-wrap { position: relative; }
+
+.tlc-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 30;
+  min-width: 260px;
+  padding: 6px;
+  background: var(--tl-bg-raised);
+  border: 1px solid var(--tl-line-2);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-md);
+  animation: tlFadeIn 0.16s var(--ease) both;
+}
+.tlc-menu[hidden] { display: none; }
+/* --- category sidebar (the menu behind the Categories button) ---
+   A row is a toggle, never a removal: a dimmed category fades its name and its
+   colour indicators to the --tl-dim the row carries — half strength, which is
+   DIM_OPACITY_SIDEBAR in js/timeline.js — and nothing else. The row itself, its
+   background, its hover, its focus ring and its hit area all stay at full
+   strength, so a dimmed row is always there to click back on. On the canvas the
+   same category fades much further (DIM_OPACITY): there the reader asked for it
+   gone, here they only asked for it set aside. */
+.tlc-menu-actions { display: flex; gap: 4px; }
+.tlc-menu-all {
+  flex: 1 1 0;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: none;
+  color: var(--tl-accent);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+}
+.tlc-menu-all:hover { background: var(--tl-bg-soft); }
+.tlc-menu-all:active { transform: scale(0.96); }
+.tlc-menu-all:focus-visible { outline: 2px solid var(--tl-accent); outline-offset: -2px; }
+.tlc-menu-sep { height: 1px; margin: 5px 4px; background: var(--tl-line); }
+.tlc-menu-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: var(--r-sm);
+  font-size: 12px;
+  color: var(--tl-fg);
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease),
+              transform var(--t-fast) var(--ease);
+}
+.tlc-menu-row:hover { background: var(--tl-bg-soft); color: var(--tl-accent); }
+.tlc-menu-row:active {
+  background: color-mix(in srgb, var(--lane) 20%, transparent);
+  transform: scale(0.985);
+}
+.tlc-menu-row:focus-visible { outline: 2px solid var(--tl-accent); outline-offset: -2px; }
+.tlc-menu-row.press { animation: catFlash 320ms var(--ease); }
+.tlc-menu-row.press .tlc-menu-dot,
+.tlc-menu-row.press .tlc-menu-state { animation: catDotPulse 320ms var(--ease); }
+.tlc-menu-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: opacity 220ms var(--ease);
+}
+.tlc-menu-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--lane);
+  flex: 0 0 auto;
+  transition: transform var(--t-fast) var(--ease), opacity 220ms var(--ease);
+}
+.tlc-menu-row:hover .tlc-menu-dot { transform: scale(1.2); }
+/* The pip on the right: filled while the category is drawn, hollow while dimmed. */
+.tlc-menu-state {
+  margin-left: auto;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  border: 1.5px solid var(--tl-fg-3);
+  flex: 0 0 auto;
+  transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease),
+              opacity 220ms var(--ease);
+}
+.tlc-menu-row[aria-pressed='true'] .tlc-menu-state {
+  background: var(--lane);
+  border-color: var(--lane);
+}
+/* The whole of a dimmed control: its name, its colour dot and its state pip drop
+   to the half strength the row carries as --tl-dim (set by js/timeline.js). The
+   row itself keeps its background, its hover and its focus ring — and the dot
+   keeps the category's own accent colour, so a dimmed category is still told
+   apart from the others at a glance, and is still the thing the reader clicks to
+   bring it back. */
+.tlc-menu-row.dimmed .tlc-menu-name,
+.tlc-menu-row.dimmed .tlc-menu-dot,
+.tlc-menu-row.dimmed .tlc-menu-state,
+.tlc-lane.dimmed .tlc-lane-name,
+.tlc-lane.dimmed .tlc-lane-count,
+.tlc-lane.dimmed .tlc-ico { opacity: var(--tl-dim, 1); }
+
+@keyframes catFlash {
+  0%   { background-color: color-mix(in srgb, var(--lane) 24%, transparent); }
+  100% { background-color: transparent; }
+}
+@keyframes catDotPulse {
+  0%   { transform: scale(1); }
+  45%  { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+/* --- range window ("500 BCE – 1500 CE" + two handles) --- */
+.tlc-window {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 220px;
+}
+.tlc-window-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  color: var(--tl-fg-2);
+  text-align: center;
+}
+.tlc-range {
+  position: relative;
+  height: 20px;
+}
+.tlc-range-track {
+  position: absolute;
+  top: 9px; left: 0; right: 0;
+  height: 3px;
+  border-radius: var(--r-pill);
+  background: var(--tl-line);
+}
+/* The selected window between the two handles. */
+.tlc-range-fill {
+  position: absolute;
+  top: 9px;
+  height: 3px;
+  border-radius: var(--r-pill);
+  background: var(--tl-accent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--tl-accent) 45%, transparent);
+}
+.tlc-range input {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 20px;
+  margin: 0;
+  background: none;
+  -webkit-appearance: none;
+  appearance: none;
+  pointer-events: none;
+  outline: none;
+}
+.tlc-range input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--tl-bg);
+  border: 2px solid var(--tl-accent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--tl-accent) 40%, transparent);
+  cursor: pointer;
+  pointer-events: all;
+}
+.tlc-range input::-moz-range-thumb {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--tl-bg);
+  border: 2px solid var(--tl-accent);
+  cursor: pointer;
+  pointer-events: all;
+}
+.tlc-range input::-moz-range-track { background: none; }
+.tlc-range input:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--tl-accent) 30%, transparent);
+}
+
+/* --- grid unit select --- */
+.tlc-select { display: inline-flex; align-items: center; gap: 6px; }
+.tlc-select select {
+  height: 34px;
+  padding: 0 26px 0 10px;
+  border: 1px solid var(--tl-line-2);
+  border-radius: var(--r-sm);
+  background: var(--tl-bg-soft);
+  color: var(--tl-fg);
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color var(--t-fast) var(--ease);
+}
+.tlc-select select:hover { border-color: var(--tl-line-hover); }
+.tlc-select .tlc-caret {
+  margin-left: -22px;
+  pointer-events: none;
+}
+
+/* ==================== HISTORICAL PERIOD BAR ==================== */
+/* One segment per period, sized by the years it covers (with a floor so a short
+   period stays readable). The whole segment is the button: dot + name, the date
+   range underneath, and an accent rail along the bottom that sweeps left → right
+   on hover and on click. */
+
+.tlc-ribbon {
+  padding: 10px var(--tlc-pad);
+  border-top: 1px solid var(--tl-line);
+  flex: 0 0 auto;
+}
+.tlc-ribbon-inner {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--tl-line);
+  border-radius: var(--r-md);
+  background: var(--tl-bg-soft);
+  overflow: hidden;
+}
+
+.tlc-era {
+  --era: var(--tl-accent);
+  position: relative;
+  flex: var(--era-grow, 1) 1 0;
+  min-width: 132px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 9px 14px 12px;
+  border: 0;
+  border-left: 1px solid var(--tl-line);
+  background-color: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 200ms var(--ease);
+}
+.tlc-era:first-child { border-left: 0; }
+
+.tlc-era-head {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.tlc-era-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--era);
+  flex: 0 0 auto;
+  transition: box-shadow 200ms var(--ease), filter 200ms var(--ease), transform 200ms var(--ease);
+}
+.tlc-era-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--tl-fg-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 200ms var(--ease);
+}
+.tlc-era-range {
+  padding-left: 18px;      /* lines the dates up under the name, clear of the dot */
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--tl-fg-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  transition: color 200ms var(--ease);
+}
+
+/* The accent rail — hidden until the segment is hovered, clicked or active. */
+.tlc-era::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background: var(--era);
+  transform: scaleX(0);
+  transform-origin: left center;
+  opacity: 0;
+  transition: transform 200ms var(--ease), opacity 200ms var(--ease);
+}
+
+/* --- hover --- */
+.tlc-era:hover { background-color: color-mix(in srgb, var(--era) 10%, transparent); }
+.tlc-era:hover .tlc-era-dot {
+  filter: brightness(1.15);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--era) 22%, transparent),
+              0 0 12px color-mix(in srgb, var(--era) 55%, transparent);
+}
+.tlc-era:hover .tlc-era-name { color: var(--tl-fg); }
+.tlc-era:hover .tlc-era-range { color: var(--tl-fg-2); }
+.tlc-era:hover::after { transform: scaleX(1); opacity: 0.5; }
+
+/* --- keyboard focus --- */
+.tlc-era:focus-visible {
+  outline: none;
+  background-color: color-mix(in srgb, var(--era) 12%, transparent);
+}
+.tlc-era:focus-visible .tlc-era-dot {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--era) 28%, transparent);
+}
+.tlc-era:focus-visible::after { transform: scaleX(1); opacity: 0.6; }
+
+/* --- the period the canvas is showing --- */
+.tlc-era.active { background-color: color-mix(in srgb, var(--era) 14%, transparent); }
+.tlc-era.active .tlc-era-dot {
+  filter: brightness(1.2);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--era) 24%, transparent),
+              0 0 14px color-mix(in srgb, var(--era) 60%, transparent);
+}
+.tlc-era.active .tlc-era-name { color: var(--tl-fg); }
+.tlc-era.active .tlc-era-range { color: var(--tl-fg-2); }
+.tlc-era.active::after { transform: scaleX(1); opacity: 1; }
+
+/* --- click feedback (added for ~320ms, then removed) --- */
+.tlc-era.pulse { animation: eraFlash 320ms var(--ease); }
+.tlc-era.pulse .tlc-era-dot { animation: eraDotPulse 320ms var(--ease); }
+.tlc-era.pulse::after { animation: eraSweep 320ms cubic-bezier(0.2, 0.7, 0.3, 1) both; }
+
+@keyframes eraFlash {
+  0%   { background-color: color-mix(in srgb, var(--era) 22%, transparent); }
+  100% { background-color: color-mix(in srgb, var(--era) 14%, transparent); }
+}
+@keyframes eraDotPulse {
+  0%   { transform: scale(1); }
+  45%  { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+@keyframes eraSweep {
+  from { transform: scaleX(0); opacity: 0.3; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+
+/* ==================== CANVAS ==================== */
+
+.tlc-chart {
+  display: grid;
+  grid-template-columns: var(--tl-labels-w) minmax(0, 1fr);
+  align-items: start;
+  border-top: 1px solid var(--tl-line);
+  flex: 0 0 auto;
+  /* The canvas owns the scroll wheel (see the wheel handler in js/timeline.js)
+     and a sideways drag pans it, but an up-and-down touch drag still scrolls
+     the page — the timeline never becomes a scroll trap. */
+  touch-action: pan-y;
+}
+
+/* --- frozen lane labels (left column) --- */
+.tlc-labels {
+  display: flex;
+  flex-direction: column;
+  /* The canvas reserves the same bands above the first lane (the year ruler)
+     and below the last one (the selection callout). */
+  padding-top: var(--tl-axis-h);
+  padding-bottom: var(--tl-select-h);
+  border-right: 1px solid var(--tl-line);
+}
+.tlc-lane {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+  padding: 0 14px;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  /* The row itself is never faded — a dimmed category only half-fades its icon,
+     its name and its count (see the .dimmed rules above), so those are the things
+     that ease and the row only has to ease its own background. */
+  transition: background var(--t-fast) var(--ease);
+}
+.tlc-lane + .tlc-lane { border-top: 1px solid var(--tl-line); }
+.tlc-lane:hover { background: var(--tl-bg-soft); }
+.tlc-lane:hover .tlc-ico { filter: brightness(1.15); }
+.tlc-lane:hover .tlc-lane-name { color: var(--tl-fg); }
+.tlc-lane:active { background: color-mix(in srgb, var(--lane) 16%, transparent); }
+.tlc-lane:focus-visible { outline: 2px solid var(--tl-accent); outline-offset: -2px; }
+.tlc-lane.press { animation: catFlash 320ms var(--ease); }
+.tlc-lane.press .tlc-ico { animation: catDotPulse 320ms var(--ease); }
+/* A lane that can never be dimmed is a label, not a control: nothing to click. */
+.tlc-lane.locked { cursor: default; }
+.tlc-lane.locked:hover { background: none; }
+.tlc-lane.locked:hover .tlc-ico { filter: none; }
+.tlc-ico {
+  width: 22px; height: 22px;
+  display: inline-flex;
+  flex: 0 0 auto;
+  color: var(--lane);
+  transition: filter var(--t-fast) var(--ease), opacity 220ms var(--ease);
+}
+.tlc-ico svg { width: 100%; height: 100%; }
+.tlc-lane-name {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--tl-fg);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: opacity 220ms var(--ease);
+}
+.tlc-lane-count {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--tl-fg-3);
+  transition: opacity 220ms var(--ease);
+}
+
+/* --- canvas body (right of the labels) --- */
+.tlc-track {
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  background-image: radial-gradient(circle, var(--tl-grid) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+.tlc-track.pannable { cursor: grab; }
+.tlc-track.pannable.dragging { cursor: grabbing; }
+.tlc-svg { display: block; position: relative; }
+/* A dimmed category fades as one piece — spine, markers and labels together — and
+   its markers stop taking clicks while they are invisible. The lane itself never
+   leaves the canvas, so nothing below or beside it moves. */
+.tlc-svg g[data-lane] { transition: opacity 220ms var(--ease); }
+.tlc-svg g[data-lane].dimmed { pointer-events: none; }
+.tlc-svg [data-rec] { cursor: pointer; }
+.tlc-svg [data-rec]:focus { outline: none; }
+.tlc-svg [data-rec]:focus-visible circle { stroke: var(--tl-sel); stroke-width: 2; }
+
+/* --- the year ruler, and the view that pins it --- */
+/* The ruler is drawn in its own svg so that it can be pinned: the Lifespan View is
+   taller than the screen, and the band sticks to the top of the page while the
+   rows travel under it, which is what keeps the years — and the zoom — in sight.
+   The negative bottom margin slides the canvas up under the band, so the ruler
+   keeps occupying exactly the strip the canvas reserves for it. */
+.tlc-axis-band {
+  position: relative;
+  z-index: 3;
+  height: var(--tl-axis-h);
+  margin-bottom: calc(-1 * var(--tl-axis-h));
+  overflow: hidden;
+  background: linear-gradient(180deg,
+    var(--tl-bg) 0%, var(--tl-bg) 82%,
+    color-mix(in srgb, var(--tl-bg) 55%, transparent) 100%);
+}
+.tlc-axis-svg { display: block; }
+
+/* ==================== LIFESPAN VIEW ==================== */
+/* One thin line per figure, birth → death, packed into rows. Nothing is removed:
+   the frozen label column steps aside because the rows are no longer lanes, so the
+   canvas takes the whole width, and `clip` replaces `hidden` because clipping via
+   `clip` does not create a scrollport — which is what lets the ruler stick. */
+.tlc.lifespan { overflow: clip; }
+.tlc.lifespan .tlc-track { overflow: clip; }
+.tlc.lifespan .tlc-chart { grid-template-columns: minmax(0, 1fr); }
+.tlc.lifespan .tlc-labels { display: none; }
+.tlc.lifespan .tlc-axis-band {
+  position: sticky;
+  top: var(--topbar-h);
+  box-shadow: 0 12px 20px -16px rgba(2, 9, 15, 0.95);
+}
+
+.tlc-span { cursor: pointer; }
+.tlc-span .tlc-span-line { transition: stroke-width var(--t-fast) var(--ease); }
+/* Hover, focus and selection all light the life up in its own colour. The group
+   carries that colour as `color`, so one rule covers all four categories. */
+.tlc-span:hover,
+.tlc-span.selected,
+.tlc-span:focus-visible { filter: drop-shadow(0 0 6px currentColor); }
+.tlc-span:hover .tlc-span-line,
+.tlc-span.selected .tlc-span-line,
+.tlc-span:focus-visible .tlc-span-line { stroke-width: 3.2; }
+.tlc-span:focus { outline: none; }
+/* The name is a label on the line, never a hit target of its own. */
+.tlc-span-name { pointer-events: none; }
+
+/* ==================== LEGEND FOOTER ==================== */
+
+.tlc-legend {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 12px var(--tlc-pad);
+  border-top: 1px solid var(--tl-line);
+  flex: 0 0 auto;
+}
+.tlc-legend-items {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.tlc-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11.5px;
+  color: var(--tl-fg-2);
+}
+.tlc-legend-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--lane);
+  flex: 0 0 auto;
+}
+.tlc-hint {
+  font-size: 11px;
+  color: var(--tl-fg-3);
+}
+.tlc-tagline {
+  margin-left: auto;
+  font-size: 11px;
+  font-style: italic;
+  color: var(--tl-fg-3);
+}
+
+/* --- "Show labels" switch --- */
+.tlc-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  color: var(--tl-fg-2);
+  cursor: pointer;
+  user-select: none;
+}
+.tlc-switch input {
+  position: absolute;
+  width: 1px; height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.tlc-switch-track {
+  position: relative;
+  width: 36px; height: 20px;
+  border-radius: var(--r-pill);
+  background: var(--tl-switch-off);
+  flex: 0 0 auto;
+  transition: background var(--t-fast) var(--ease);
+}
+.tlc-switch input:checked ~ .tlc-switch-track { background: var(--tl-accent); }
+.tlc-switch input:focus-visible ~ .tlc-switch-track {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--tl-accent) 28%, transparent);
+}
+.tlc-switch-knob {
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: transform var(--t-fast) var(--ease);
+}
+.tlc-switch input:checked ~ .tlc-switch-track .tlc-switch-knob {
+  transform: translateX(16px);
+}
+
+/* --- Lifespan switch, beside "Show labels" --- */
+/* A button rather than a switch: it does not change what is drawn so much as how,
+   so it reads as a mode. The dot and the border light up in the accent while the
+   Lifespan View is on, which is a state the "Show labels" switch never has. */
+.tlc-lifespan {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 26px;
+  padding: 0 11px;
+  border: 1px solid var(--tl-line-2);
+  border-radius: var(--r-pill);
+  background: var(--tl-bg-soft);
+  color: var(--tl-fg-2);
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color var(--t-fast) var(--ease), background var(--t-fast) var(--ease),
+              color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+.tlc-lifespan:hover { border-color: var(--tl-line-hover); color: var(--tl-fg); }
+.tlc-lifespan:active { transform: scale(0.97); }
+.tlc-lifespan:focus-visible { outline: 2px solid var(--tl-accent); outline-offset: 2px; }
+.tlc-lifespan-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--tl-fg-3);
+  flex: 0 0 auto;
+  transition: background var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+/* The active state: the one place in this footer where the accent means "on". */
+.tlc-lifespan[aria-pressed='true'] {
+  border-color: var(--tl-accent);
+  background: color-mix(in srgb, var(--tl-accent) 12%, transparent);
+  color: var(--tl-accent);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--tl-accent) 20%, transparent);
+}
+.tlc-lifespan[aria-pressed='true'] .tlc-lifespan-dot {
+  background: var(--tl-accent);
+  box-shadow: 0 0 8px var(--tl-accent);
+}
+
+/* --- the two keys and the two hints --- */
+/* The Lifespan View is read by generation, so its key stands in for the entity
+   legend and its hint stands in for the wheel hint: only one of each is shown. */
+.tlc-legend-items--spans { display: none; }
+.tlc-hint--spans { display: none; }
+.tlc.lifespan .tlc-legend-items--lanes { display: none; }
+.tlc.lifespan .tlc-legend-items--spans { display: flex; }
+.tlc.lifespan .tlc-hint--lanes { display: none; }
+.tlc.lifespan .tlc-hint--spans { display: inline; }
+.tlc-legend-count {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--tl-fg-3);
+}
+
+/* ==================== SELECTED RECORD CARD ==================== */
+/* One fixed-height panel at the foot of the view: the hero on the left, the lists
+   on the right. A card that grew and shrank with every record moved the whole page
+   under the reader's pointer, and left the canvas a different distance away each
+   time, so the panel has a height of its own and each half scrolls inside it.
+   --tl-row-h is one list row; --tl-rows-h is the four of them plus their gaps,
+   which is what VISIBLE_ROWS in js/timeline.js counts. */
+
+.tlc-detail {
+  --tl-detail-h: 370px;
+  --tl-row-h: 55px;
+  --tl-rows-h: calc(var(--tl-row-h) * 4 + 18px);
+  background: var(--panel);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
+  padding: 16px 18px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 22px;
+  height: var(--tl-detail-h);
+  overflow: hidden;
+}
+.tlc-detail[hidden] { display: none; }
+
+.tlc-detail-hero {
+  display: flex;
+  gap: 18px;
+  min-width: 0;
+  min-height: 0;
+  /* A hero that outgrows the panel scrolls rather than pushing it open. */
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.tlc-detail-media {
+  position: relative;
+  flex: 0 0 auto;
+  width: 128px;
+  height: 128px;
+  display: grid;
+  place-items: center;
+  gap: 4px;
+  padding: 10px;
+  border: 1px solid color-mix(in srgb, var(--rec-color, var(--teal)) 45%, transparent);
+  border-radius: var(--r-md);
+  background:
+    radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--rec-color, var(--teal)) 18%, transparent), transparent 68%),
+    var(--bg-2);
+  overflow: hidden;
+  text-align: center;
+}
+.tlc-detail-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--r-sm);
+}
+.tlc-detail-mark {
+  font-family: var(--font-arabic);
+  font-size: 30px;
+  line-height: 1.2;
+  color: var(--rec-color, var(--teal));
+  direction: rtl;
+}
+.tlc-detail-arabic {
+  font-family: var(--font-arabic);
+  font-size: 12px;
+  color: var(--muted);
+  direction: rtl;
+}
+
+.tlc-detail-body { min-width: 0; }
+.tlc-detail-eyebrow {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rec-color, var(--teal));
+}
+.tlc-detail-name {
+  margin-top: 4px;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--text);
+}
+.tlc-detail-dates {
+  margin-top: 3px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+.tlc-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.tlc-tag {
+  padding: 3px 9px;
+  border: 1px solid color-mix(in srgb, var(--rec-color, var(--teal)) 35%, transparent);
+  border-radius: var(--r-pill);
+  background: color-mix(in srgb, var(--rec-color, var(--teal)) 8%, transparent);
+  color: var(--rec-color, var(--teal));
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.tlc-detail-bio {
+  margin-top: 10px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+.tlc-detail-cta {
+  margin-top: 14px;
+  height: 34px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--teal);
+  border-radius: var(--r-sm);
+  background: rgba(52, 246, 193, 0.06);
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 600;
+  transition: all var(--t-fast) var(--ease);
+}
+.tlc-detail-cta:hover {
+  background: var(--teal);
+  color: var(--bg);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(52, 246, 193, 0.25);
+}
+
+/* --- tabs --- */
+/* The side half is a column that fills the panel: the tab strip is its fixed
+   header, the list under it takes what is left and scrolls, and the count sits on
+   the floor of the panel whatever the list holds. */
+.tlc-detail-side {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+.tlc-tabs {
+  display: flex;
+  gap: 18px;
+  flex: 0 0 auto;
+  border-bottom: 1px solid var(--line);
+}
+.tlc-tab {
+  padding: 4px 0 9px;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+.tlc-tab:hover { color: var(--text-2); }
+.tlc-tab.active {
+  color: var(--teal);
+  border-bottom-color: var(--teal);
+}
+.tlc-tab-count {
+  margin-left: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted-2);
+}
+.tlc-tab.active .tlc-tab-count { color: var(--teal); }
+/* Four rows are on show and the rest scroll: the list never stretches the panel,
+   so a record with twelve events and one with none leave the card the same size. */
+.tlc-tab-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+  flex: 0 1 auto;
+  min-height: 0;
+  max-height: var(--tl-rows-h);
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* What the list holds and whether there is more of it. */
+.tlc-rows-note {
+  margin-top: auto;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted-2);
+}
+
+.tlc-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  /* An exact height, so four rows are exactly four rows: the lines inside are
+     clamped to one each, which is what the number is measured against. */
+  height: var(--tl-row-h);
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--bg-2);
+  text-align: left;
+  transition: all var(--t-fast) var(--ease);
+}
+.tlc-row:hover {
+  border-color: var(--rec-color, var(--teal));
+  background: var(--panel-2);
+  transform: translateX(3px);
+}
+.tlc-row-year {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted-2);
+  white-space: nowrap;
+  max-width: 104px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tlc-row-body { min-width: 0; }
+.tlc-row-body strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tlc-row-body span {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tlc-row:hover .tlc-row-body strong { color: var(--rec-color, var(--teal)); }
+.tlc-row-arrow { color: var(--muted-2); font-size: 11px; }
+.tlc-empty {
+  padding: 14px;
+  border: 1px dashed var(--line-2);
+  border-radius: var(--r-sm);
+  color: var(--muted);
+  font-size: 11.5px;
+  text-align: center;
+}
+
+/* ==================== TOOLTIP ==================== */
+
+.tlc-tip {
+  position: absolute;
+  top: 0; left: 0;
+  z-index: 20;
+  width: max-content;
+  max-width: 264px;
+  padding: 11px 13px;
+  border-radius: var(--r-md);
+  background: var(--tl-tip-bg);
+  color: var(--tl-tip-fg);
+  border: 1px solid var(--tl-tip-line);
+  box-shadow: var(--shadow-md);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--t-fast) var(--ease);
+}
+.tlc-tip.show { opacity: 1; }
+.tlc-tip-name { font-size: 12px; font-weight: 600; }
+.tlc-tip-ar {
+  font-family: var(--font-arabic);
+  font-size: 14px;
+  color: var(--tl-tip-mute);
+  direction: rtl;
+  margin-top: 2px;
+}
+.tlc-tip-dates {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--tl-tip-mute);
+  margin-top: 4px;
+}
+.tlc-tip-role {
+  display: inline-block;
+  margin-top: 7px;
+  padding: 3px 8px;
+  border-radius: var(--r-pill);
+  background: color-mix(in srgb, var(--tl-accent) 16%, transparent);
+  color: var(--tl-accent);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.tlc-tip-note {
+  margin-top: 7px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--tl-tip-mute);
+}
+
+/* ==================== LIGHT SKIN ==================== */
+/* Add data-tl-theme="light" to the root div.tlc for the paper palette. */
+
+.tlc[data-tl-theme='light'] {
+  --tl-bg:          #ffffff;
+  --tl-bg-soft:     #f7f9fb;
+  --tl-bg-raised:   #ffffff;
+  --tl-fg:          #16191d;
+  --tl-fg-2:        #5a646e;
+  --tl-fg-3:        #8d969e;
+  --tl-line:        #e4e8ec;
+  --tl-line-2:      #d3d9e0;
+  --tl-line-hover:  #c9d1d9;
+  --tl-grid:        rgba(20, 40, 60, 0.06);
+  --tl-grid-strong: rgba(20, 40, 60, 0.18);
+  --tl-figures:     #2f9e44;
+  --tl-companions:  #0c8599;
+  --tl-tabiun:      #1c7ed6;
+  --tl-scholars:    #7048e8;
+  --tl-books:       #b8860b;
+  --tl-events:      #e5484d;
+  --tl-places:      #1971c2;
+  --tl-dynasties:   #e8590c;
+  --tl-era-1:       #8d969e;
+  --tl-era-2:       #2f9e44;
+  --tl-era-3:       #0c8599;
+  --tl-era-4:       #b8860b;
+  --tl-era-5:       #1971c2;
+  --tl-era-6:       #7048e8;
+  --tl-accent:      #0ca678;
+  --tl-switch-off:  #d7dde3;
+  --tl-sel:         #16191d;
+  --tl-tip-bg:      #14191f;
+  --tl-tip-fg:      #eef2f5;
+  --tl-tip-line:    rgba(255, 255, 255, 0.10);
+  --tl-tip-mute:    rgba(238, 242, 245, 0.62);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.18);
+}
+.tlc[data-tl-theme='light'] .tlc-menu { box-shadow: 0 18px 44px rgba(10, 20, 30, 0.18); }
+.tlc[data-tl-theme='light'] .tlc-detail { box-shadow: 0 18px 44px rgba(10, 20, 30, 0.14); }
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 1100px) {
+  .tlc { --tl-labels-w: 188px; }
+  /* Stacked, the panel cannot hold a fixed height without clipping one half, so it
+     goes back to sizing itself — the list still shows its four rows and scrolls. */
+  .tlc-detail {
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+    overflow: visible;
+  }
+  .tlc-detail-hero { overflow: visible; }
+}
+@media (max-width: 900px) {
+  .tlc-head { padding: 14px; gap: 12px; }
+  .tlc-controls { gap: 10px; }
+  .tlc-window { min-width: 170px; }
+  .tlc-tagline { margin-left: 0; }
+
+  /* The period bar becomes a two-column grid so no segment is squeezed. */
+  .tlc-ribbon-inner {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .tlc-era {
+    min-width: 0;
+    border-left: 0;
+    border-top: 1px solid var(--tl-line);
+  }
+  .tlc-era:nth-child(-n + 2) { border-top: 0; }
+  .tlc-era:nth-child(odd) { border-right: 1px solid var(--tl-line); }
+}
+@media (max-width: 820px) {
+  .tlc { --tl-labels-w: 132px; --tlc-pad: 14px; }
+  .tlc-title { font-size: 17px; }
+  .tlc-lane { padding: 0 10px; gap: 7px; }
+  .tlc-lane-name { font-size: 11px; }
+  .tlc-ico { width: 18px; height: 18px; }
+  .tlc-lane-count { display: none; }
+  .tlc-legend { padding: 10px 14px; gap: 12px; }
+  .tlc-legend-items { gap: 12px; }
+  .tlc-hint,
+  .tlc.lifespan .tlc-hint--spans { display: none; }
+  .tlc-detail { padding: 14px; }
+  .tlc-detail-media { width: 96px; height: 96px; }
+  .tlc-detail-name { font-size: 18px; }
+}
+
+/* ==================== MOTION PREFERENCES ==================== */
+/* A reader who asked for reduced motion still gets the active period, just
+   without the sweeps and pulses. */
+
+@media (prefers-reduced-motion: reduce) {
+  .tlc-era,
+  .tlc-era::after,
+  .tlc-era-dot,
+  .tlc-era-name,
+  .tlc-era-range,
+  .tlc-menu-row,
+  .tlc-menu-all,
+  .tlc-menu-dot,
+  .tlc-menu-state,
+  .tlc-menu-name,
+  .tlc-lane,
+  .tlc-lane-name,
+  .tlc-lane-count,
+  .tlc-ico,
+  .tlc-lifespan,
+  .tlc-lifespan-dot,
+  .tlc-span .tlc-span-line,
+  .tlc-svg g[data-lane] {
+    transition-duration: 1ms;
+  }
+  .tlc-era.pulse,
+  .tlc-era.pulse::after,
+  .tlc-era.pulse .tlc-era-dot,
+  .tlc-menu-row.press,
+  .tlc-menu-row.press .tlc-menu-dot,
+  .tlc-menu-row.press .tlc-menu-state,
+  .tlc-lane.press,
+  .tlc-lane.press .tlc-ico {
+    animation: none;
+  }
+  .timeline-page { animation: none; }
+}

@@ -1,0 +1,126 @@
+/* ==================== PLACES ====================
+   The atlas: the same projection, coastline file and place ids the Events map
+   draws from, with a marker size and colour that say what the record is. */
+
+.plc-center { gap: 10px; }
+
+.plc-frame {
+  position: relative;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--bg);
+}
+.plc-svg { width: 100%; display: block; cursor: grab; background: radial-gradient(circle at 50% 40%, #07202c, #02121a); }
+.plc-svg.dragging { cursor: grabbing; }
+
+.plc-sea { fill: transparent; }
+.plc-land { fill: #0c2029; stroke: #1b3d4c; stroke-width: 0.5; }
+.plc-land.main { fill: #0d222c; }
+.plc-graticule line { stroke: rgba(52, 246, 193, 0.06); stroke-width: 0.6; }
+.plc-frame[data-layer="grid"] .plc-land { fill: #081820; }
+.plc-frame[data-layer="terrain"] .plc-land { fill: #102b26; }
+
+.plc-marker { cursor: pointer; }
+.plc-halo { fill: var(--dot); opacity: 0.16; transition: opacity var(--t-fast) var(--ease); }
+.plc-dot { fill: var(--dot); stroke: #04121a; stroke-width: 1.1; }
+.plc-marker:hover .plc-halo { opacity: 0.34; }
+.plc-marker.selected .plc-halo { opacity: 0.42; }
+.plc-tag {
+  font-size: 15px; font-weight: 600;
+  fill: var(--text);
+  paint-order: stroke;
+  stroke: #04121a; stroke-width: 3.5;
+}
+.plc-marker:focus { outline: none; }
+.plc-marker:focus-visible .plc-dot { stroke: #fff; stroke-width: 2; }
+
+.plc-journey path { stroke: var(--gold); stroke-width: 1.6; stroke-dasharray: 7 5; opacity: 0.7; }
+.plc-journey-label { font-size: 19px; fill: var(--gold); opacity: 0.85; }
+
+.plc-zoom {
+  position: absolute; top: 10px; right: 10px;
+  display: flex; flex-direction: column; gap: 5px;
+}
+.plc-legend {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  padding: 8px 12px;
+  border-top: 1px solid var(--line);
+  background: var(--panel);
+  font-size: 10px; color: var(--muted);
+}
+.plc-legend-item { display: inline-flex; align-items: center; gap: 5px; }
+.plc-legend-item::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--dot);
+}
+.plc-legend-note { color: var(--muted-2); }
+
+/* --- time period strip -------------------------------------------------- */
+
+.plc-period {
+  padding: 10px 12px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  background: var(--panel);
+}
+.plc-period-svg { width: 100%; height: 58px; display: block; }
+.plc-axis { stroke: var(--line-2); stroke-width: 1; }
+.plc-mark { cursor: pointer; }
+.plc-mark circle { fill: var(--cyan); }
+.plc-mark text { font-family: var(--font-mono); font-size: 11px; fill: var(--muted-2); }
+.plc-mark.selected circle { fill: var(--gold); r: 6; }
+.plc-mark.selected text { fill: var(--text); }
+
+/* --- the list ----------------------------------------------------------- */
+
+.plc-list {
+  display: flex; flex-direction: column; gap: 6px;
+  max-height: calc(var(--dsh-col-h) - 420px);
+  min-height: 200px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.plc-row {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 8px 10px;
+  border: 1px solid var(--line-2);
+  border-left: 2px solid var(--dot, var(--teal));
+  border-radius: var(--r-sm);
+  background: var(--panel);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+.plc-row:hover { border-color: var(--line-3); background: var(--panel-2); }
+.plc-row.selected { border-color: var(--teal); background: color-mix(in srgb, var(--teal) 7%, var(--panel-2)); }
+.plc-row-name { font-size: 12px; font-weight: 600; color: var(--text); }
+.plc-row-name em { font-style: normal; color: var(--muted-2); font-size: 9px; text-transform: uppercase; }
+.plc-row-sub { font-size: 10px; color: var(--muted); }
+.plc-row-meta { font-size: 10px; color: var(--teal); }
+
+/* --- the panel ---------------------------------------------------------- */
+
+.plc-hero {
+  display: flex;
+  gap: 12px;
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--dot, var(--cyan)) 12%, transparent), transparent);
+}
+.plc-hero-mark {
+  width: 44px; height: 44px;
+  flex: 0 0 auto;
+  display: grid; place-items: center;
+  border: 1px solid var(--line-2);
+  border-radius: 50%;
+  background: var(--bg-2);
+}
+.plc-hero-copy { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.plc-hero-coords { font-family: var(--font-mono); font-size: 10px; color: var(--muted); }
+
+@media (max-width: 1180px) {
+  .plc-list { max-height: 320px; }
+}

@@ -1,0 +1,93 @@
+{
+  "places": [
+    { "id": "makkah",       "name": "Makkah",            "arabic": "مكة المكرمة",  "region": "Hejaz",    "zone": "Makkah",  "lat": 21.42,  "lon": 39.83,  "sources": ["Ibn Hisham, al-Sirah al-Nabawiyyah"],
+      "milestones": [
+        { "year": 570, "label": "Birth of the Prophet ﷺ" },
+        { "year": 610, "label": "First Revelation at Hira" },
+        { "year": 622, "label": "Hijrah departure" },
+        { "year": 630, "label": "Conquest of Makkah" }
+      ] },
+    { "id": "madinah",      "name": "Madinah",           "arabic": "المدينة المنورة", "region": "Hejaz", "zone": "Madinah", "lat": 24.47, "lon": 39.61, "sources": ["Ibn Hisham, al-Sirah al-Nabawiyyah"],
+      "milestones": [
+        { "year": 622, "label": "Hijrah arrival" },
+        { "year": 624, "label": "First Muslim polity" },
+        { "year": 632, "label": "Passing of the Prophet ﷺ" }
+      ] },
+    { "id": "jerusalem",    "name": "Jerusalem",         "arabic": "القدس",        "region": "Levant",   "zone": "Levant",  "lat": 31.78,  "lon": 35.24,  "sources": ["al-Tabari, Tarikh al-Rusul wa al-Muluk"],
+      "milestones": [
+        { "year": 620, "label": "Isra and Mi'raj" },
+        { "year": 637, "label": "Muslim conquest" }
+      ] },
+    { "id": "damascus",     "name": "Damascus",          "arabic": "دمشق",         "region": "Levant",   "zone": "Levant",  "lat": 33.51,  "lon": 36.29,  "sources": ["al-Tabari, Tarikh al-Rusul wa al-Muluk"],
+      "milestones": [
+        { "year": 635, "label": "Muslim conquest" },
+        { "year": 661, "label": "Umayyad capital" }
+      ] },
+    { "id": "kufa",         "name": "Kufa",              "arabic": "الكوفة",       "region": "Iraq",     "zone": "Persia",  "lat": 32.03,  "lon": 44.40,  "sources": ["al-Tabari, Tarikh al-Rusul wa al-Muluk"],
+      "milestones": [
+        { "year": 638, "label": "Founded as garrison city" },
+        { "year": 656, "label": "Seat of Ali's caliphate" }
+      ] },
+    { "id": "basra",        "name": "Basra",             "arabic": "البصرة",       "region": "Iraq",     "zone": "Persia",  "lat": 30.51,  "lon": 47.78,  "sources": ["al-Tabari, Tarikh al-Rusul wa al-Muluk"],
+      "milestones": [
+        { "year": 636, "label": "Founded as garrison city" }
+      ] },
+    { "id": "baghdad",      "name": "Baghdad",           "arabic": "بغداد",        "region": "Iraq",     "zone": "Persia",  "lat": 33.31,  "lon": 44.36,  "sources": ["al-Tabari, Tarikh al-Rusul wa al-Muluk"],
+      "milestones": [
+        { "year": 762, "label": "Abbasid capital founded" },
+        { "year": 830, "label": "Bayt al-Hikma established" }
+      ] },
+    { "id": "cairo",        "name": "Cairo",             "arabic": "القاهرة",      "region": "Egypt",    "zone": "Egypt",   "lat": 30.04,  "lon": 31.24,  "sources": ["Ibn Muyassar, Akhbar Misr"],
+      "milestones": [
+        { "year": 969, "label": "Fatimid founding" },
+        { "year": 1171, "label": "Ayyubid capital" }
+      ] },
+    { "id": "bukhara",      "name": "Bukhara",           "arabic": "بخارى",        "region": "Central Asia", "zone": "Others", "lat": 39.77, "lon": 64.42, "sources": ["al-Dhahabi, Siyar A'lam al-Nubala"],
+      "milestones": [
+        { "year": 810, "label": "Birth of Imam al-Bukhari" },
+        { "year": 870, "label": "Death of Imam al-Bukhari" }
+      ] },
+    { "id": "nishapur",     "name": "Nishapur",          "arabic": "نيسابور",      "region": "Khurasan", "zone": "Persia",  "lat": 36.21,  "lon": 58.80,  "sources": ["al-Dhahabi, Siyar A'lam al-Nubala"],
+      "milestones": [
+        { "year": 815, "label": "Birth of Imam Muslim" },
+        { "year": 875, "label": "Death of Imam Muslim" }
+      ] },
+    { "id": "cave-of-hira", "name": "Cave of Hira (Jabal al-Nur)", "arabic": "غار حراء", "region": "Hejaz", "zone": "Makkah", "lat": 21.456, "lon": 39.861, "sources": ["Ibn Hisham, al-Sirah al-Nabawiyyah"] },
+    { "id": "aqabah-mina",  "name": "Al-Aqabah (Mina)", "arabic": "العقبة", "region": "Hejaz", "zone": "Makkah", "lat": 21.414, "lon": 39.893, "approx": true, "sources": ["Ibn Hisham, al-Sirah al-Nabawiyyah"] },
+    { "id": "arafat",       "name": "Arafat",           "arabic": "عرفات",  "region": "Hejaz", "zone": "Makkah", "lat": 21.355, "lon": 39.984, "sources": ["Sahih Muslim 1218a"] },
+    { "id": "hudaybiyyah",  "name": "Al-Hudaybiyyah",   "arabic": "الحديبية", "region": "Hejaz", "zone": "Makkah", "lat": 21.47, "lon": 39.51, "approx": true, "sources": ["Ibn Hisham; Qur'an 48:1"] },
+    { "id": "hunayn",       "name": "Hunayn",           "arabic": "حنين",   "region": "Hejaz", "zone": "Makkah", "lat": 21.42, "lon": 40.25, "approx": true, "sources": ["Qur'an 9:25; Ibn Hisham"] },
+    { "id": "badr",         "name": "Badr",             "arabic": "بدر",    "region": "Hejaz", "zone": "Madinah", "lat": 23.78, "lon": 38.79, "sources": ["Qur'an 3:123; Ibn Hisham"] },
+    { "id": "uhud",         "name": "Mount Uhud",       "arabic": "أحد",    "region": "Hejaz", "zone": "Madinah", "lat": 24.505, "lon": 39.611, "sources": ["Qur'an 3:152; Ibn Hisham"] },
+    { "id": "khaybar",      "name": "Khaybar",          "arabic": "خيبر",   "region": "Hejaz", "zone": "Madinah", "lat": 25.70, "lon": 39.28, "sources": ["Sahih al-Bukhari; Ibn Hisham"] },
+    { "id": "tabuk",        "name": "Tabuk",            "arabic": "تبوك",   "region": "Hejaz", "zone": "Arabia", "lat": 28.38, "lon": 36.57, "sources": ["Sahih al-Bukhari 4418; Ibn Hisham"] },
+    { "id": "najran",       "name": "Najran",           "arabic": "نجران",  "region": "Arabia", "zone": "Arabia", "lat": 17.49, "lon": 44.13, "sources": ["Ibn Hisham; Qur'an 85:4-8"] },
+    { "id": "sanaa",        "name": "Sana'a",           "arabic": "صنعاء",  "region": "Yemen",  "zone": "Arabia", "lat": 15.35, "lon": 44.21, "sources": ["al-Tabari, Tarikh al-Rusul wa al-Muluk"] },
+    { "id": "al-hira",      "name": "Al-Hira",          "arabic": "الحيرة", "region": "Iraq",   "zone": "Persia", "lat": 31.98, "lon": 44.38, "approx": true, "sources": ["al-Tabari, Tarikh al-Rusul wa al-Muluk"] },
+    { "id": "mutah",        "name": "Mu'tah",           "arabic": "مؤتة",   "region": "Levant", "zone": "Levant", "lat": 31.09, "lon": 35.72, "sources": ["Sahih al-Bukhari 4261; Ibn Hisham"] },
+    { "id": "yarmuk",       "name": "Yarmuk",           "arabic": "اليرموك", "region": "Levant", "zone": "Levant", "lat": 32.71, "lon": 35.86, "approx": true, "sources": ["al-Tabari, Tarikh al-Rusul wa al-Muluk"] },
+    { "id": "siffin",       "name": "Siffin",           "arabic": "صفين",   "region": "Levant", "zone": "Levant", "lat": 35.95, "lon": 38.90, "approx": true, "sources": ["al-Tabari, Tarikh al-Rusul wa al-Muluk"] },
+    { "id": "karbala",      "name": "Karbala",          "arabic": "كربلاء", "region": "Iraq",   "zone": "Persia", "lat": 32.62, "lon": 44.03, "sources": ["al-Tabari, Tarikh al-Rusul wa al-Muluk"] },
+    { "id": "samarra",      "name": "Samarra",          "arabic": "سامراء", "region": "Iraq",   "zone": "Persia", "lat": 34.20, "lon": 43.87, "sources": ["al-Tabari, Tarikh al-Rusul wa al-Muluk"] },
+    { "id": "nihawand",     "name": "Nihawand",         "arabic": "نهاوند", "region": "Persia", "zone": "Persia", "lat": 34.19, "lon": 48.37, "sources": ["al-Tabari, Tarikh al-Rusul wa al-Muluk"] },
+    { "id": "alexandria",   "name": "Alexandria",       "arabic": "الإسكندرية", "region": "Egypt", "zone": "Egypt", "lat": 31.20, "lon": 29.92, "sources": ["al-Tabari, Tarikh al-Rusul wa al-Muluk"] },
+    { "id": "kairouan",     "name": "Kairouan",         "arabic": "القيروان", "region": "North Africa", "zone": "Others", "lat": 35.68, "lon": 10.10, "sources": ["Ibn Khaldun, Kitab al-Ibar"] },
+    { "id": "tours",        "name": "Tours-Poitiers",   "arabic": "بلاط الشهداء", "region": "Gaul", "zone": "Others", "lat": 46.86, "lon": 0.31, "approx": true, "sources": ["al-Tabari; Ibn Khaldun"] },
+    { "id": "cordoba",      "name": "Cordoba",          "arabic": "قرطبة",  "region": "Al-Andalus", "zone": "Others", "lat": 37.89, "lon": -4.78, "sources": ["Ibn Khaldun, Kitab al-Ibar"] },
+    { "id": "talas",        "name": "Talas",            "arabic": "طَلاس",  "region": "Central Asia", "zone": "Others", "lat": 42.90, "lon": 71.37, "approx": true, "sources": ["al-Tabari; Ibn al-Athir"] },
+    { "id": "manzikert",    "name": "Manzikert",        "arabic": "ملاذكرد", "region": "Anatolia", "zone": "Others", "lat": 39.15, "lon": 42.54, "sources": ["Ibn al-Athir, al-Kamil fi al-Tarikh"] },
+    { "id": "hattin",       "name": "Horns of Hattin",  "arabic": "حطين",   "region": "Levant", "zone": "Levant", "lat": 32.79, "lon": 35.44, "sources": ["Ibn al-Athir; Ibn Shaddad, al-Nawadir al-Sultaniyya"] },
+    { "id": "ayn-jalut",    "name": "Ayn Jalut",        "arabic": "عين جالوت", "region": "Levant", "zone": "Levant", "lat": 32.55, "lon": 35.35, "approx": true, "sources": ["Ibn Kathir, al-Bidaya wa al-Nihaya"] },
+    { "id": "acre",         "name": "Acre",             "arabic": "عكا",    "region": "Levant", "zone": "Levant", "lat": 32.93, "lon": 35.08, "sources": ["Ibn Kathir, al-Bidaya wa al-Nihaya"] },
+    { "id": "sogut",        "name": "Sogut",            "arabic": "سوغوت",  "region": "Anatolia", "zone": "Others", "lat": 40.02, "lon": 30.19, "approx": true, "sources": ["Asikpasazade, Tevarih-i Al-i Osman"] },
+    { "id": "bursa",        "name": "Bursa",            "arabic": "بورصة",  "region": "Anatolia", "zone": "Others", "lat": 40.19, "lon": 29.06, "sources": ["Asikpasazade, Tevarih-i Al-i Osman"] },
+    { "id": "kosovo",       "name": "Kosovo Field",     "arabic": "قوصوة",  "region": "Balkans", "zone": "Others", "lat": 42.70, "lon": 21.10, "approx": true, "sources": ["Ottoman chronicles; Ibn Khaldun"] },
+    { "id": "istanbul",     "name": "Constantinople / Istanbul", "arabic": "القسطنطينية", "region": "Anatolia", "zone": "Others", "lat": 41.01, "lon": 28.98, "sources": ["Tursun Beg, Tarikh-i Abu al-Fath"] },
+    { "id": "tabriz",       "name": "Tabriz",           "arabic": "تبريز",  "region": "Persia", "zone": "Persia", "lat": 38.08, "lon": 46.29, "sources": ["Iskandar Beg Munshi, Tarikh-i Alam-ara-yi Abbasi"] },
+    { "id": "isfahan",      "name": "Isfahan",          "arabic": "أصفهان", "region": "Persia", "zone": "Persia", "lat": 32.65, "lon": 51.67, "sources": ["Iskandar Beg Munshi, Tarikh-i Alam-ara-yi Abbasi"] },
+    { "id": "panipat",      "name": "Panipat",          "arabic": "باني بت", "region": "South Asia", "zone": "Others", "lat": 29.39, "lon": 76.97, "sources": ["Abu al-Fazl, Akbarnama"] },
+    { "id": "delhi",        "name": "Delhi",            "arabic": "دلهي",   "region": "South Asia", "zone": "Others", "lat": 28.61, "lon": 77.21, "sources": ["Abu al-Fazl, Akbarnama; Sirhindi, Tarikh-i Mubarakshahi"] },
+    { "id": "vienna",       "name": "Vienna",           "arabic": "فيينا",  "region": "Europe", "zone": "Others", "lat": 48.21, "lon": 16.37, "sources": ["Silahdar Findiklili Mehmed Agha, Nusretname"] },
+    { "id": "granada",      "name": "Granada",          "arabic": "غرناطة", "region": "Al-Andalus", "zone": "Others", "lat": 37.18, "lon": -3.60, "sources": ["al-Maqqari, Nafh al-Tib"] }
+  ]
+}

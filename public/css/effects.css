@@ -1,0 +1,165 @@
+/* ==================== EFFECTS ====================
+   Decorative treatments for the controls, in the spirit of the community pieces
+   on uiverse.io (shine sweeps, gradient border runs, ripples, shimmer, tilt) but
+   written for this palette and this markup, and layered on top of the state
+   transitions in css/motion.css. Nothing here changes layout, and everything is
+   switched off under prefers-reduced-motion at the foot of the file. */
+
+/* --- 1. shine sweep: a soft highlight crossing a filled control ---------- */
+
+@keyframes sweep {
+  from { transform: translateX(-120%) skewX(-18deg); }
+  to   { transform: translateX(240%) skewX(-18deg); }
+}
+
+/* Every filled control gets the same crossing highlight, so the scholar card's
+   call to action answers the pointer as the hero's buttons do. The three
+   declarations below are the whole mechanism; the colour of the highlight is the
+   only part a component overrides (css/overview.css, white on both of these
+   fills, where the teal would be invisible). */
+.dsh-btn.primary,
+.dsh-btn.block,
+.ov-scholar-cta {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.dsh-btn.primary::after,
+.dsh-btn.block::after,
+.ov-scholar-cta::after {
+  content: '';
+  position: absolute;
+  inset: -40% -10%;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(52, 246, 193, 0.22), transparent);
+  transform: translateX(-120%) skewX(-18deg);
+  pointer-events: none;
+}
+.dsh-btn.primary:hover::after,
+.dsh-btn.block:hover::after,
+.ov-scholar-cta:hover::after { animation: sweep 700ms var(--ease); }
+
+/* --- 2. running gradient border on the selected things ------------------ */
+
+@property --run {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes runBorder { to { --run: 360deg; } }
+
+.ev-row.selected,
+.dy-card.selected,
+.bk-card.selected,
+.hd-card.selected {
+  border-image: conic-gradient(from var(--run), #34f6c1, #5a8dff, #ad68ff, #34f6c1) 1;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ev-row.selected,
+  .dy-card.selected,
+  .bk-card.selected,
+  .hd-card.selected { animation: runBorder 6s linear infinite; }
+}
+
+/* --- 3. ripple on round icon buttons ------------------------------------ */
+
+.dsh-iconbtn { position: relative; overflow: hidden; }
+.dsh-iconbtn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(52, 246, 193, 0.35), transparent 62%);
+  opacity: 0;
+  transform: scale(0.2);
+  transition: opacity 320ms var(--ease), transform 320ms var(--ease);
+  pointer-events: none;
+}
+.dsh-iconbtn:active::after { opacity: 1; transform: scale(1.6); transition: none; }
+
+/* --- 4. toggle switch with a light trail -------------------------------- */
+
+.dsh-switch-track { overflow: hidden; }
+.dsh-switch input:checked + .dsh-switch-track {
+  box-shadow: inset 0 0 10px rgba(52, 246, 193, 0.28);
+}
+.dsh-switch input:checked + .dsh-switch-track::before {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 34px; height: 12px;
+  border-radius: var(--r-pill);
+  background: linear-gradient(90deg, rgba(52, 246, 193, 0.5), transparent);
+  opacity: 0.7;
+}
+
+/* --- 5. shimmer for loading states ------------------------------------- */
+
+@keyframes shimmer {
+  from { background-position: -220% 0; }
+  to   { background-position: 220% 0; }
+}
+.tps-state:has(+ *),
+.dsh-empty.loading,
+.loading-block {
+  background-image: linear-gradient(100deg, transparent 20%, rgba(52, 246, 193, 0.07) 45%, transparent 70%);
+  background-size: 220% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+.tps-state { animation: fadeUpSm 200ms var(--ease) both; }
+
+/* --- 6. book cover tilt on hover --------------------------------------- */
+
+.bk-card { transform-style: preserve-3d; }
+.bk-card-art {
+  transition: transform 260ms var(--ease), box-shadow var(--t-base) var(--ease);
+  transform-origin: left center;
+}
+.bk-card:hover .bk-card-art {
+  transform: perspective(600px) rotateY(-9deg) translateX(2px);
+  box-shadow: 14px 10px 26px rgba(0, 0, 0, 0.55);
+}
+.bk-row-art { transition: transform 260ms var(--ease); }
+.bk-row:hover .bk-row-art { transform: perspective(500px) rotateY(-7deg); }
+
+/* --- 7. living marker: the selected record in the lists ----------------- */
+
+@keyframes markerPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(52, 246, 193, 0.4); }
+  50%      { box-shadow: 0 0 0 6px rgba(52, 246, 193, 0); }
+}
+.ev-row.selected .ev-dotmark,
+.hd-card.selected .hd-badge.grade { animation: markerPulse 2.2s var(--ease) infinite; }
+
+/* --- 8. chart bars breathe on hover ------------------------------------ */
+
+.dyt-bar:hover .dyt-bar-bg { filter: brightness(1.15) saturate(1.05); }
+.ev-period.active .ev-period-name { text-shadow: 0 0 12px color-mix(in srgb, var(--era) 70%, transparent); }
+
+/* --- 9. the shared picker's rows slide in ------------------------------ */
+
+@keyframes rowIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.tps-row { animation: rowIn 180ms var(--ease) both; }
+.tps-row:nth-child(2) { animation-delay: 14ms; }
+.tps-row:nth-child(3) { animation-delay: 28ms; }
+.tps-row:nth-child(4) { animation-delay: 42ms; }
+.tps-row:nth-child(5) { animation-delay: 56ms; }
+
+/* --- reduced motion ---------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .dsh-btn.primary::after,
+  .dsh-btn.block::after,
+  .ov-scholar-cta::after { display: none; }
+  .ev-row.selected,
+  .dy-card.selected,
+  .bk-card.selected,
+  .hd-card.selected { animation: none; border-image: none; }
+  .bk-card:hover .bk-card-art,
+  .bk-row:hover .bk-row-art { transform: none; }
+  .ev-row.selected .ev-dotmark,
+  .hd-card.selected .hd-badge.grade { animation: none; }
+  .tps-row { animation: none; }
+}

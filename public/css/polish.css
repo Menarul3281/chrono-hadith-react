@@ -1,0 +1,61 @@
+/* Shared finishing layer: quiet motion, clear focus, and readable help. */
+:root { color-scheme: dark; }
+::selection { color: var(--text); background: #176753; }
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 4px;
+}
+:where(button, input, select, textarea):disabled { cursor: not-allowed; opacity: .5; }
+.page:focus { outline: none; }
+.skip-link {
+  position: fixed; top: 12px; left: 12px; z-index: 100001;
+  padding: 12px 18px; border-radius: 8px;
+  color: var(--bg); background: var(--teal); font-weight: 700;
+  transform: translateY(-180%);
+}
+.skip-link:focus { transform: translateY(0); }
+
+.chrono-tooltip {
+  position: fixed; z-index: 100000; pointer-events: none;
+  max-width: min(280px, calc(100vw - 16px));
+  padding: 9px 12px; border: 1px solid var(--line-3); border-radius: 8px;
+  background: #102632; color: var(--text); font: 500 12px/1.5 var(--font-sans);
+  box-shadow: 0 8px 24px #0006; overflow-wrap: anywhere;
+  animation: tooltip-appear 140ms ease-out;
+}
+.chrono-tooltip[hidden] { display: none; }
+@keyframes tooltip-appear { from { opacity: 0; } to { opacity: 1; } }
+
+:is(.ov-story, .ov-stat-link, .ov-scholar-cta, .bk-card, .bk-row, .hd-card,
+    .plc-row, .gph-tr, .nfg-node, .rx-node, .tps-chip, .tlc-btn, .tlc-tab) {
+  transition: border-color 180ms ease, background-color 180ms ease,
+    box-shadow 180ms ease, translate 180ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  :is(.ov-story, .bk-card, .hd-card, .figure-card):hover {
+    translate: 0 -3px;
+    border-color: var(--line-3);
+    box-shadow: 0 12px 28px #0004, 0 0 0 1px #34f6c114;
+  }
+  :is(.bk-row, .plc-row, .gph-tr, .ov-stat-link):hover {
+    background-color: color-mix(in srgb, var(--teal) 6%, var(--panel));
+  }
+  :is(.rx-node, .nfg-node):hover {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px #34f6c114, 0 6px 20px #0004;
+  }
+  .nav-item:hover .nav-icon { color: var(--teal); }
+}
+.nav-icon { transition: color 160ms ease; }
+:is(.ov-story, .bk-card, .hd-card, .figure-card):active { translate: 0 0; }
+.topbar-search:focus-within { box-shadow: 0 0 0 3px #34f6c118; border-color: var(--teal); }
+/* A static accent avoids repainting a rotating gradient on every selected card. */
+:is(.ev-row.selected, .dy-card.selected, .bk-card.selected, .hd-card.selected) {
+  animation: none; border-image: none; border-color: var(--teal);
+  box-shadow: inset 3px 0 0 #34f6c155;
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.ov-story, .bk-card, .hd-card, .figure-card):hover { translate: none; }
+  .react-flow__edge.animated path { animation: none !important; }
+}

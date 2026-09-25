@@ -1,0 +1,203 @@
+/* ==================== BOOKS ====================
+   The shelf: filters, a dense grid of works, and the selected work's panel. The
+   covers are drawn placeholders (js/chrono-art.js), never borrowed art. */
+
+.bk-top { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 10px; }
+.bk-authors { display: flex; flex-wrap: wrap; gap: 5px; }
+.bk-authors .dsh-chip em { font-style: normal; color: var(--muted-2); margin-left: 2px; }
+
+/* --- toolbar over the shelf --------------------------------------------- */
+
+.bk-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.bk-sorts { display: flex; flex-wrap: wrap; gap: 5px; }
+.bk-count-line { font-size: 11px; color: var(--muted); }
+
+.bk-shelf {
+  display: grid;
+  gap: 10px;
+  max-height: calc(var(--dsh-col-h) - 190px);
+  min-height: 340px;
+  overflow-y: auto;
+  padding: 2px 4px 2px 2px;
+}
+.bk-shelf.grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.bk-shelf.list { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+
+/* A cell holds the card and its bookmark star, so the star is a control of its
+   own rather than a button inside a button. */
+.bk-cell { position: relative; display: flex; }
+.bk-cell > .bk-card, .bk-cell > .bk-row { flex: 1 1 auto; min-width: 0; }
+.bk-star {
+  position: absolute;
+  top: 6px; right: 6px;
+  width: 24px; height: 24px;
+  display: grid; place-items: center;
+  border: 1px solid var(--line-2);
+  border-radius: 50%;
+  background: rgba(4, 15, 22, 0.86);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all var(--t-fast) var(--ease);
+}
+.bk-star .nav-icon { width: 12px; height: 12px; }
+.bk-star:hover { color: var(--gold); border-color: var(--gold); }
+.bk-star.on {
+  color: var(--gold);
+  border-color: color-mix(in srgb, var(--gold) 60%, transparent);
+  background: color-mix(in srgb, var(--gold) 18%, rgba(4, 15, 22, 0.86));
+}
+.bk-star.on .nav-icon { filter: drop-shadow(0 0 6px rgba(255, 212, 94, 0.6)); }
+.bk-star:focus-visible { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px var(--press-ring-soft); }
+.bk-cell.list .bk-star { top: 8px; right: 10px; }
+.bk-hero-title-row { display: flex; align-items: flex-start; gap: 8px; }
+.bk-hero-title-row .bk-star { position: static; flex: 0 0 auto; }
+.bk-only { margin-bottom: 2px; }
+
+/* --- a card on the shelf ------------------------------------------------ */
+
+.bk-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-md);
+  background: var(--panel);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  transition: border-color var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
+}
+:is(.bk-card, .bk-row):hover { border-color: var(--line-3); background: var(--panel-2); }
+.bk-card.selected {
+  border-color: var(--teal);
+  background: color-mix(in srgb, var(--teal) 7%, var(--panel-2));
+  box-shadow: 0 0 0 1px rgba(52, 246, 193, 0.28);
+}
+.bk-card-art {
+  display: block;
+  align-self: center;
+  width: 108px; height: 144px;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+}
+.bk-card-art svg { width: 100%; height: 100%; display: block; }
+.bk-card-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.bk-card-name {
+  font-size: 12px; font-weight: 600; color: var(--text);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.bk-card-author, .bk-card-meta {
+  font-size: 10px; color: var(--muted);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.bk-card-foot { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-top: 2px; font-size: 10px; }
+.bk-lang { color: var(--muted-2); }
+.bk-count { font-family: var(--font-mono); font-size: 10px; color: var(--teal); }
+.bk-count.muted { color: var(--muted-2); }
+
+.bk-badge {
+  align-self: flex-start;
+  padding: 2px 7px;
+  border: 1px solid color-mix(in srgb, var(--dot, var(--teal)) 45%, transparent);
+  border-radius: var(--r-pill);
+  background: color-mix(in srgb, var(--dot, var(--teal)) 12%, transparent);
+  font-size: 9px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--text-2);
+  white-space: nowrap;
+}
+
+/* --- a row in list view ------------------------------------------------- */
+
+.bk-row {
+  display: flex;
+  align-items: stretch;
+  gap: 11px;
+  padding: 8px;
+  border: 1px solid var(--line-2);
+  border-left: 2px solid var(--dot, var(--teal));
+  border-radius: var(--r-md);
+  background: var(--panel);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  transition: border-color var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
+}
+.bk-row:hover { border-color: var(--line-3); background: var(--panel-2); }
+.bk-row.selected { border-color: var(--teal); background: color-mix(in srgb, var(--teal) 7%, var(--panel-2)); }
+.bk-row-art { width: 45px; height: 60px; flex: 0 0 auto; overflow: hidden; border-radius: 2px; }
+.bk-row-art svg { width: 100%; height: 100%; display: block; }
+.bk-row-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.bk-row-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.bk-row-sub { font-size: 11px; color: var(--text-2); }
+.bk-row-note {
+  font-size: 11px; color: var(--muted);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.bk-row-side { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; flex: 0 0 auto; }
+
+/* --- the selected work's panel ----------------------------------------- */
+
+.bk-hero {
+  display: flex;
+  gap: 12px;
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--dot, var(--teal)) 10%, transparent), transparent);
+}
+.bk-hero-cover {
+  width: 84px; height: 112px;
+  flex: 0 0 auto;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+}
+.bk-hero-cover svg { width: 100%; height: 100%; display: block; }
+.bk-hero-copy { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.bk-hero-author { font-size: 11px; color: var(--text-2); }
+.bk-hero-author a { text-decoration: underline; text-decoration-color: var(--line-3); }
+.bk-hero-author a:hover { color: var(--teal); }
+.bk-hero-dates { font-size: 10px; color: var(--muted); }
+
+.bk-contents { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.bk-contents li {
+  display: flex; flex-direction: column; gap: 5px;
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--bg-2);
+}
+.bk-contents-name { font-size: 12px; font-weight: 600; color: var(--text); }
+.bk-contents-count { font-family: var(--font-mono); font-size: 10px; color: var(--muted); }
+.bk-contents-refs { display: flex; flex-wrap: wrap; gap: 5px; }
+
+.bk-evs { display: flex; flex-direction: column; gap: 6px; }
+.bk-ev {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--dot, var(--teal));
+  border-radius: var(--r-sm);
+  background: var(--bg-2);
+  color: var(--text-2);
+}
+.bk-ev:hover { border-color: var(--line-3); background: var(--panel-2); color: var(--text); }
+.bk-ev-year { font-family: var(--font-mono); font-size: 10px; color: var(--muted); flex: 0 0 54px; }
+.bk-ev-name { flex: 1; min-width: 0; font-size: 12px; color: var(--text); }
+
+/* --- drawn cover type -------------------------------------------------- */
+
+.cha-cover-ar { font-size: 17px; }
+.cha-cover-en { font-size: 8px; opacity: 0.75; }
+
+@media (max-width: 1180px) {
+  .bk-shelf { max-height: 520px; }
+}
+

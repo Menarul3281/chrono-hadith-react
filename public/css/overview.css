@@ -1,0 +1,1025 @@
+/* ==================== OVERVIEW ====================
+   The front page of the archive. It reads like the rest of the app — the same
+   panels, borders, radii and accent colours — and it has three parts, in the
+   order the design settles them: a hero carrying the copy, the map of the record
+   families this archive holds and the live statistics beside them; the Discover
+   row; and a footer.
+
+   The map and the Discover row are written in the design they were ported from
+   rather than in the app's own idiom. That design names its treatments by hand —
+   a grain, a shining Arabic, a serif display and a technical mono — and this file
+   keeps those names (.grain, .shining-arabic, .font-serif-display,
+   .font-mono-tech) so the port stays checkable against the design it came from.
+   They are all scoped under `.ov`, because this app has no Tailwind and no other
+   page agreed to inherit a utility it did not ask for; radii, motion and every
+   generic type size still come from the app's own tokens, so the new cards sit in
+   the same family as the panels beside them. The two faces those rules name are
+   declared on the one preconnected fonts request in index.html.
+
+   Two things are read from the app rather than from the design: a family's colour
+   is the colour the Graph page draws that family in, and every counter is counted
+   from the records it names when the page opens, then drawn again inside a
+   plausible tenth of that count each time the rail is built, so the numbers move
+   on a refresh the way a live rail moves. The design's own numbers belong to a
+   mock-up, and this page does not print a number its own records could not carry.
+
+   The only declaration here that reaches past this page's own classes is the one
+   that restates a shared control inside `.ov` (the hero's primary button is filled
+   rather than tinted), and it is written with as many class names as the shared
+   rule so no stylesheet order can decide the outcome. The scholar card's call to
+   action is the card's own, filled with the card's own sweep.
+
+   Part 1 · shell        2 · hero copy      3 · the map       4 · live statistics
+   5 · the verse         6 · Discover       7 · story card    8 · scholar scroll
+   9 · footer           10 · responsive */
+
+/* ==================== 1. SHELL ==================== */
+
+.ov {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fadeUp 0.5s var(--ease) both;
+}
+
+/* ==================== 2. HERO COPY ==================== */
+
+/* Copy, figure, statistics: the figure keeps the middle and the statistics the
+   foot of the panel, which is the order the design reads in. */
+.ov-hero {
+  /* The panel's own height, named once. The copy row is held to it from 1025px up,
+     which is what keeps the hero the same height on a 1366 laptop and on a 4K
+     screen instead of collapsing to whatever the copy happens to measure, and the
+     figure — the one item that brings no content of its own — stretches to it. From
+     1024px down the three items are stacked, so every row is as tall as what it
+     holds and the panel is as tall as the page needs. It is the design's own
+     390px raised by 30%, so the figure and the statistics beside it open out
+     instead of closing in on the copy above them. */
+  --ov-hero-h: 507px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 1.02fr) minmax(0, 0.94fr);
+  grid-template-rows: minmax(var(--ov-hero-h), auto);
+  grid-auto-rows: auto;
+  gap: 26px;
+  align-items: stretch;
+  padding: 28px 30px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  background:
+    radial-gradient(120% 120% at 8% 0%, rgba(52, 246, 193, 0.07), transparent 42%),
+    radial-gradient(90% 110% at 78% 46%, rgba(90, 141, 255, 0.08), transparent 55%),
+    var(--panel);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.ov-hero-copy { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+
+.ov-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.ov-dot { color: var(--line-3); }
+
+.ov-title {
+  margin-top: 12px;
+  font-size: clamp(26px, 2.2vw, 34px);
+  font-weight: 800;
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+  color: var(--text);
+}
+.ov-accent {
+  background: linear-gradient(96deg, var(--teal) 12%, #a9fbe0 88%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.ov-lead {
+  margin-top: 12px;
+  max-width: 46ch;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--text-2);
+}
+
+.ov-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+
+/* Both ways out of the hero wear the same fill: a teal gradient with dark ink,
+   the lift and the glow on hover, and the shine sweep css/effects.css runs
+   across filled buttons. */
+.ov .dsh-btn.primary {
+  height: 40px;
+  padding: 0 18px;
+  font-size: 12.5px;
+  border-radius: var(--r-md);
+  border-color: transparent;
+  background: linear-gradient(180deg, #52fdcf, #1fcea0);
+  color: #04140f;
+}
+.ov .dsh-btn.primary:hover {
+  background: linear-gradient(180deg, #6affd8, #2adcac);
+  box-shadow: 0 8px 22px rgba(52, 246, 193, 0.28);
+}
+/* The shine sweep in css/effects.css is a pale teal — invisible on a filled
+   button, so the hero's read white instead. */
+.ov .dsh-btn.primary::after {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+}
+
+/* ==================== 3. THE MAP ==================== */
+
+/* The families on one ring. The ring and its spokes are a single SVG laid under
+   the whole box and drawn in the box's own percentage units (a 0 0 100 100
+   viewBox with `preserveAspectRatio="none"`), so a family stays on the ring at
+   any size the panel takes; the pills and the hub are laid over it as type,
+   which a scaled SVG could not have kept legible. */
+.ov-map {
+  position: relative;
+  width: 100%;
+  min-height: 340px;
+}
+
+.ov-map-lines { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ov-ring {
+  fill: none;
+  stroke: rgba(148, 190, 210, 0.17);
+  stroke-width: 0.25;
+  stroke-dasharray: 1.6 2.4;
+}
+.ov-ring-inner { stroke: rgba(52, 246, 193, 0.15); stroke-dasharray: 1 3; }
+.ov-spoke { stroke: rgba(148, 190, 210, 0.16); stroke-width: 0.22; }
+
+/* The centre: the one record every chain in the archive terminates at. */
+.ov-map-hub {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 92px;
+  height: 92px;
+  border: 1px solid rgba(52, 246, 193, 0.34);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 38%, rgba(52, 246, 193, 0.16), rgba(4, 20, 15, 0.94) 72%);
+  box-shadow: 0 0 38px rgba(52, 246, 193, 0.18), inset 0 0 20px rgba(52, 246, 193, 0.12);
+  text-align: center;
+  touch-action: manipulation;
+  transition: border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+.ov-map-hub::before {
+  content: "";
+  position: absolute;
+  inset: -13px;
+  border-radius: 50%;
+  border: 1px solid rgba(52, 246, 193, 0.16);
+}
+.ov-map-hub:hover {
+  border-color: var(--teal);
+  box-shadow: 0 0 46px rgba(52, 246, 193, 0.3), inset 0 0 22px rgba(52, 246, 193, 0.16);
+}
+.ov-map-hub-ar { font-family: var(--font-arabic); font-size: 21px; line-height: 1; color: var(--teal); }
+.ov-map-hub-cap {
+  font-size: 7.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+
+/* A family: a pill on the ring, tinted with the colour that family is drawn in
+   everywhere else in the app, opening the page that lists its records. */
+.ov-pill {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border: 1px solid rgba(148, 190, 210, 0.16);
+  border-radius: var(--r-pill);
+  background: rgba(8, 25, 37, 0.74);
+  backdrop-filter: blur(6px);
+  font-size: 11.5px;
+  line-height: 1;
+  color: var(--text-2);
+  white-space: nowrap;
+  touch-action: manipulation;
+  transition: border-color var(--t-fast) var(--ease), background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+.ov-pill-dot {
+  flex: 0 0 auto;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c, var(--teal));
+  box-shadow: 0 0 8px var(--c, var(--teal));
+}
+.ov-pill:hover,
+.ov-pill:focus-visible {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--c, var(--teal)) 60%, transparent);
+  background: rgba(12, 34, 48, 0.92);
+}
+
+/* ==================== 4. LIVE STATISTICS ==================== */
+
+/* The rail the design puts inside the hero: six counters in two columns, and the
+   verse under them. It is separated from the figure by a hairline, the way the
+   design separates them. */
+.ov-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  padding-left: 22px;
+  border-left: 1px solid var(--line);
+}
+
+.ov-stats-title { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; color: var(--text); }
+
+/* The counters carry the rail's own left edge, which is what the title above and
+   the verse card below already sit on. A list arrives with the browser's own
+   indent and block margins, and the shared sheets reset neither (base.css zeroes
+   the headings and the paragraphs, and stops there), so the six counters were
+   set 40px right of the line everything else on the rail reads down. Zeroed here
+   with `padding` and `margin`, the way every other list in the app does it. */
+.ov-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* The rail is as tall as the hero (§ 2) and holds more than the six cards
+     need: the room is shared between the rows rather than left as one hole under
+     the last of them, and the verse stays against the foot where `margin-top:
+     auto` on § 5 pins it. */
+  flex: 1 1 auto;
+  align-content: space-between;
+}
+.ov-stat { min-width: 0; }
+
+.ov-stat-link {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-md);
+  background: var(--panel-2);
+  transition: border-color var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
+}
+.ov-stat-link:hover {
+  border-color: color-mix(in srgb, var(--c, var(--teal)) 45%, var(--line-2));
+  background: var(--panel-3);
+}
+.ov-stat-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-sm);
+  background: color-mix(in srgb, var(--c, var(--teal)) 14%, transparent);
+  color: var(--c, var(--teal));
+}
+.ov-stat-icon svg { width: 15px; height: 15px; }
+.ov-stat-copy { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.ov-stat-count {
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+/* The label is set tight on purpose: three counters and their icons have to fit a
+   two-column grid in a third of the hero at 1440px, and `HADITH REFS` is the
+   longest of them. */
+.ov-stat-label {
+  font-size: 8.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+
+/* ==================== 5. THE VERSE ==================== */
+
+/* The record's own quotation, read over the record's own scene: the scene fills
+   the card the way a photograph would, a wash keeps the type legible over it, and
+   the grain lies on the scene rather than on the words — the card's two text
+   layers sit above it. The whole card opens the record the verse came from, and
+   the copy control stays faint until the card is pointed at. */
+.ov-quote {
+  position: relative;
+  margin-top: auto;
+  min-height: 104px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-md);
+  background: var(--bg-2);
+  overflow: hidden;
+}
+.ov-quote-art { position: absolute; inset: 0; display: block; }
+.ov-quote-art svg,
+.ov-quote-art .cha-img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ov-quote-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, rgba(2, 9, 15, 0.95) 0%, rgba(2, 9, 15, 0.88) 46%, rgba(2, 9, 15, 0.6) 100%);
+}
+/* The right padding reserves the copy control that sits 8px in from the card's
+   edge (§ 5), and the control is not one width: 26px above 1024px, 40px from
+   1024px down (§ 10). The reserve is therefore 8 + 26 on a desktop and 8 + 40 at
+   the tablet and phone tiers, so 48px is what this sets: the verse's measure then
+   ends 14px short of the control on a desktop and exactly on the control's left
+   edge at 1024px and down — nothing can be painted under it, because a line ends
+   at its own content edge. Checked at eighteen widths, 1600px down to 360px,
+   against the longest quotation in the pool — the worst case of the eight the
+   data holds, with the longest reference line set under it — where the painted
+   ink came closest to the control at 390px and still stopped 1.91px short. The
+   verse carries no margin of its own on that side. */
+.ov-quote-link { position: relative; z-index: 3; display: block; padding: 14px 48px 14px 16px; }
+/* The design sets this line in the serif display, italic and light — quieter than
+   the card titles, so the verse reads as a quotation rather than a heading. */
+.ov-quote-text {
+  /* A blockquote arrives with the browser's own `margin: 1em 40px`, and the shared
+     sheets reset neither (base.css zeroes the headings and the paragraphs only, the
+     way it stops there for the counters' list in § 4), so the verse was set 40px
+     right of the card's own padding edge. Cleared on the inline axis, the way
+     `.ev-quote` clears its own, and the verse reads down the line the counters
+     read down; the block margins are left as the browser sets them, which at this
+     size is 12.5px — the gap that holds the verse off the 104px card's top edge
+     (§ 5) rather than the verse hugging it. */
+  margin-left: 0;
+  margin-right: 0;
+
+  font-family: var(--font-serif);
+  font-size: 12.5px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--text-2);
+}
+.ov-quote-ref {
+  display: block;
+  margin-top: 7px;
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+}
+.ov-quote-copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-sm);
+  background: rgba(6, 18, 26, 0.82);
+  color: var(--muted);
+  opacity: 0.4;
+  transition: opacity var(--t-fast) var(--ease), color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+.ov-quote-icon { display: inline-flex; width: 13px; height: 13px; }
+.ov-quote-icon svg { width: 100%; height: 100%; }
+.ov-quote:hover .ov-quote-copy,
+.ov-quote-copy:focus-visible { opacity: 1; }
+.ov-quote-copy:hover { color: var(--teal); border-color: var(--line-3); }
+
+/* ==================== 6. DISCOVER ==================== */
+
+/* The design's own named treatments. `grain` is the film over a dark card,
+   `shining-arabic` a sheen travelling across a line set in Amiri, `glow-text-cyan`
+   an ambient bleed on a label, and the two `font-` rules the editorial pair this
+   row is set in — a serif display for the titles and a technical mono for every
+   label, date and count. Each is written under `.ov`, so nothing else in the app
+   inherits a utility it never asked for. */
+.ov {
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-mono-tech: 'JetBrains Mono', var(--font-mono);
+}
+
+.ov .font-serif-display { font-family: var(--font-serif); font-weight: 700; }
+.ov .font-mono-tech { font-family: var(--font-mono-tech); }
+
+.ov .grain { position: relative; isolation: isolate; }
+.ov .grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  /* One inlined SVG turbulence at the frequency the design uses, tiled by hand so
+     it repeats without a seam: a grain that costs a request less than a PNG and
+     cannot 404 on a page that is meant to read offline. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* A label lit from behind, in the design's two-stop cyan. It carries no colour of
+   its own, so it can sit on a kicker of any ink. */
+.ov .glow-text-cyan {
+  text-shadow: 0 0 10px rgba(34, 211, 238, 0.6), 0 0 20px rgba(34, 211, 238, 0.3);
+}
+
+/* Amiri filled with the design's cyan-to-white-to-emerald sweep and lit by two
+   drop shadows, the sweep travelling across it on a loop. */
+.ov .shining-arabic {
+  font-family: var(--font-arabic);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(90deg, #22d3ee 0%, #ffffff 50%, #10b981 100%);
+  background-size: 200% auto;
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.6)) drop-shadow(0 0 15px rgba(34, 211, 238, 0.4));
+  animation: ovShine 3s linear infinite;
+}
+@keyframes ovShine {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* The section: a hairline above it, the name of the row, and the one line the
+   design prints under it. */
+.ov-discover {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.ov-discover-head { display: flex; flex-direction: column; gap: 5px; }
+.ov-discover-title { font-size: var(--f-h2); font-weight: 700; letter-spacing: -0.01em; color: var(--text); }
+.ov-discover-sub { font-size: 12.5px; color: var(--muted); }
+
+/* Two story cards down the left, the scholar down the right, as the design has
+   them: the stories take two thirds and the scholar the rest, and the scholar's
+   own height is what the two cards are stretched to. */
+.ov-discover-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2.08fr) minmax(0, 1fr);
+  gap: 12px;
+  align-items: stretch;
+}
+.ov-discover-grid > .ov-scholar { grid-column: 2; grid-row: 1 / span 2; }
+
+/* ==================== 7. STORY CARD ==================== */
+
+/* The record's own scene down one side, the piece's words down the other, the
+   record's type as a chip over the scene's corner and its connections along the
+   foot — a card whose colour is the event type's, so a reader learns the language
+   the rest of the app already uses. The copy starts well clear of the scene,
+   because the chip sits over the scene and not over the words. */
+.ov-story {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(200px, 33%) minmax(0, 1fr);
+  min-height: 232px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  background:
+    radial-gradient(130% 120% at 0% 0%, color-mix(in srgb, var(--accent) 13%, transparent), transparent 48%),
+    linear-gradient(180deg, var(--panel), var(--bg-2));
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.ov-story:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line-2));
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+.ov-story:focus-visible {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px var(--press-ring-soft);
+}
+
+/* The scene is ChronoArt's, drawn on a stage that covers the panel the way a
+   photograph would and fades into the copy; the record itself can carry an image
+   instead, and `ChronoArt.frame` hands it over with no change here. */
+.ov-story-art { position: relative; display: block; overflow: hidden; background: var(--bg-2); }
+.ov-story-art svg,
+.ov-story-art .cha-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform var(--t-slow) var(--ease);
+}
+.ov-story-art .cha-img { object-fit: cover; }
+.ov-story:hover .ov-story-art svg,
+.ov-story:hover .ov-story-art .cha-img { transform: scale(1.06); }
+.ov-story-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent 40%, var(--panel) 100%);
+}
+
+/* The record's type, filled the way the design fills it: the colour the rest of
+   the app files that type under, with the dark ink that reads on it. */
+.ov-story-tag {
+  position: absolute;
+  top: 22px;
+  left: 24px;
+  z-index: 2;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: var(--accent, var(--teal));
+  color: #06171f;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.ov-story-body {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  padding: 28px 28px 20px 44px;
+}
+.ov-story-date {
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+.ov-story-title {
+  font-size: 21px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+.ov-story-desc {
+  margin-top: 3px;
+  max-width: 62ch;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--text-2);
+}
+/* The counter sits on the card's foot, where the design puts it: the body is a
+   column, so the auto margin above this line is what carries it down. */
+.ov-story-meta {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 12px;
+  font-size: 11px;
+  color: var(--muted-2);
+}
+.ov-story-meta-icon { display: inline-flex; width: 12px; height: 12px; color: var(--muted-2); }
+.ov-story-meta-icon svg { width: 100%; height: 100%; }
+
+/* ==================== 8. SCHOLAR SCROLL ==================== */
+
+/* The design's scholar card, rebuilt in the idiom it was drawn in: its own ink
+   (the design's cyan, teal and emerald), a teal hairline round the card and teal
+   on the bars inside it, a diagonal slate gradient, and a shadow tinted cyan
+   rather than black. It is the one editorial card on the page, so it is allowed a
+   palette of its own; its radius, its motion and its type sizes stay the app's.
+   Its Arabic, its name, its dates and place, its counters and its route are the
+   record's — the pool only holds the sentence. */
+.ov-scholar {
+  --s-cyan: #22d3ee;
+  --s-teal: #2dd4bf;
+  --s-teal-dim: #14b8a6;
+  --s-emerald: #34d399;
+  --s-emerald-dim: #10b981;
+  --s-edge: rgba(17, 94, 89, 0.5);
+  --s-line: rgba(19, 78, 74, 0.45);
+  --s-bar: rgba(15, 23, 42, 0.2);
+  position: relative;
+  display: grid;
+  grid-template-columns: 128px minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    "head head"
+    "band copy"
+    "foot foot";
+  border: 1px solid var(--s-edge);
+  border-radius: var(--r-lg);
+  background: linear-gradient(135deg, #081a2e 0%, #06141f 52%, #020810 100%);
+  box-shadow: 0 25px 50px -12px rgba(22, 78, 99, 0.3), var(--shadow-sm);
+  overflow: hidden;
+}
+
+/* The bar the card opens with: its own label, and the three dots the design prints
+   opposite it. */
+.ov-scholar-head {
+  grid-area: head;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 16px;
+  border-bottom: 1px solid var(--s-line);
+  background: var(--s-bar);
+}
+.ov-scholar-kicker {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--s-cyan);
+}
+/* The bar's label is set wider than the piece's, as the design sets it. */
+.ov-scholar-head .ov-scholar-kicker { letter-spacing: 0.4em; }
+
+/* The design's three dots: cyan, teal and emerald, solid, in both bars. */
+.ov-scholar-dots { display: inline-flex; align-items: center; gap: 4px; }
+.ov-scholar-dots i,
+.ov-scholar-foot i { width: 4px; height: 4px; border-radius: 50%; background: #06b6d4; }
+.ov-scholar-dots i:nth-child(2),
+.ov-scholar-foot i:nth-child(2) { background: var(--s-teal-dim); }
+.ov-scholar-dots i:nth-child(3),
+.ov-scholar-foot i:nth-child(3) { background: var(--s-emerald-dim); }
+
+/* The band: the record's own words down the card's edge, the given name, the
+   connector and the rest of the name one group to a line, with the name in roman
+   letters under them and the two ornaments the design prints above and below the
+   whole. */
+.ov-scholar-band {
+  grid-area: band;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px 8px;
+  border-right: 1px solid var(--s-edge);
+  background: linear-gradient(180deg, rgba(17, 94, 89, 0.2), rgba(23, 37, 84, 0.4));
+}
+.ov-scholar-orn {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--s-cyan);
+  transform: rotate(45deg);
+}
+/* The words and the name are one block, centred between the ornaments. The words
+   take the sizes the design gives them — the outer ones large, the connectors
+   between them smaller. The design's own card holds three short words; a record
+   here carries a full nasab, so the largest line is set a step down to stay
+   inside the band. */
+.ov-scholar-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  margin: auto 0;
+}
+.ov-scholar-ar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-size: 30px;
+  line-height: 1.25;
+}
+.ov-scholar-ar-mid { font-size: 23px; }
+.ov-scholar-label {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--s-teal);
+}
+
+/* The piece beside the band: the kicker, the name on two lines, the record's role,
+   dates and place, then the divider, the sentence, the counters and the way in. It
+   is centred in whatever height the card is given, as the design centres it. */
+.ov-scholar-copy {
+  grid-area: copy;
+  z-index: 3;                /* above the grain, which films the card's surfaces */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: 24px;
+}
+.ov-scholar-lead { margin-bottom: 20px; }
+.ov-scholar-title {
+  margin-top: 8px;
+  font-size: 24px;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: #ffffff;
+}
+.ov-scholar-role {
+  display: block;
+  margin-top: 8px;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: var(--s-teal);
+}
+/* The ornamental divider: a rule either side of a diamond, both fading out. */
+.ov-scholar-rule {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.ov-scholar-rule i {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #155e75, transparent);
+}
+.ov-scholar-rule span {
+  flex: 0 0 auto;
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--s-cyan);
+  transform: rotate(45deg);
+}
+.ov-scholar-desc {
+  margin-bottom: 24px;
+  font-size: 11px;
+  line-height: 1.65;
+  color: #cbd5e1;
+}
+.ov-scholar-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.ov-scholar-stat {
+  padding: 12px;
+  border: 1px solid var(--s-line);
+  border-radius: var(--r-md);
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
+}
+/* The first counter is emerald and the second cyan, as the design colours them. */
+.ov-scholar-stat-num {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--s-emerald);
+  font-variant-numeric: tabular-nums;
+}
+.ov-scholar-stat:nth-child(2) .ov-scholar-stat-num { color: var(--s-cyan); }
+.ov-scholar-stat-label {
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--s-teal-dim);
+}
+.ov-scholar-note {
+  margin-bottom: 24px;
+  padding: 10px 12px;
+  border: 1px dashed var(--s-line);
+  border-radius: var(--r-md);
+  font-size: 11px;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+/* The call to action: the design fills it with its own emerald-to-cyan sweep and
+   puts dark ink on it — the one filled control on the card, and the only place
+   this palette is used as a surface rather than as a line. It answers the pointer
+   the way the hero's filled buttons do: it lifts, its fill and its glow come up
+   (below), and the shine sweep in css/effects.css crosses it. */
+.ov-scholar-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 0;
+  border-radius: var(--r-md);
+  background: linear-gradient(90deg, var(--s-emerald-dim), #06b6d4);
+  color: #0f172a;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  box-shadow: 0 10px 15px -3px rgba(6, 182, 212, 0.25);
+  transition: transform var(--t-fast) var(--ease), background var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+.ov-scholar-cta:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(90deg, var(--s-emerald), var(--s-cyan));
+  box-shadow: 0 12px 22px -4px rgba(6, 182, 212, 0.4);
+}
+/* The sweep's own ink is a pale teal — invisible on this gradient, exactly as it
+   is on the hero's, so this control's highlight reads white too. The `.ov` scope
+   is what wins the tie with css/effects.css, which loads after this file. */
+.ov .ov-scholar-cta::after {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+}
+/* This card's crossing is a touch slower than the shared sweep, and it eases out
+   hard at the end (ease-out-expo), so the highlight settles as it leaves rather
+   than stopping dead. Scoped under `.ov` for the same reason the ink above is. */
+.ov .ov-scholar-cta:hover::after {
+  animation: sweep 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ov-scholar-cta-arrow { display: inline-flex; width: 14px; height: 14px; }
+.ov-scholar-cta-arrow svg { width: 100%; height: 100%; }
+
+/* The bar the design closes the card with. */
+.ov-scholar-foot {
+  grid-area: foot;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 32px;
+  border-top: 1px solid var(--s-line);
+  background: var(--s-bar);
+}
+
+/* ==================== 9. FOOTER ==================== */
+
+/* One line, three parts: what the archive is for, its name in Arabic, and the
+   three doors out of it. */
+.ov-footer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.ov-footer-tag { font-size: 11px; color: var(--muted-2); }
+.ov-footer-ar {
+  justify-self: center;
+  font-family: var(--font-arabic);
+  font-size: 12.5px;
+  color: var(--muted-2);
+}
+.ov-footer-links { justify-self: end; display: flex; align-items: center; gap: 8px; }
+.ov-footer-btn {
+  padding: 2px 4px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 11px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color var(--t-fast) var(--ease);
+}
+.ov-footer-btn:hover { color: var(--teal); }
+.ov-footer-sep { color: var(--line-3); font-size: 11px; }
+
+/* ==================== 10. RESPONSIVE ==================== */
+
+/* The hero's three columns need room before the statistics can sit beside the
+   figure: below this the statistics take the panel's full width, under the copy
+   and the figure. */
+@media (max-width: 1440px) {
+  .ov-hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
+  .ov-stats {
+    grid-column: 1 / -1;
+    padding: 20px 0 0;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .ov-stat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ov-quote { margin-top: 0; }
+}
+
+/* One column for the hero — tablet, and the foot of the laptop range — and the
+   Discover row's two cards under the scholar. The copy row's own height (§ 2) is
+   released here: stacked, every row is as tall as what it holds, so the hero grows
+   downwards to whatever the page needs rather than being held at 507px. */
+@media (max-width: 1024px) {
+  .ov-hero { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; gap: 22px; }
+  .ov-map { min-height: 320px; }
+  .ov-stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ov-discover-grid { grid-template-columns: minmax(0, 1fr); }
+  .ov-discover-grid > .ov-scholar { grid-column: 1; grid-row: auto; }
+
+  /* A tablet is held, not pointed at, so the copy control on the verse and the
+     three doors out of the footer come up to the size the phone tier gives them.
+     The verse's right padding is the control's new width plus its 8px inset —
+     8 + 40 = 48px, the same number the desktop tier sets, where the control is
+     26px and the same padding leaves 14px over. */
+  .ov-quote-link { padding: 14px 48px 14px 16px; }
+  .ov-quote-copy { width: 40px; height: 40px; }
+  .ov-footer-btn { min-height: 40px; }
+}
+
+/* Phones: one card per row, the hero in the order the panel already holds it —
+   copy, figure, statistics — and every size that was set for a wide column
+   brought down to one. The scene becomes a band across the top of its card and
+   fades down into the copy instead of across it, and the scholar's band, which
+   runs down the card's edge on a desktop, runs across its top here. */
+@media (max-width: 760px) {
+  .ov-hero { padding: 22px 18px; gap: 20px; }
+
+  .ov-title { font-size: 26px; }
+  .ov-lead { font-size: 12.5px; }
+  .ov-cta { gap: 10px; margin-top: 18px; }
+  /* Both ways out of the hero, at the size a finger needs. */
+  .ov .dsh-btn.primary { height: 44px; }
+
+  /* The ring keeps its shape and its pills stay on it; only their type comes down
+     a step, because eight pills on one ring have to fit the width a phone has. */
+  .ov-map { min-height: 300px; }
+  .ov-pill { font-size: 10px; padding: 8px 10px; gap: 5px; }
+  .ov-pill-dot { width: 5px; height: 5px; }
+  .ov-map-hub { width: 78px; height: 78px; }
+  .ov-map-hub-ar { font-size: 18px; }
+
+  /* Six counters stay two-up, as the design has them: a phone is where a
+     two-column grid is the readable one, not a six-column list. */
+  .ov-stats { padding-top: 18px; gap: 10px; }
+  .ov-stat-link { padding: 9px 10px; gap: 8px; }
+  .ov-stat-icon { width: 28px; height: 28px; }
+  .ov-stat-label { font-size: 9px; letter-spacing: 0.1em; }
+  /* The control is 40px here as it is on a tablet, so the verse keeps the same
+     48px reserve on the right (§ 5); the left padding steps down with the rest of
+     the phone tier, and the verse still reads from the card's own gutter. */
+  .ov-quote-link { padding: 14px 48px 14px 14px; }
+  .ov-quote-copy { width: 40px; height: 40px; }
+
+  .ov-story { grid-template-columns: minmax(0, 1fr); }
+  .ov-story-art { aspect-ratio: 16 / 9; }
+  .ov-story-art::after { background: linear-gradient(180deg, transparent 40%, var(--panel) 100%); }
+  .ov-story-body { padding: 24px 20px 18px; }
+
+  /* The scholar's card stacks: the band across the top with its two ornaments at
+     the ends of the row, the piece under it. */
+  .ov-scholar {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "head"
+      "band"
+      "copy"
+      "foot";
+  }
+  .ov-scholar-band {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border-right: 0;
+    border-bottom: 1px solid var(--s-edge);
+  }
+  .ov-scholar-name { flex: 1 1 auto; gap: 8px; margin: 0; min-width: 0; }
+  .ov-scholar-ar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+    gap: 8px;
+    font-size: 22px;
+  }
+  .ov-scholar-ar-mid { font-size: 17px; }
+  .ov-scholar-copy { padding: 18px; }
+  .ov-scholar-title { font-size: 21px; }
+  .ov-scholar-desc { font-size: 12px; }
+  .ov-scholar-note { font-size: 12px; }
+  .ov-scholar-stat { padding: 10px; }
+  .ov-scholar-cta { padding: 14px 0; }
+
+  .ov-footer { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; gap: 4px; }
+  .ov-footer-links { justify-self: center; flex-wrap: wrap; justify-content: center; }
+  /* The three doors out, at the size a finger needs. */
+  .ov-footer-btn { padding: 12px 6px; }
+}
+
+/* The narrowest phones: the two ways out of the hero take the full width instead
+   of sitting side by side, and the copy and the pills come down a step further. */
+@media (max-width: 430px) {
+  .ov-hero { padding: 20px 14px; }
+  .ov-title { font-size: 24px; }
+  .ov-cta > .dsh-btn { flex: 1 1 100%; }
+  .ov-pill { font-size: 9.5px; padding: 7px 9px; }
+  .ov-stat-link { padding: 8px 9px; }
+  .ov-scholar-copy { padding: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ov-story:hover { transform: none; }
+  .ov-story:hover .ov-story-art svg,
+  .ov-story:hover .ov-story-art .cha-img { transform: none; }
+  .ov-scholar-cta:hover { transform: none; }
+  .ov .shining-arabic { animation: none; }
+}

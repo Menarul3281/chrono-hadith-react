@@ -1,0 +1,153 @@
+/* ==================== MOTION ====================
+   One place for how every control responds to the pointer and the keyboard:
+   a hover lift with a tinted glow, a press that pushes the control in, and a
+   short ring on release so a click is acknowledged even when it only changes
+   something elsewhere on the page. The palette is the app's own teal/mint, so
+   the motion reads as part of the theme rather than as decoration on top of it.
+
+   Nothing here changes layout: transforms and shadows only. Everything is
+   switched off under prefers-reduced-motion at the end of the file. */
+
+:root {
+  --motion-fast: 140ms;
+  --motion-ease: cubic-bezier(.22, .8, .25, 1);
+  --press-ring: rgba(52, 246, 193, 0.45);
+  --press-ring-soft: rgba(52, 246, 193, 0.16);
+  --lift-1: -1px;
+}
+
+/* --- one shared vocabulary for the three states ------------------------- */
+
+.pressable,
+.dsh-btn, .dsh-iconbtn, .dsh-chip, .dsh-view-btn, .dsh-select, .dsh-switch,
+.top-action, .footer-btn, .nav-item, .dsh-check,
+.ev-tab, .ev-period, .ev-row, .ev-near, .ev-chain-steps a, .ev-badge.dyn,
+.dy-card, .dy-arrow, .dy-more, .dym-legend-item, .dyt-bar,
+.filter-chip, .figure-card, .picker-item, .picker-button,
+.tlc-btn, .tlc-tab, .tlc-span, .narrator-row, .badge-mini {
+  transition:
+    transform var(--motion-fast) var(--motion-ease),
+    box-shadow var(--motion-fast) var(--motion-ease),
+    border-color var(--motion-fast) var(--motion-ease),
+    background-color var(--motion-fast) var(--motion-ease),
+    color var(--motion-fast) var(--motion-ease);
+}
+
+/* hover: rise a little, brighten the edge, glow in the accent */
+.dsh-btn:hover, .dsh-iconbtn:hover, .dsh-chip:hover, .dsh-view-btn:hover,
+.top-action:hover, .footer-btn:hover, .dy-arrow:hover, .dyt-bar:hover,
+.ev-near:hover, .figure-card:hover, .picker-item:hover, .narrator-row:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--press-ring-soft);
+}
+.dsh-btn:hover, .dsh-chip:hover, .dy-arrow:hover { transform: translateY(var(--lift-1)); }
+.dsh-iconbtn:hover, .top-action:hover { transform: translateY(var(--lift-1)) scale(1.04); }
+.dsh-btn.primary:hover, .dsh-btn.primary:focus-visible {
+  box-shadow: 0 0 20px rgba(52, 246, 193, 0.22), 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+.dy-card:hover { box-shadow: 0 10px 26px rgba(0, 0, 0, 0.42), 0 0 0 1px var(--press-ring-soft); }
+.ev-row:hover { box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3); }
+.dsh-chip:hover, .dym-legend-item:hover { border-color: var(--teal); }
+.dy-more:hover { transform: translateX(2px); }
+.ev-chain-steps a:hover, .dyp-ruler-name a:hover { box-shadow: 0 2px 0 0 currentColor; }
+
+/* nav items slide toward the content edge and glow on hover */
+.nav-item:hover { box-shadow: inset 2px 0 0 0 var(--teal); }
+.nav-item:active { transform: translateX(3px) scale(0.995); }
+
+/* checks and switches nudge rather than move */
+.dsh-check:hover { transform: translateX(2px); }
+.dsh-check:active { transform: translateX(2px) scale(0.99); }
+.dsh-switch:hover .dsh-switch-track { box-shadow: 0 0 0 3px var(--press-ring-soft); }
+
+/* tabs underline from the accent colour on hover, and always when active */
+.ev-tab:hover { border-bottom-color: var(--press-ring); }
+.ev-tab:active, .dsh-view-btn:active { transform: translateY(1px); }
+
+/* period segments and dynasty bars take a bright edge on hover */
+.ev-period:hover { border-color: color-mix(in srgb, var(--era) 70%, transparent); }
+.dyt-bar:hover .dyt-bar-label { fill: #fff; }
+
+/* --- press and release -------------------------------------------------- */
+
+.dsh-btn:active, .dsh-chip:active, .dsh-view-btn:active, .dsh-iconbtn:active,
+.top-action:active, .footer-btn:active, .dy-arrow:active, .ev-row:active,
+.dy-card:active, .figure-card:active, .picker-item:active, .ev-near:active,
+.dym-legend-item:active, .dy-more:active {
+  transform: translateY(1px) scale(0.985);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) inset;
+}
+
+/* The ring on release: added by js/motion.js and removed when the animation
+   ends, so a second click replays it. */
+@keyframes pressPop {
+  0%   { box-shadow: 0 0 0 0 var(--press-ring), 0 0 0 0 var(--press-ring-soft); }
+  45%  { box-shadow: 0 0 0 3px var(--press-ring-soft), 0 2px 6px rgba(0, 0, 0, 0.35) inset; }
+  100% { box-shadow: 0 0 0 10px rgba(52, 246, 193, 0), 0 0 0 0 rgba(52, 246, 193, 0); }
+}
+.is-pressed { animation: pressPop 340ms var(--motion-ease); }
+
+/* A quieter ring for large surfaces (cards, rows, map areas), so a click reads
+   as acknowledgement without flashing the whole panel. */
+@keyframes pressPopSoft {
+  0%   { box-shadow: 0 0 0 0 var(--press-ring-soft); }
+  100% { box-shadow: 0 0 0 8px rgba(52, 246, 193, 0); }
+}
+.is-pressed-soft { animation: pressPopSoft 420ms var(--motion-ease); }
+
+/* --- keyboard focus ----------------------------------------------------- */
+
+.dsh-btn:focus-visible, .dsh-iconbtn:focus-visible, .dsh-chip:focus-visible,
+.dsh-view-btn:focus-visible, .ev-tab:focus-visible, .ev-period:focus-visible,
+.ev-row:focus-visible, .dy-card:focus-visible, .dy-arrow:focus-visible,
+.dym-legend-item:focus-visible, .dyt-bar:focus-visible, .nav-item:focus-visible,
+.top-action:focus-visible, .footer-btn:focus-visible, .picker-item:focus-visible,
+.figure-card:focus-visible, .tlc-btn:focus-visible, .tlc-tab:focus-visible {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px var(--press-ring-soft), 0 0 18px rgba(52, 246, 193, 0.22);
+}
+
+/* --- selected records settle in ---------------------------------------- */
+
+@keyframes recSelect {
+  from { background-color: rgba(52, 246, 193, 0.18); }
+  to   { background-color: color-mix(in srgb, var(--teal) 8%, var(--panel-2)); }
+}
+.ev-row.selected, .dsh-chip.selected, .dy-card.selected { animation: recSelect 320ms var(--motion-ease); }
+
+@keyframes fadeUpSm {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.dsh-empty, .picker-list, .ev-noloc, .dyp-events, .dsh-context { animation: fadeUpSm 260ms var(--motion-ease) both; }
+
+/* --- the shared topbar picker ------------------------------------------ */
+
+@keyframes pickerIn {
+  from { opacity: 0; transform: translateY(-6px) scale(0.985); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.tps-panel.open { animation: pickerIn 180ms var(--motion-ease); }
+
+@keyframes chipStagger {
+  from { opacity: 0; transform: translateY(-3px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.tps-chip { animation: chipStagger 200ms var(--motion-ease) both; }
+
+/* --- reduced motion ----------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .dsh-btn:hover, .dsh-iconbtn:hover, .dsh-chip:hover, .dsh-view-btn:hover,
+  .dsh-btn:active, .dsh-chip:active, .dsh-iconbtn:active, .nav-item:active,
+  .ev-row:hover, .dy-card:hover, .dsh-check:hover, .dy-more:hover {
+    transform: none;
+  }
+}
+

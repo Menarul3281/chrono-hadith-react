@@ -1,0 +1,402 @@
+/* ==================== GRAPH PAGE ====================
+   The page has two renderers and one vocabulary. React Flow draws the canvas
+   when its modules load (the npm @xyflow/react package, whose own stylesheet the
+   module imports with it); plain SVG draws the same records when they do not.
+   Around the canvas both mount identical markup, so the file is split into three
+   parts:
+
+     1. REACT FLOW CANVAS   — .rx-* and the .react-flow__* chrome
+     2. SHARED LAYOUT/CHROME — the grid, mode switch, views, rail, legend, panel
+     3. FALLBACK CANVAS      — the hand-drawn SVG diagram and its own timeline
+
+   Nothing in parts 1 and 3 leaks into the other renderer, and a class that
+   appears in both parts 1/3 belongs in part 2. The numbers name the parts, not
+   their order: the shared shell is declared first, the fallback canvas next, then
+   the shared views, rail and panel that both renderers mount. */
+
+/* ==================== 1. REACT FLOW CANVAS ====================
+   The library supplies the interaction model — pan, zoom, dragging, mini-map —
+   and these rules dress its nodes and chrome in the app's own palette. */
+
+.rx-canvas {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  background: var(--panel);
+  overflow: hidden;
+}
+
+.rx-flow {
+  height: calc(100vh - 232px);
+  min-height: 460px;
+}
+/* The Table view hides the canvas without taking it out of the layout: the flow
+   keeps the box it measured, so returning to the graph does not re-measure a
+   zero-sized container (React Flow warns when it is asked to draw in one).
+   `opacity: 0` is the one property a descendant cannot override — the library
+   paints its own nodes and edges inside this box — so the canvas is certainly
+   invisible while the table, which is positioned over it, keeps the paint order. */
+.rx-flow[hidden] {
+  display: block;
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+/* The graph page's own canvas ground: the narrator card keeps the ground its wrap
+   already draws, so this stays scoped to this page's flow. */
+.rx-flow .react-flow { background: radial-gradient(circle at 50% 45%, #08202c 0, var(--bg) 70%); }
+
+/* --- nodes -------------------------------------------------------------- */
+
+.rx-node {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid var(--line-2);
+  border-left: 3px solid var(--family, var(--teal));
+  border-radius: var(--r-sm);
+  background: color-mix(in srgb, var(--family, var(--teal)) 9%, var(--panel));
+  color: var(--text-2);
+  overflow: hidden;
+  cursor: grab;
+  transition: border-color var(--t-fast) var(--ease), background var(--t-fast) var(--ease),
+              box-shadow var(--t-fast) var(--ease), opacity var(--t-base) var(--ease);
+}
+.rx-node:hover {
+  border-color: var(--family, var(--teal));
+  background: color-mix(in srgb, var(--family, var(--teal)) 20%, var(--panel));
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+.rx-node.selected {
+  border-color: var(--teal);
+  border-left-color: var(--teal);
+  background: color-mix(in srgb, var(--teal) 18%, var(--panel));
+  box-shadow: 0 0 0 1px rgba(52, 246, 193, 0.4), 0 0 22px rgba(52, 246, 193, 0.18);
+}
+.rx-node.dim { opacity: 0.42; }
+.rx-node:active { cursor: grabbing; }
+
+.rx-node-dot {
+  width: 8px; height: 8px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--family, var(--teal));
+  box-shadow: 0 0 8px color-mix(in srgb, var(--family, var(--teal)) 60%, transparent);
+}
+.rx-node-copy { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.rx-node-label {
+  font-size: 11px; font-weight: 600; color: var(--text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 136px;
+}
+.rx-node-sub {
+  font-size: 9px; color: var(--muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 136px;
+}
+/* A handle on every side, so a trace can leave and arrive by the side that faces
+   the record it is drawn to. They are invisible, but they must stay measured: one
+   handle removed from the DOM and the library drops every edge attached to it.
+   The canvas class keeps the library's own sizing rules from winning. */
+.rx-flow .rx-handle {
+  width: 5px; height: 5px;
+  min-width: 0; min-height: 0;
+  opacity: 0;
+  border: 0;
+  background: transparent;
+}
+
+/* --- region captions ---------------------------------------------------- */
+
+/* Each band prints its own name on the board. A caption is not a record: it is
+   flat, never dragged or selected, and a click on it reaches the pane beneath. */
+.rx-flow .react-flow__node-caption { pointer-events: none; }
+.rx-cap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+  border-bottom: 1px solid rgba(52, 246, 193, 0.22);
+  color: var(--muted-2);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.rx-cap-label { overflow: hidden; text-overflow: ellipsis; }
+.rx-cap-count {
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+  color: rgba(52, 246, 193, 0.55);
+}
+
+/* --- edges -------------------------------------------------------------- */
+
+.rx-flow .react-flow__edge-path {
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  transition: stroke-width var(--t-fast) var(--ease), opacity var(--t-fast) var(--ease);
+}
+.rx-flow .react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: 6 5;
+  animation: rxDash 700ms linear infinite;
+}
+@keyframes rxDash { to { stroke-dashoffset: -22; } }
+
+/* --- chrome -------------------------------------------------------------
+   The library's chrome takes its colours from its own custom properties, and its
+   stylesheet arrives after this page's — the modules import it, so the bundler
+   puts it last. Setting those properties on the canvas, two classes deep so the
+   cascade cannot go the other way, is therefore how the controls, the mini-map and
+   the attribution are dressed in the app's palette: a plain rule of the same
+   weight as the library's would simply lose. */
+
+.rx-flow .react-flow {
+  --xy-controls-box-shadow: var(--shadow-sm);
+  --xy-controls-button-background-color: var(--panel-2);
+  --xy-controls-button-background-color-hover: var(--panel-3);
+  --xy-controls-button-color: var(--text-2);
+  --xy-controls-button-color-hover: var(--teal);
+  --xy-controls-button-border-color: var(--line);
+  --xy-minimap-background-color: rgba(2, 9, 15, 0.85);
+  --xy-minimap-node-background-color: #1d4354;
+  --xy-minimap-node-stroke-color: transparent;
+  --xy-minimap-mask-stroke-color: transparent;
+  --xy-attribution-background-color: transparent;
+}
+.rx-flow .react-flow__controls-button svg { fill: currentColor; }
+.rx-flow .react-flow__minimap {
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-sm);
+}
+.rx-flow .react-flow__attribution { font-size: 9px; color: var(--muted-2); }
+.rx-flow .react-flow__attribution a { color: var(--muted-2); }
+
+/* ==================== 2. SHARED LAYOUT AND CHROME ====================
+   Both renderers mount this shell: three columns on one row — the canvas, the
+   controls, and the selected node. What follows is therefore neither renderer's
+   private property: it is the page. Both roots carry the dashboard shell class
+   (`dsh gph gph-react` for React, `dsh gph` for the fallback), so the rail, the
+   panel and the counters read the same tokens either way.
+
+   The selected record's panel is the widest column: its rows name a record and its
+   context line, and the archive's longer names need the room. The rail gives up
+   width to it as the window narrows, and below 1180px the three columns become one
+   and the rail and the panel stack under the canvas. */
+
+.gph {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 244px 420px;
+  gap: 14px;
+  align-items: start;
+}
+@media (max-width: 1420px) { .gph { grid-template-columns: minmax(0, 1fr) 224px 380px; } }
+@media (max-width: 1180px) { .gph { grid-template-columns: minmax(0, 1fr); } }
+
+/* ==================== 3. FALLBACK CANVAS (plain SVG) ====================
+   Drawn without a library, so the whole diagram is hand-built: a central hub,
+   cluster cards on a fixed ring so the layout is stable between renders, the
+   individual records, the connecting edges, and the small zoom and mini-map
+   controls. js/graph-view.js is the only writer of these classes; none of them
+   appears once React Flow has mounted. */
+
+.gph-canvas-wrap {
+  position: relative;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  background: var(--panel);
+  overflow: hidden;
+}
+.gph-svg { width: 100%; display: block; cursor: grab; }
+.gph-svg.dragging { cursor: grabbing; }
+
+.gph-hub { cursor: pointer; }
+.gph-hub circle {
+  fill: rgba(52, 246, 193, 0.10);
+  stroke: var(--teal);
+  stroke-width: 1.5;
+}
+.gph-hub:hover circle { fill: rgba(52, 246, 193, 0.18); }
+.gph-hub-name { font-size: 15px; font-weight: 700; fill: var(--text); }
+.gph-hub-sub { font-size: 11px; fill: var(--muted); }
+
+.gph-card {
+  fill: rgba(7, 23, 34, 0.92);
+  stroke: var(--line-2);
+  stroke-width: 1;
+}
+.gph-cluster.expanded .gph-card { stroke: var(--cluster); stroke-width: 1.4; }
+.gph-card-title { font-size: 12px; font-weight: 600; fill: var(--cluster); }
+.gph-card-count { font-family: var(--font-mono); font-size: 10px; fill: var(--muted-2); }
+
+.gph-node { cursor: pointer; }
+.gph-node rect { fill: rgba(13, 36, 49, 0.9); stroke: var(--line); stroke-width: 0.8; }
+.gph-node text { font-size: 10px; fill: var(--text-2); pointer-events: none; }
+.gph-node:hover rect { fill: rgba(52, 246, 193, 0.16); stroke: var(--teal); }
+.gph-node.selected rect { fill: rgba(52, 246, 193, 0.26); stroke: var(--teal); stroke-width: 1.4; }
+.gph-node.selected text { fill: #fff; }
+.gph-node:focus { outline: none; }
+.gph-node:focus-visible rect { stroke: #fff; stroke-width: 2; }
+
+.gph-more { cursor: pointer; }
+.gph-more rect { fill: rgba(52, 246, 193, 0.08); stroke: var(--line-2); stroke-width: 0.8; }
+.gph-more text { font-size: 9px; fill: var(--muted); pointer-events: none; }
+.gph-more:hover rect { fill: rgba(52, 246, 193, 0.2); }
+
+.gph-edge { fill: none; stroke: var(--edge); stroke-width: 1.6; opacity: 0.75; }
+.gph-edge-dot { fill: var(--edge); opacity: 0.9; }
+
+.gph-zoom {
+  position: absolute; top: 10px; right: 10px;
+  display: flex; flex-direction: column; gap: 5px;
+}
+.gph-minimap {
+  position: absolute; bottom: 10px; right: 10px;
+  width: 116px; height: 74px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-sm);
+  background: rgba(2, 12, 18, 0.85);
+  overflow: hidden;
+}
+.gph-minimap svg { width: 100%; height: 100%; }
+.gph-minimap rect { fill: rgba(52, 246, 193, 0.16); stroke: var(--teal); stroke-width: 4; }
+
+/* ==================== 2. SHARED: THE VIEWS ====================
+   The mode switch and the table view are the same markup under both renderers.
+   This page has two views — the board and the table. The archive's Timeline is a
+   route of its own, and neither renderer offers it from here. */
+
+.gph-modes {
+  display: flex;
+  gap: 4px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+  flex-wrap: wrap;
+}
+/* The table view sits over the canvas, which is still in the DOM behind it: the
+   view keeps the paint order and its own ground, so the board can never show
+   through the rows. */
+.gph-slot {
+  position: relative;
+  z-index: 1;
+  padding: 12px;
+  background: var(--panel);
+}
+/* The table view scrolls inside its card instead of stretching the page. */
+.gph-table-wrap {
+  padding: 12px;
+  max-height: calc(100vh - 232px);
+  overflow-y: auto;
+}
+
+.gph-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+.gph-table th {
+  text-align: left;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--line-2);
+  font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--muted);
+}
+.gph-table td { padding: 6px 8px; border-bottom: 1px solid var(--line); color: var(--text-2); }
+.gph-tr { cursor: pointer; }
+.gph-tr:hover td { background: rgba(52, 246, 193, 0.06); color: var(--text); }
+.gph-tr.selected td { background: rgba(52, 246, 193, 0.12); color: var(--text); }
+.gph-tr:focus { outline: none; }
+.gph-tr:focus-visible td { box-shadow: inset 0 0 0 2px var(--teal); }
+
+/* --- 2. SHARED: the controls rail, the legend and the selected node ------ */
+
+.gph-rail {
+  display: flex; flex-direction: column; gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  background: var(--panel);
+  max-height: calc(100vh - 232px);
+  overflow-y: auto;
+}
+.gph-stats { display: flex; gap: 8px; }
+.gph-stat {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 1px;
+  padding: 8px 6px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--bg-2);
+}
+.gph-stat-num { font-family: var(--font-mono); font-size: 15px; color: var(--teal); }
+.gph-stat-lbl { font-size: 9px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted-2); }
+
+.gph-legend { display: flex; flex-direction: column; gap: 5px; margin: 0; padding: 0; list-style: none; }
+.gph-legend-item { display: flex; align-items: center; gap: 7px; font-size: 10px; color: var(--text-2); }
+.gph-legend-line { width: 18px; height: 0; border-top: 2px solid var(--edge); }
+
+/* --- the collapsible groups --------------------------------------------- */
+
+/* The filters fold away: a rail is the narrowest column of the three, and a reader
+   who has set them does not need them on screen while reading the board. The
+   heading itself is the button, and it carries how many families are still on. */
+.gph-fold-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.gph-fold-btn:hover { color: var(--teal); }
+.gph-fold-btn:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+.gph-fold-btn .dsh-check-count { margin-left: auto; }
+.gph-fold-body { display: flex; flex-direction: column; gap: 6px; padding-top: 8px; }
+.gph-fold-body .dsh-btn { align-self: flex-start; }
+.gph-caret {
+  width: 0; height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 6px solid var(--muted-2);
+  transition: transform var(--t-fast) var(--ease);
+}
+.gph-caret.open { transform: rotate(90deg); }
+
+/* --- the board's regions ------------------------------------------------ */
+
+.gph-bands { display: flex; flex-direction: column; gap: 3px; margin: 0; padding: 0; list-style: none; }
+.gph-band { display: flex; align-items: baseline; gap: 6px; font-size: 10px; color: var(--text-2); }
+.gph-band-where {
+  flex: 0 0 46px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+.gph-band-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* --- the selected node -------------------------------------------------- */
+
+.gph-panel { display: flex; flex-direction: column; }
+.gph-rels { display: flex; flex-direction: column; gap: 4px; }
+.gph-rel {
+  display: flex; flex-direction: column; gap: 1px;
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--edge, var(--teal));
+  border-radius: var(--r-sm);
+  background: var(--bg-2);
+  text-align: left;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.gph-rel:hover { border-color: var(--line-3); background: var(--panel-2); }
+.gph-rel-name { font-size: 11px; color: var(--text); }
+.gph-rel-note { font-size: 10px; color: var(--muted); }

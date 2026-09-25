@@ -1,0 +1,108 @@
+.hadith-of-day {
+  position: relative;
+  padding: var(--s-4) var(--s-4) var(--s-4);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-md);
+  background:
+    linear-gradient(160deg, rgba(10, 29, 41, 0.9), rgba(7, 23, 34, 0.9));
+  overflow: hidden;
+}
+.hadith-of-day::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.7;
+}
+
+.hod-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--s-3);
+}
+.hod-star {
+  width: 12px; height: 12px;
+  color: var(--gold);
+  filter: drop-shadow(0 0 6px rgba(255, 212, 94, 0.6));
+}
+
+.hod-arabic {
+  font-family: var(--font-arabic);
+  font-size: 18px;
+  line-height: 1.65;
+  direction: rtl;
+  text-align: right;
+  color: var(--gold);
+  margin-bottom: var(--s-3);
+  text-shadow: 0 0 24px rgba(255, 212, 94, 0.14);
+  transition: opacity var(--t-base) var(--ease);
+}
+
+.hod-translation {
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--text-2);
+  font-style: italic;
+  margin-bottom: var(--s-3);
+  transition: opacity var(--t-base) var(--ease);
+}
+
+.hod-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--s-3);
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--muted);
+}
+
+.hod-badge {
+  padding: 2px 8px;
+  border: 1px solid rgba(52, 246, 193, 0.4);
+  border-radius: var(--r-pill);
+  background: rgba(52, 246, 193, 0.06);
+  color: var(--teal);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  font-size: 9px;
+}
+
+.hod-ref {
+  color: var(--muted-2);
+}
+
+.hod-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--f-small);
+  font-weight: 600;
+  color: var(--teal);
+  transition: gap var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+.hod-link:hover { gap: var(--s-3); color: var(--teal-soft); }
+.hod-arrow {
+  width: 12px; height: 12px;
+  transition: transform var(--t-fast) var(--ease);
+}
+.hod-link:hover .hod-arrow { transform: translate(2px, -2px); }
+
+/* Fade transition when the day changes */
+.hadith-of-day.swapping .hod-arabic,
+.hadith-of-day.swapping .hod-translation {
+  opacity: 0;
+}
+
+@media (max-width: 900px) {
+  .hadith-of-day { display: none; }
+}

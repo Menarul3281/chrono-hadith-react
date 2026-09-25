@@ -1,0 +1,103 @@
+/* ==================== HADITHS ====================
+   The report list and the reader. The Arabic matn is set in the archive's Arabic
+   face and kept RTL inside an LTR interface. */
+
+.hd-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: calc(var(--dsh-col-h) - 190px);
+  min-height: 340px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.hd-card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 9px 11px;
+  border: 1px solid var(--line-2);
+  border-left: 2px solid var(--line-2);
+  border-radius: var(--r-md);
+  background: var(--panel);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  transition: border-color var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
+}
+.hd-card:hover { border-color: var(--line-3); background: var(--panel-2); }
+.hd-card.selected {
+  border-color: var(--teal);
+  border-left-color: var(--teal);
+  background: color-mix(in srgb, var(--teal) 8%, var(--panel-2));
+  box-shadow: 0 0 0 1px rgba(52, 246, 193, 0.25);
+}
+.hd-card-top { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.hd-card-ref { font-family: var(--font-mono); font-size: 11px; color: var(--teal); }
+.hd-badge {
+  padding: 2px 7px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-pill);
+  background: var(--bg-2);
+  font-size: 9px; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--text-2);
+}
+.hd-badge.grade { border-color: color-mix(in srgb, var(--teal) 50%, transparent); color: var(--teal); }
+.hd-card-ar {
+  font-family: var(--font-arabic);
+  font-size: 16px;
+  line-height: 1.85;
+  text-align: right;
+  color: var(--text);
+}
+.hd-card-en { font-size: 11px; line-height: 1.55; color: var(--text-2); }
+.hd-card-foot { display: flex; justify-content: space-between; gap: 8px; font-size: 10px; color: var(--muted-2); }
+.hd-card-topic { color: var(--muted); }
+
+.hd-narrators { display: flex; flex-wrap: wrap; gap: 5px; }
+.hd-narrators .dsh-chip em { font-style: normal; color: var(--muted-2); margin-left: 2px; }
+.hd-clearbook { color: var(--teal); margin-left: 4px; }
+.hd-scope { border-color: color-mix(in srgb, var(--teal) 35%, var(--line)); }
+
+/* --- the reader --------------------------------------------------------- */
+
+.hd-matn {
+  padding: 12px 14px;
+  border: 1px solid var(--line-2);
+  border-left: 2px solid var(--gold);
+  border-radius: var(--r-md);
+  background: var(--bg-2);
+  font-family: var(--font-arabic);
+  font-size: 19px;
+  line-height: 2;
+  text-align: right;
+  color: var(--text);
+}
+
+.hd-chain { display: flex; flex-direction: column; gap: 0; margin: 0; padding: 0; list-style: none; }
+.hd-chain-step {
+  display: flex;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--line);
+}
+.hd-chain-step:last-child { border-bottom: 0; }
+.hd-chain-node {
+  width: 20px; height: 20px;
+  flex: 0 0 auto;
+  display: grid; place-items: center;
+  border: 1px solid var(--line-2);
+  border-radius: 50%;
+  font-family: var(--font-mono); font-size: 9px;
+  color: var(--muted);
+}
+.hd-chain-copy { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.hd-chain-copy a { font-size: 12px; color: var(--text); text-decoration: underline; text-decoration-color: var(--line-3); }
+.hd-chain-copy a:hover { color: var(--teal); }
+.hd-chain-role { font-size: 10px; color: var(--muted); }
+.hd-chain-note { font-size: 10px; color: var(--muted-2); font-style: italic; }
+
+@media (max-width: 1180px) {
+  .hd-list { max-height: 520px; }
+}

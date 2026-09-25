@@ -1,0 +1,608 @@
+/* ==================== Page layout ==================== */
+
+.isnad-page {
+  animation: fadeUp 0.5s var(--ease) both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== Page head ==================== */
+
+.isnad-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-5);
+  margin-bottom: var(--s-6);
+  flex-wrap: wrap;
+}
+.isnad-head h1 {
+  font-size: var(--f-h1);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s-1);
+}
+.isnad-head p {
+  color: var(--muted);
+  font-size: var(--f-small);
+  max-width: 60ch;
+}
+
+/* ==================== Hadith card ==================== */
+
+.hadith-card {
+  position: relative;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  padding: var(--s-7) var(--s-6) var(--s-6);
+  margin-bottom: var(--s-6);
+  overflow: hidden;
+  background: var(--panel);
+  animation: fadeUp 0.5s 0.1s var(--ease) both;
+}
+
+/* Animated ambient background — drifts slowly, barely perceptible */
+.hadith-card::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(52, 246, 193, 0.08), transparent 45%),
+    radial-gradient(circle at 70% 60%, rgba(255, 212, 94, 0.06), transparent 50%),
+    radial-gradient(circle at 50% 90%, rgba(173, 104, 255, 0.05), transparent 55%);
+  animation: driftBg 60s linear infinite;
+  z-index: 0;
+}
+@keyframes driftBg {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  50%  { transform: translate(-4%, -3%) rotate(180deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+/* Gold top hairline */
+.hadith-card::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.6;
+  z-index: 2;
+}
+
+.hadith-card-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.hadith-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--s-5);
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--muted);
+}
+.hadith-meta .badge {
+  padding: 3px 10px;
+  border: 1px solid rgba(52, 246, 193, 0.4);
+  border-radius: var(--r-pill);
+  color: var(--teal);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  background: rgba(52, 246, 193, 0.06);
+}
+.hadith-meta .sep { color: var(--muted-2); }
+
+.hadith-arabic {
+  font-family: var(--font-arabic);
+  font-size: 34px;
+  line-height: 1.7;
+  direction: rtl;
+  text-align: center;
+  color: var(--text);
+  margin-bottom: var(--s-4);
+  padding: 0 var(--s-4);
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.05);
+  letter-spacing: -0.005em;
+}
+
+.hadith-translation {
+  font-size: 17px;
+  line-height: 1.65;
+  text-align: center;
+  color: var(--text-2);
+  max-width: 62ch;
+  margin: 0 auto var(--s-5);
+  font-style: italic;
+}
+
+.hadith-source {
+  text-align: center;
+  font-size: var(--f-small);
+  color: var(--muted-2);
+}
+.hadith-source a {
+  color: var(--cyan);
+  transition: color var(--t-fast) var(--ease);
+}
+.hadith-source a:hover { color: var(--text); }
+
+/* Copy button on the card */
+.hadith-copy {
+  position: absolute;
+  top: var(--s-4);
+  right: var(--s-4);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-sm);
+  background: rgba(7, 23, 34, 0.85);
+  backdrop-filter: blur(8px);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: all var(--t-base) var(--ease);
+}
+.hadith-card:hover .hadith-copy {
+  opacity: 1;
+  transform: translateY(0);
+}
+.hadith-copy:hover {
+  color: var(--teal);
+  border-color: var(--teal);
+  background: rgba(52, 246, 193, 0.08);
+  box-shadow: 0 0 14px rgba(52, 246, 193, 0.2);
+}
+.hadith-copy.copied {
+  color: var(--teal);
+  border-color: var(--teal);
+}
+.hadith-copy svg { width: 13px; height: 13px; }
+
+/* ==================== Chain + Side panel ==================== */
+
+.isnad-grid {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: var(--s-5);
+  align-items: start;
+}
+
+/* ==================== Chain ==================== */
+
+.chain-track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--bg-2);
+  padding: var(--s-5) var(--s-4);
+  overflow: hidden;
+}
+
+/* Ambient particles drift across the track */
+.chain-track::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(52, 246, 193, 0.5) 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(52, 246, 193, 0.35) 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(255, 212, 94, 0.4) 1px, transparent 1.5px);
+  background-size: 220px 180px, 340px 260px, 480px 380px;
+  background-position: 0 0, 80px 120px, 200px 60px;
+  opacity: 0.35;
+  animation: particleDrift 90s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+@keyframes particleDrift {
+  0%   { background-position: 0 0, 80px 120px, 200px 60px; }
+  100% { background-position: 220px 180px, 420px 380px, 680px 440px; }
+}
+
+.chain-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 44px 1fr 24px;
+  gap: var(--s-4);
+  align-items: center;
+  padding: 12px 0;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(6px);
+  animation: rowIn 0.4s var(--ease) forwards;
+}
+@keyframes rowIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.chain-step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--gen-color, var(--teal));
+  background: var(--bg);
+  color: var(--gen-color, var(--teal));
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 12px;
+  box-shadow: 0 0 14px color-mix(in srgb, var(--gen-color) 25%, transparent);
+  position: relative;
+  z-index: 2;
+  transition: transform var(--t-base) var(--ease);
+}
+.chain-row:hover .chain-step {
+  transform: scale(1.08);
+}
+
+/* Prophet step has an ambient pulse — it's the source */
+.chain-row.is-prophet .chain-step::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 2px solid var(--gen-color);
+  animation: prophetPulse 3s ease-out infinite;
+}
+@keyframes prophetPulse {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* The connector line below each step — draws itself in on load */
+.chain-row:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 22px;
+  top: 42px;
+  bottom: -12px;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    var(--gen-color, var(--teal)) 0%,
+    var(--line-2) 100%
+  );
+  opacity: 0.55;
+  transform-origin: top;
+  transform: scaleY(0);
+  animation: drawLine 0.4s var(--ease) forwards;
+  animation-delay: calc(var(--row-index, 0) * 0.08s + 0.3s);
+  z-index: 1;
+}
+@keyframes drawLine {
+  to { transform: scaleY(1); }
+}
+
+/* Narrator row */
+.narrator-row {
+  border: 1px solid var(--line-2);
+  border-left: 3px solid var(--gen-color, var(--teal));
+  border-radius: var(--r-md);
+  background: var(--panel);
+  padding: 12px var(--s-4);
+  cursor: pointer;
+  transition: all var(--t-base) var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.narrator-row::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--gen-color) 12%, transparent), transparent 60%);
+  opacity: 0;
+  transition: opacity var(--t-base) var(--ease);
+  pointer-events: none;
+}
+.narrator-row:hover {
+  border-color: var(--gen-color, var(--teal));
+  background: var(--panel-2);
+  transform: translateX(4px);
+  box-shadow: 0 0 22px color-mix(in srgb, var(--gen-color) 15%, transparent);
+}
+.narrator-row:hover::before { opacity: 1; }
+
+.narrator-row.expanded {
+  background: var(--panel-3);
+  box-shadow: 0 0 22px color-mix(in srgb, var(--gen-color) 20%, transparent);
+}
+
+.narrator-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  position: relative;
+  z-index: 1;
+}
+.narrator-line .narrator-name {
+  font-size: var(--f-h3);
+  font-weight: 600;
+  color: var(--text);
+  transition: color var(--t-fast) var(--ease);
+}
+.narrator-row:hover .narrator-name {
+  color: var(--gen-color, var(--teal));
+}
+.narrator-line .narrator-side {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  font-size: 10px;
+  font-family: var(--font-mono);
+}
+.narrator-side .narrator-role {
+  color: var(--gen-color, var(--teal));
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.narrator-side .narrator-gen {
+  color: var(--muted-2);
+}
+
+.narrator-arabic-inline {
+  font-family: var(--font-arabic);
+  font-size: 15px;
+  color: var(--text-2);
+  direction: rtl;
+  margin-top: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+.narrator-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--t-slow) var(--ease);
+  position: relative;
+  z-index: 1;
+}
+.narrator-row.expanded .narrator-details {
+  max-height: 600px;
+}
+
+.narrator-details-inner {
+  padding-top: var(--s-3);
+  margin-top: var(--s-3);
+  border-top: 1px solid var(--line);
+  font-size: var(--f-small);
+  color: var(--muted);
+  line-height: 1.65;
+}
+.narrator-details-inner .kv {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: var(--s-2);
+  padding: 3px 0;
+  font-size: 11px;
+}
+.narrator-details-inner .kv span:first-child {
+  color: var(--muted-2);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.narrator-details-inner .kv span:last-child { color: var(--text-2); }
+
+.narrator-open-profile {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: var(--s-3);
+  padding: 6px 12px;
+  border: 1px solid var(--gen-color, var(--teal));
+  border-radius: var(--r-sm);
+  background: color-mix(in srgb, var(--gen-color) 8%, transparent);
+  color: var(--gen-color, var(--teal));
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: all var(--t-fast) var(--ease);
+}
+.narrator-open-profile:hover {
+  background: color-mix(in srgb, var(--gen-color) 18%, transparent);
+  transform: translateX(2px);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--gen-color) 25%, transparent);
+}
+
+/* Chevron */
+.chain-chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--muted-2);
+  font-size: 11px;
+  transition: transform var(--t-base) var(--ease), color var(--t-base) var(--ease);
+  position: relative;
+  z-index: 1;
+}
+.chain-row.expanded .chain-chevron {
+  transform: rotate(180deg);
+  color: var(--gen-color, var(--teal));
+}
+
+/* ==================== Side panel ==================== */
+
+.isnad-side {
+  position: sticky;
+  top: calc(var(--topbar-h) + var(--s-5));
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  animation: fadeUp 0.5s 0.25s var(--ease) both;
+}
+
+.side-card {
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-md);
+  background: var(--panel);
+  padding: var(--s-4);
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
+}
+.side-card:hover {
+  border-color: rgba(52, 246, 193, 0.3);
+  box-shadow: 0 0 20px rgba(52, 246, 193, 0.06);
+}
+
+.side-head {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  margin-bottom: var(--s-3);
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+.side-head::before {
+  content: "";
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 6px var(--teal);
+}
+
+.side-stat {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: var(--f-small);
+  padding: 4px 0;
+  color: var(--text-2);
+}
+.side-stat strong {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.gen-list { display: flex; flex-direction: column; gap: 6px; }
+.gen-item {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: 11px;
+  color: var(--text-2);
+}
+.gen-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gen-color);
+  box-shadow: 0 0 6px var(--gen-color);
+}
+.gen-item strong {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.related-list { display: flex; flex-direction: column; gap: 6px; }
+.related-item {
+  display: block;
+  padding: 8px 10px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-sm);
+  background: var(--bg-2);
+  color: var(--text-2);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all var(--t-fast) var(--ease);
+  text-align: left;
+  width: 100%;
+}
+.related-item:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+  background: rgba(52, 246, 193, 0.04);
+  transform: translateX(2px);
+}
+.related-item strong {
+  display: block;
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.related-item:hover strong { color: var(--teal); }
+.related-item span {
+  display: block;
+  font-size: 10px;
+  color: var(--muted-2);
+  font-family: var(--font-mono);
+}
+
+.cite-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.cite-btn {
+  padding: 8px 10px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-sm);
+  background: var(--bg-2);
+  color: var(--text-2);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: all var(--t-fast) var(--ease);
+}
+.cite-btn:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+  background: rgba(52, 246, 193, 0.06);
+}
+.cite-btn.copied {
+  border-color: var(--teal);
+  color: var(--teal);
+  background: rgba(52, 246, 193, 0.1);
+}
+
+/* ==================== Responsive ==================== */
+
+@media (max-width: 1000px) {
+  .isnad-grid { grid-template-columns: 1fr; }
+  .isnad-side {
+    position: static;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-3);
+  }
+}
+
+@media (max-width: 720px) {
+  .hadith-card { padding: var(--s-5) var(--s-4); }
+  .hadith-arabic { font-size: 24px; }
+  .hadith-translation { font-size: 15px; }
+  .chain-track { padding: var(--s-4) var(--s-3); }
+  .chain-row { grid-template-columns: 36px 1fr 20px; gap: var(--s-3); }
+  .chain-step { width: 30px; height: 30px; font-size: 11px; }
+  .chain-row:not(:last-child)::after { left: 18px; top: 36px; }
+  .narrator-line .narrator-name { font-size: var(--f-body); }
+  .narrator-line .narrator-side { flex-direction: column; align-items: flex-end; gap: 2px; }
+  .isnad-side { grid-template-columns: 1fr; }
+  .hadith-copy { opacity: 1; transform: none; }
+}

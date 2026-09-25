@@ -1,0 +1,1105 @@
+{
+  "hadiths": [
+    {
+      "id": "bukhari-1",
+      "collection": "Sahih al-Bukhari",
+      "book": "Book of Revelation",
+      "number": "1",
+      "reference": "Sahih al-Bukhari 1",
+      "grade": "Sahih",
+      "matnGroup": "intentions",
+      "arabic": "إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ",
+      "translation": "Actions are only by intention, and every person shall have what they intended.",
+      "narratorId": "umar",
+      "sourceUrl": "https://sunnah.com/bukhari:1",
+      "note": "The opening hadith of Sahih al-Bukhari.",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "umar",
+          "role": "Companion narrator",
+          "generation": "Sahabi"
+        },
+        {
+          "narratorId": "alqama-waqqas",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "muhammad-ibrahim-taymi",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "yahya-said-ansari",
+          "role": "Narrator",
+          "generation": "Tabi' al-Tabi'in"
+        },
+        {
+          "narratorId": "sufyan-uyaynah",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "humaydi",
+          "role": "Al-Bukhari's teacher",
+          "generation": "Compiler generation"
+        },
+        {
+          "narratorId": "bukhari",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ]
+    },
+    {
+      "id": "nasai-75",
+      "collection": "Sunan an-Nasa'i",
+      "book": "Book of Purification",
+      "number": "75",
+      "reference": "Sunan an-Nasa'i 75",
+      "grade": "Sahih (Darussalam)",
+      "matnGroup": "intentions",
+      "arabic": "إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ",
+      "translation": "Actions are only by intention, and every person shall have what they intended.",
+      "narratorId": "umar",
+      "sourceUrl": "https://sunnah.com/nasai:75",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "umar",
+          "role": "Companion narrator",
+          "generation": "Sahabi"
+        },
+        {
+          "narratorId": "alqama-waqqas",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "muhammad-ibrahim-taymi",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "yahya-said-ansari",
+          "role": "Narrator",
+          "generation": "Tabi' al-Tabi'in"
+        },
+        {
+          "narratorId": "abdallah-mubarak",
+          "role": "Narrator",
+          "generation": "Hadith scholar"
+        },
+        {
+          "narratorId": "sulayman-mansur",
+          "role": "Al-Nasa'i's teacher",
+          "generation": "Compiler generation"
+        },
+        {
+          "narratorId": "nasai",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ]
+    },
+    {
+      "id": "bukhari-3",
+      "collection": "Sahih al-Bukhari",
+      "book": "Book of Revelation",
+      "number": "3",
+      "reference": "Sahih al-Bukhari 3",
+      "grade": "Sahih",
+      "arabic": "إِنَّ أَوَّلَ مَا بُدِئَ بِهِ رَسُولُ اللَّهِ ﷺ الرُّؤْيَا الصَّالِحَةُ",
+      "translation": "The beginning of revelation to the Messenger of Allah ﷺ was true dreams.",
+      "narratorId": "aisha",
+      "sourceUrl": "https://sunnah.com/bukhari:3",
+      "note": "Aisha's report of the beginning of revelation at Hira.",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "aisha",
+          "role": "Companion narrator",
+          "generation": "Mother of the Believers"
+        },
+        {
+          "narratorId": "urwah",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "zuhri",
+          "role": "Narrator",
+          "generation": "Tabi'i scholar"
+        },
+        {
+          "narratorId": "uqayl",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "layth-sad",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "yahya-bukayr",
+          "role": "Al-Bukhari's teacher",
+          "generation": "Compiler generation"
+        },
+        {
+          "narratorId": "bukhari",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ],
+      "placeIds": [
+        "cave-of-hira"
+      ]
+    },
+    {
+      "id": "bukhari-5027",
+      "collection": "Sahih al-Bukhari",
+      "book": "Virtues of the Qur'an",
+      "number": "5027",
+      "reference": "Sahih al-Bukhari 5027",
+      "grade": "Sahih",
+      "arabic": "خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ",
+      "translation": "The best among you are those who learn the Qur'an and teach it.",
+      "narratorId": "uthman",
+      "sourceUrl": "https://sunnah.com/bukhari:5027",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "uthman",
+          "role": "Companion narrator",
+          "generation": "Sahabi"
+        },
+        {
+          "narratorId": "abu-abd-rahman-sulami",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "sad-ubayda",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "alqama-marthad",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "shubah",
+          "role": "Narrator",
+          "generation": "Hadith scholar"
+        },
+        {
+          "narratorId": "hajjaj-minhal",
+          "role": "Al-Bukhari's teacher",
+          "generation": "Compiler generation"
+        },
+        {
+          "narratorId": "bukhari",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ]
+    },
+    {
+      "id": "bukhari-13",
+      "collection": "Sahih al-Bukhari",
+      "book": "Book of Faith",
+      "number": "13",
+      "reference": "Sahih al-Bukhari 13",
+      "grade": "Sahih",
+      "arabic": "لَا يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لِأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ",
+      "translation": "None of you truly believes until he loves for his brother what he loves for himself.",
+      "narratorId": "anas",
+      "sourceUrl": "https://sunnah.com/bukhari:13",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "anas",
+          "role": "Companion narrator",
+          "generation": "Sahabi"
+        },
+        {
+          "narratorId": "qatada",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "shubah",
+          "role": "Narrator",
+          "generation": "Hadith scholar"
+        },
+        {
+          "narratorId": "yahya-qattan",
+          "role": "Narrator",
+          "generation": "Hadith scholar"
+        },
+        {
+          "narratorId": "musaddad",
+          "role": "Al-Bukhari's teacher",
+          "generation": "Compiler generation"
+        },
+        {
+          "narratorId": "bukhari",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ]
+    },
+    {
+      "id": "bukhari-6018",
+      "collection": "Sahih al-Bukhari",
+      "book": "Book of Manners",
+      "number": "6018",
+      "reference": "Sahih al-Bukhari 6018",
+      "grade": "Sahih",
+      "arabic": "مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ",
+      "translation": "Whoever believes in Allah and the Last Day, let him speak good or remain silent.",
+      "narratorId": "abu-hurairah",
+      "sourceUrl": "https://sunnah.com/bukhari:6018",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "abu-hurairah",
+          "role": "Companion narrator",
+          "generation": "Sahabi"
+        },
+        {
+          "narratorId": "abu-salih",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "abu-hasin",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "abu-ahwas",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "qutaybah",
+          "role": "Al-Bukhari's teacher",
+          "generation": "Compiler generation"
+        },
+        {
+          "narratorId": "bukhari",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ]
+    },
+    {
+      "id": "tirmidhi-2518",
+      "collection": "Jami' at-Tirmidhi",
+      "book": "Book of the Description of the Day of Judgment",
+      "number": "2518",
+      "reference": "Jami' at-Tirmidhi 2518",
+      "grade": "Sahih (Darussalam)",
+      "arabic": "دَعْ مَا يَرِيبُكَ إِلَى مَا لَا يَرِيبُكَ",
+      "translation": "Leave what causes you doubt for what does not cause you doubt.",
+      "narratorId": "hasan",
+      "sourceUrl": "https://sunnah.com/tirmidhi:2518",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "hasan",
+          "role": "Companion-family narrator",
+          "generation": "Ahl al-Bayt"
+        },
+        {
+          "narratorId": "abu-hawra",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "burayd",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "shubah",
+          "role": "Narrator",
+          "generation": "Hadith scholar"
+        },
+        {
+          "narratorId": "abdallah-idris",
+          "role": "Narrator",
+          "generation": "Hadith scholar"
+        },
+        {
+          "narratorId": "abu-musa-ansari",
+          "role": "Al-Tirmidhi's teacher",
+          "generation": "Compiler generation"
+        },
+        {
+          "narratorId": "tirmidhi",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ]
+    },
+    {
+      "id": "nasai-235",
+      "collection": "Sunan an-Nasa'i",
+      "book": "Book of Purification",
+      "number": "235",
+      "reference": "Sunan an-Nasa'i 235",
+      "grade": "Sahih (Darussalam)",
+      "arabic": "كَانَ النَّبِيُّ ﷺ وَعَائِشَةُ يَغْتَسِلَانِ مِنْ إِنَاءٍ وَاحِدٍ",
+      "translation": "The Prophet ﷺ and Aisha would perform ghusl from a single vessel.",
+      "narratorId": "aisha",
+      "sourceUrl": "https://sunnah.com/nasai:235",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "aisha",
+          "role": "Companion narrator",
+          "generation": "Mother of the Believers"
+        },
+        {
+          "narratorId": "aswad",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "nakhai",
+          "role": "Narrator",
+          "generation": "Tabi'i scholar"
+        },
+        {
+          "narratorId": "mansur",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "sufyan-thawri",
+          "role": "Narrator",
+          "generation": "Hadith scholar"
+        },
+        {
+          "narratorId": "amr-ali-fallas",
+          "role": "Al-Nasa'i's teacher",
+          "generation": "Compiler generation"
+        },
+        {
+          "narratorId": "nasai",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ]
+    },
+    {
+      "id": "muslim-783b",
+      "collection": "Sahih Muslim",
+      "book": "Book of Prayer",
+      "number": "783b",
+      "reference": "Sahih Muslim 783b",
+      "grade": "Sahih",
+      "matnGroup": "continuous-deeds",
+      "arabic": "أَحَبُّ الأَعْمَالِ إِلَى اللَّهِ أَدْوَمُهَا وَإِنْ قَلَّ",
+      "translation": "The deeds most beloved to Allah are those done consistently, even if small.",
+      "narratorId": "aisha",
+      "sourceUrl": "https://sunnah.com/muslim:783b",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "aisha",
+          "role": "Companion narrator",
+          "generation": "Mother of the Believers"
+        },
+        {
+          "narratorId": "urwah",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "zuhri",
+          "role": "Narrator",
+          "generation": "Tabi'i scholar"
+        },
+        {
+          "narratorId": "layth-sad",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "yahya-bukayr",
+          "role": "Al-Bukhari's teacher",
+          "generation": "Compiler generation"
+        },
+        {
+          "narratorId": "bukhari",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ]
+    },
+    {
+      "id": "bukhari-6464",
+      "collection": "Sahih al-Bukhari",
+      "book": "Book of Heart-Melting Traditions",
+      "number": "6464",
+      "reference": "Sahih al-Bukhari 6464",
+      "grade": "Sahih",
+      "matnGroup": "continuous-deeds",
+      "arabic": "أَحَبُّ الأَعْمَالِ إِلَى اللَّهِ أَدْوَمُهَا وَإِنْ قَلَّ",
+      "translation": "The deeds most beloved to Allah are those done consistently, even if small.",
+      "narratorId": "aisha",
+      "sourceUrl": "https://sunnah.com/bukhari:6464",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "aisha",
+          "role": "Companion narrator",
+          "generation": "Mother of the Believers"
+        },
+        {
+          "narratorId": "urwah",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "zuhri",
+          "role": "Narrator",
+          "generation": "Tabi'i scholar"
+        },
+        {
+          "narratorId": "uqayl",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "layth-sad",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "yahya-bukayr",
+          "role": "Al-Bukhari's teacher",
+          "generation": "Compiler generation"
+        },
+        {
+          "narratorId": "bukhari",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ]
+    },
+    {
+      "id": "bukhari-2",
+      "collection": "Sahih al-Bukhari",
+      "book": "Book of Revelation",
+      "number": "2",
+      "reference": "Sahih al-Bukhari 2",
+      "grade": "Sahih",
+      "arabic": "كَانَ رَسُولُ اللَّهِ ﷺ أَجْوَدَ النَّاسِ",
+      "translation": "The Messenger of Allah ﷺ was the most generous of people.",
+      "narratorId": "ibn-abbas",
+      "sourceUrl": "https://sunnah.com/bukhari:2",
+      "note": "Ibn Abbas describes the Prophet's generosity, especially in Ramadan.",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "ibn-abbas",
+          "role": "Companion narrator",
+          "generation": "Sahabi"
+        },
+        {
+          "narratorId": "abu-ubaydah",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "zuhri",
+          "role": "Narrator",
+          "generation": "Tabi'i scholar"
+        },
+        {
+          "narratorId": "uqayl",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "layth-sad",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "yahya-bukayr",
+          "role": "Al-Bukhari's teacher",
+          "generation": "Compiler generation"
+        },
+        {
+          "narratorId": "bukhari",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ]
+    },
+    {
+      "id": "muslim-8a",
+      "collection": "Sahih Muslim",
+      "book": "Book of Faith",
+      "number": "8a",
+      "reference": "Sahih Muslim 8a",
+      "grade": "Sahih",
+      "arabic": "أَخْبِرْنِي عَنِ الإِسْلَامِ",
+      "translation": "The famous hadith of Jibril, who asked about Islam, iman, and ihsan.",
+      "narratorId": "umar",
+      "sourceUrl": "https://sunnah.com/muslim:8a",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "umar",
+          "role": "Companion narrator",
+          "generation": "Sahabi"
+        },
+        {
+          "narratorId": "yahya-yaqtan",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "abd-rahman-mahdi",
+          "role": "Narrator",
+          "generation": "Hadith scholar"
+        },
+        {
+          "narratorId": "muslim",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ]
+    },
+    {
+      "id": "bukhari-8",
+      "collection": "Sahih al-Bukhari",
+      "book": "Book of Faith",
+      "number": "8",
+      "reference": "Sahih al-Bukhari 8",
+      "grade": "Sahih",
+      "arabic": "بُنِيَ الإِسْلَامُ عَلَى خَمْسٍ",
+      "translation": "Islam is built upon five: testimony, prayer, zakah, Hajj, and fasting Ramadan.",
+      "narratorId": "ibn-umar",
+      "sourceUrl": "https://sunnah.com/bukhari:8",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "ibn-umar",
+          "role": "Companion narrator",
+          "generation": "Sahabi"
+        },
+        {
+          "narratorId": "saad-ibrahim",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "sufyan-uyaynah",
+          "role": "Narrator",
+          "generation": "Hadith scholar"
+        },
+        {
+          "narratorId": "humaydi",
+          "role": "Al-Bukhari's teacher",
+          "generation": "Compiler generation"
+        },
+        {
+          "narratorId": "bukhari",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ]
+    },
+    {
+      "id": "bukhari-6094",
+      "collection": "Sahih al-Bukhari",
+      "book": "Book of Manners",
+      "number": "6094",
+      "reference": "Sahih al-Bukhari 6094",
+      "grade": "Sahih",
+      "arabic": "إِنَّ الصِّدْقَ يَهْدِي إِلَى الْبِرِّ",
+      "translation": "Truthfulness leads to righteousness, and righteousness leads to Paradise.",
+      "narratorId": "ibn-masud",
+      "sourceUrl": "https://sunnah.com/bukhari:6094",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "ibn-masud",
+          "role": "Companion narrator",
+          "generation": "Sahabi"
+        },
+        {
+          "narratorId": "nakhai",
+          "role": "Narrator",
+          "generation": "Tabi'i scholar"
+        },
+        {
+          "narratorId": "mansur",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "shubah",
+          "role": "Narrator",
+          "generation": "Hadith scholar"
+        },
+        {
+          "narratorId": "musaddad",
+          "role": "Al-Bukhari's teacher",
+          "generation": "Compiler generation"
+        },
+        {
+          "narratorId": "bukhari",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ]
+    },
+    {
+      "id": "bukhari-2856",
+      "collection": "Sahih al-Bukhari",
+      "book": "Book of Jihad",
+      "number": "2856",
+      "reference": "Sahih al-Bukhari 2856",
+      "grade": "Sahih",
+      "arabic": "حَقُّ اللَّهِ عَلَى الْعِبَادِ",
+      "translation": "The right of Allah upon His servants, and the promise of protection from punishment for those who avoid shirk.",
+      "narratorId": "muadh",
+      "sourceUrl": "https://sunnah.com/bukhari:2856",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "muadh",
+          "role": "Companion narrator",
+          "generation": "Sahabi"
+        },
+        {
+          "narratorId": "abu-wail",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "abu-ishaq",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "shubah",
+          "role": "Narrator",
+          "generation": "Hadith scholar"
+        },
+        {
+          "narratorId": "musaddad",
+          "role": "Al-Bukhari's teacher",
+          "generation": "Compiler generation"
+        },
+        {
+          "narratorId": "bukhari",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ]
+    },
+    {
+      "id": "bukhari-3653",
+      "collection": "Sahih al-Bukhari",
+      "book": "Virtues of the Companions",
+      "number": "3653",
+      "reference": "Sahih al-Bukhari 3653",
+      "grade": "Sahih",
+      "arabic": "لَا تَحْزَنْ إِنَّ اللَّهَ مَعَنَا",
+      "translation": "Do not grieve; indeed Allah is with us.",
+      "narratorId": "abu-bakr",
+      "sourceUrl": "https://sunnah.com/bukhari:3653",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "abu-bakr",
+          "role": "Companion narrator",
+          "generation": "Sahabi"
+        },
+        {
+          "narratorId": "ibn-abbas",
+          "role": "Companion narrator",
+          "generation": "Sahabi"
+        },
+        {
+          "narratorId": "abu-bakr-sons",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "sufyan-uyaynah",
+          "role": "Narrator",
+          "generation": "Hadith scholar"
+        },
+        {
+          "narratorId": "musaddad",
+          "role": "Al-Bukhari's teacher",
+          "generation": "Compiler generation"
+        },
+        {
+          "narratorId": "bukhari",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ],
+      "placeIds": [
+        "makkah",
+        "madinah"
+      ]
+    },
+    {
+      "id": "bukhari-106",
+      "collection": "Sahih al-Bukhari",
+      "book": "Book of Knowledge",
+      "number": "106",
+      "reference": "Sahih al-Bukhari 106",
+      "grade": "Sahih",
+      "arabic": "مَنْ كَذَبَ عَلَيَّ مُتَعَمِّدًا فَلْيَتَبَوَّأْ مَقْعَدَهُ مِنَ النَّارِ",
+      "translation": "Whoever knowingly attributes a false statement to me, let him take his seat in the Fire.",
+      "narratorId": "ali",
+      "sourceUrl": "https://sunnah.com/bukhari:106",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "ali",
+          "role": "Companion narrator",
+          "generation": "Sahabi"
+        },
+        {
+          "narratorId": "abu-juhaifah",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "abu-awais",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "ismail-majid",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "abd-aziz-awayisi",
+          "role": "Al-Bukhari's teacher",
+          "generation": "Compiler generation"
+        },
+        {
+          "narratorId": "bukhari",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ]
+    },
+    {
+      "id": "muslim-49a",
+      "collection": "Sahih Muslim",
+      "book": "Book of Faith",
+      "number": "49a",
+      "reference": "Sahih Muslim 49a",
+      "grade": "Sahih",
+      "arabic": "مَنْ رَأَى مِنْكُمْ مُنْكَرًا فَلْيُغَيِّرْهُ بِيَدِهِ",
+      "translation": "Whoever sees a wrong, let him change it with his hand; if he cannot, then with his tongue; if he cannot, then with his heart.",
+      "narratorId": "abu-said-khudri",
+      "sourceUrl": "https://sunnah.com/muslim:49a",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "abu-said-khudri",
+          "role": "Companion narrator",
+          "generation": "Sahabi"
+        },
+        {
+          "narratorId": "abu-burdah",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "abudawud-tayalisi",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "muslim",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ]
+    },
+    {
+      "id": "muslim-2577a",
+      "collection": "Sahih Muslim",
+      "book": "Book of Virtue",
+      "number": "2577a",
+      "reference": "Sahih Muslim 2577a",
+      "grade": "Sahih",
+      "arabic": "يَا عِبَادِي إِنِّي حَرَّمْتُ الظُّلْمَ عَلَى نَفْسِي",
+      "translation": "O My servants, I have forbidden oppression for Myself and made it forbidden among you.",
+      "narratorId": "abu-dharr",
+      "sourceUrl": "https://sunnah.com/muslim:2577a",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "abu-dharr",
+          "role": "Companion narrator",
+          "generation": "Sahabi"
+        },
+        {
+          "narratorId": "abu-idris-khawlani",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "abu-umamah",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "awzai",
+          "role": "Narrator",
+          "generation": "Hadith scholar"
+        },
+        {
+          "narratorId": "walid-muslim",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "muslim",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ]
+    },
+    {
+      "id": "bukhari-5048",
+      "collection": "Sahih al-Bukhari",
+      "book": "Virtues of the Qur'an",
+      "number": "5048",
+      "reference": "Sahih al-Bukhari 5048",
+      "grade": "Sahih",
+      "arabic": "لَقَدْ أُوتِيَ هَذَا مِنْ مَزَامِيرِ آلِ دَاوُدَ",
+      "translation": "The Prophet ﷺ praised Abu Musa's recitation of the Qur'an.",
+      "narratorId": "abu-musa",
+      "sourceUrl": "https://sunnah.com/bukhari:5048",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "abu-musa",
+          "role": "Companion narrator",
+          "generation": "Sahabi"
+        },
+        {
+          "narratorId": "abu-burdah",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "abu-usama",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "bukhari",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ]
+    },
+    {
+      "id": "muwatta-intentions",
+      "collection": "al-Muwatta",
+      "book": "Book of Jihad",
+      "number": "",
+      "reference": "al-Muwatta’ — Book of Jihad, the chapter on intention",
+      "grade": "Sahih",
+      "matnGroup": "intentions",
+      "arabic": "إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ",
+      "translation": "Actions are only by intention, and every person shall have what they intended.",
+      "narratorId": "umar",
+      "sourceUrl": "",
+      "note": "The route the Muwatta gives for this matn: Malik from Yahya ibn Sa’id from Muhammad ibn Ibrahim from Alqama from Umar. The chapter numbering of the Muwatta differs between recensions, so the reference names the book and chapter rather than a number.",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "umar",
+          "role": "Companion narrator",
+          "generation": "Sahabi"
+        },
+        {
+          "narratorId": "alqama-waqqas",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "muhammad-ibrahim-taymi",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "yahya-said-ansari",
+          "role": "Narrator",
+          "generation": "Tabi' al-Tabi'in"
+        },
+        {
+          "narratorId": "malik",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ]
+    },
+    {
+      "id": "ahmad-intentions",
+      "collection": "Musnad Ahmad",
+      "book": "Musnad of Umar ibn al-Khattab",
+      "number": "",
+      "reference": "Musnad Ahmad — Musnad of Umar ibn al-Khattab",
+      "grade": "Sahih",
+      "matnGroup": "intentions",
+      "arabic": "إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ",
+      "translation": "Actions are only by intention, and every person shall have what they intended.",
+      "narratorId": "umar",
+      "sourceUrl": "",
+      "note": "The route the Musnad gives for this matn: Ahmad from Abd al-Rahman ibn Mahdi from Sufyan from Yahya ibn Sa’id, the same line of transmission the Bukhari route uses below Sufyan.",
+      "chain": [
+        {
+          "narratorId": "prophet",
+          "role": "Source",
+          "generation": "Prophet"
+        },
+        {
+          "narratorId": "umar",
+          "role": "Companion narrator",
+          "generation": "Sahabi"
+        },
+        {
+          "narratorId": "alqama-waqqas",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "muhammad-ibrahim-taymi",
+          "role": "Narrator",
+          "generation": "Tabi'i"
+        },
+        {
+          "narratorId": "yahya-said-ansari",
+          "role": "Narrator",
+          "generation": "Tabi' al-Tabi'in"
+        },
+        {
+          "narratorId": "sufyan-uyaynah",
+          "role": "Narrator",
+          "generation": "Early scholar"
+        },
+        {
+          "narratorId": "abd-rahman-mahdi",
+          "role": "Narrator",
+          "generation": "Hadith critic"
+        },
+        {
+          "narratorId": "ahmad",
+          "role": "Compiler",
+          "generation": "Hadith scholar"
+        }
+      ]
+    }
+  ]
+}

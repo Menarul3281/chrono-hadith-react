@@ -1,0 +1,104 @@
+{
+  "dynasties": [
+    { "id": "rashidun", "name": "Rashidun", "arabic": "الراشدون", "full": "Rashidun Caliphate", "type": "Caliphate", "typeNote": "Elective caliphate",
+      "start": 632, "end": 661, "capital": "Madinah", "capitalIds": ["madinah", "kufa"], "region": "Arabia", "regions": ["Hejaz", "Iraq", "Levant", "Egypt", "Persia"],
+      "languages": ["Arabic"], "religion": "Islam (formative period)", "government": "Elective caliphate", "colour": "#3ecfb2",
+      "summary": "The four caliphs who succeeded the Prophet ﷺ ruled from Madinah and then Kufa, and in thirty years carried the community from the Arabian peninsula to Persia, the Levant and Egypt.",
+      "contributions": [
+        "Consolidation of the community after the death of the Prophet ﷺ, and the collection of the Qur'anic text under Abu Bakr and Uthman.",
+        "Foundation of the garrison cities of Kufa, Basra and Fustat, the earliest centres of hadith transmission.",
+        "Establishment of the diwan and the administrative practice of the conquests, later formalised by the Umayyads."
+      ],
+      "sources": ["al-Tabari, Tarikh al-Rusul wa al-Muluk", "Ibn Kathir, al-Bidaya wa al-Nihaya"] },
+    { "id": "umayyad", "name": "Umayyad", "arabic": "الأمويون", "full": "Umayyad Caliphate", "type": "Caliphate", "typeNote": "Hereditary caliphate",
+      "start": 661, "end": 750, "capital": "Damascus", "capitalIds": ["damascus"], "region": "Levant", "regions": ["Levant", "Iraq", "Egypt", "North Africa", "Al-Andalus (from 711)", "Khurasan", "Transoxiana", "Sindh"],
+      "languages": ["Arabic (chancery from 698)", "Greek", "Persian"], "religion": "Islam (Sunni)", "government": "Hereditary caliphate", "colour": "#c9a227",
+      "summary": "The first hereditary caliphate ruled from Damascus and carried the Muslim world from the Atlantic coast of Iberia to the borders of China within ninety years.",
+      "contributions": [
+        "Administrative reform under Abd al-Malik: Arabic in the state registers and a distinct Islamic coinage.",
+        "Monumental architecture: the Dome of the Rock in Jerusalem and the Great Mosque of Damascus.",
+        "The provincial framework, postal service and army registers on which the Abbasid state was later built."
+      ],
+      "sources": ["al-Tabari, Tarikh al-Rusul wa al-Muluk", "al-Baladhuri, Futuh al-Buldan", "Ibn Khaldun, Kitab al-Ibar"] },
+    { "id": "abbasid", "name": "Abbasid", "arabic": "العباسيون", "full": "Abbasid Caliphate", "type": "Caliphate", "typeNote": "Caliphate under military tutelage after 861",
+      "start": 750, "end": 1258, "capital": "Baghdad", "capitalIds": ["baghdad", "samarra"], "region": "Persia", "regions": ["Iraq", "Jazira", "Khurasan", "Persia", "Hejaz", "Levant", "Egypt (to 868)"],
+      "languages": ["Arabic", "Persian"], "religion": "Islam (Sunni, with Ismaili and Twelver minorities)", "government": "Hereditary caliphate", "colour": "#3f6fd8",
+      "summary": "The Abbasid caliphate moved the centre of the Muslim world to Iraq and presided over the period in which the hadith corpus was collected, criticised and written down.",
+      "contributions": [
+        "Patronage of translation and the sciences at the court in Baghdad, including the House of Wisdom under al-Ma'mun.",
+        "The classical age of hadith scholarship: the compilations of al-Bukhari, Muslim, Abu Dawud, al-Tirmidhi, al-Nasa'i and Ibn Majah were produced under Abbasid rule.",
+        "Administration, taxation and urban planning on Sasanian models, and the dinar as a stable standard of exchange."
+      ],
+      "sources": ["al-Tabari, Tarikh al-Rusul wa al-Muluk", "Ibn al-Nadim, al-Fihrist", "Ibn Kathir, al-Bidaya wa al-Nihaya"] },
+    { "id": "fatimid", "name": "Fatimid", "arabic": "الفاطميون", "full": "Fatimid Caliphate", "type": "Caliphate", "typeNote": "Ismaili caliphate",
+      "start": 909, "end": 1171, "capital": "Cairo", "capitalIds": ["kairouan", "cairo"], "region": "North Africa", "regions": ["Ifriqiya", "Egypt", "Sicily (to 1071)", "southern Levant", "Hejaz", "Yemen"],
+      "languages": ["Arabic", "Berber"], "religion": "Islam (Ismaili Shi'i)", "government": "Hereditary caliphate with a centralised chancery", "colour": "#8b5cf6",
+      "summary": "The Fatimids, claiming descent from the Prophet's ﷺ daughter Fatimah, ruled Ifriqiya and then Egypt from the new city of Cairo, and contested the Abbasid caliphate across the Muslim world.",
+      "contributions": [
+        "Foundation of Cairo and of al-Azhar as a centre of learning and of the Ismaili mission (da'wa).",
+        "A chancery and ceremonial court whose practice was inherited by the Ayyubid and Mamluk sultanates.",
+        "Trade and diplomacy across the Mediterranean, the Red Sea and the Indian Ocean."
+      ],
+      "sources": ["Ibn Muyassar, Akhbar Misr", "al-Maqrizi, al-Khitat", "Ibn Khaldun, Kitab al-Ibar"] },
+    { "id": "seljuk", "name": "Seljuk", "arabic": "السلاجقة", "full": "Seljuk Sultanate", "type": "Sultanate", "typeNote": "Sultanate under the nominal Abbasid caliph",
+      "start": 1037, "end": 1194, "capital": "Baghdad", "capitalIds": ["baghdad", "isfahan", "nishapur"], "region": "Persia", "regions": ["Khurasan", "Persia", "Iraq", "Anatolia", "Levant (to 1118)", "Transoxiana (to 1141)"],
+      "languages": ["Persian", "Arabic", "Turkish"], "religion": "Islam (Sunni)", "government": "Sultanate with a Persian bureaucracy", "colour": "#e08c2f",
+      "summary": "The Seljuk sultans took over the eastern Abbasid lands and Anatolia, protected the Sunni caliphate and sponsored the madrasa as the institution of Sunni learning.",
+      "contributions": [
+        "The Nizamiyya madrasas, above all in Baghdad, which organised Sunni legal and hadith teaching.",
+        "Permanent Turkmen settlement of Anatolia after Manzikert (1071), the demographic base of later Anatolian states.",
+        "Persian as the language of administration and literature across the eastern Islamic world."
+      ],
+      "sources": ["Ibn al-Athir, al-Kamil fi al-Tarikh", "al-Dhahabi, Siyar A'lam al-Nubala"] },
+    { "id": "ayyubid", "name": "Ayyubid", "arabic": "الأيوبيون", "full": "Ayyubid Sultanate", "type": "Sultanate", "typeNote": "Sultanate of a confederated ruling family",
+      "start": 1171, "end": 1260, "capital": "Cairo", "capitalIds": ["cairo", "damascus"], "region": "North Africa", "regions": ["Egypt", "Levant", "Hejaz", "Yemen", "Jazira"],
+      "languages": ["Arabic", "Kurdish", "Turkish"], "religion": "Islam (Sunni)", "government": "Sultanate, with rule shared among the Ayyubid family", "colour": "#2f9e8f",
+      "summary": "The Ayyubid sultanate, founded by Salah al-Din, ended the Fatimid caliphate in Egypt, recovered Jerusalem and held the Muslim Levant against the crusader states.",
+      "contributions": [
+        "Recovery of Jerusalem after Hattin (1187) and the treaties that reopened pilgrimage for Muslims and Christians.",
+        "Endowments and building in Cairo, Damascus and Jerusalem, including the fortification of the citadel of Cairo.",
+        "Patronage of Sunni scholarship, among it the teaching of hadith in the madrasas of Egypt and Syria."
+      ],
+      "sources": ["Ibn al-Athir, al-Kamil fi al-Tarikh", "Ibn Shaddad, al-Nawadir al-Sultaniyya", "Ibn Kathir, al-Bidaya wa al-Nihaya"] },
+    { "id": "mamluk", "name": "Mamluk", "arabic": "المماليك", "full": "Mamluk Sultanate", "type": "Sultanate", "typeNote": "Military sultanate of slave-soldiers",
+      "start": 1250, "end": 1517, "capital": "Cairo", "capitalIds": ["cairo"], "region": "North Africa", "regions": ["Egypt", "Levant", "Hejaz", "Cilicia", "Nubia"],
+      "languages": ["Arabic", "Turkish", "Circassian"], "religion": "Islam (Sunni)", "government": "Military sultanate", "colour": "#c8b04a",
+      "summary": "The Mamluk sultans of Cairo stopped the Mongols at Ayn Jalut, removed the last crusader strongholds and kept the Abbasid caliphate alive in Cairo as a title under their protection.",
+      "contributions": [
+        "Military check on Mongol expansion west of Iraq after 1260.",
+        "The great Mamluk building programme of Cairo: mosques, madrasas and hospitals endowed in perpetuity.",
+        "Custody of the Hejaz and the pilgrimage routes, and a trade system linking the Indian Ocean to the Mediterranean."
+      ],
+      "sources": ["Ibn Kathir, al-Bidaya wa al-Nihaya", "Abu al-Fida, al-Mukhtasar fi Akhbar al-Bashar", "Ibn Iyas, Bada'i al-Zuhur"] },
+    { "id": "ottoman", "name": "Ottoman", "arabic": "العثمانيون", "full": "Ottoman Sultanate", "type": "Sultanate", "typeNote": "Sultanate (caliphate claimed from 1517)",
+      "start": 1299, "end": 1922, "capital": "Istanbul", "capitalIds": ["sogut", "bursa", "istanbul"], "region": "Anatolia", "regions": ["Anatolia", "Balkans", "Crimea", "Levant", "Egypt", "Hejaz", "Iraq", "North Africa (to 1830)"],
+      "languages": ["Ottoman Turkish", "Arabic", "Persian", "Greek", "Slavic"], "religion": "Islam (Sunni, with recognised Christian and Jewish communities)", "government": "Sultanate with an imperial bureaucracy and shari'a courts", "colour": "#d9534f",
+      "summary": "The Ottoman sultanate grew from a frontier beylik in north-western Anatolia into an empire ruling the eastern Mediterranean, the Balkans and the Hejaz, and held the caliphate from 1517 until the institution was abolished in 1924.",
+      "contributions": [
+        "Law and administration: the kanun-names of Mehmed II and Suleiman I, and the office of the shaykh al-islam.",
+        "Architecture and urban life, above all the work of the architect Sinan in Istanbul and the endowments of the imperial mosques.",
+        "Custody of the two sanctuaries and of the pilgrimage, and the Ottoman school system that carried hadith teaching into the modern period."
+      ],
+      "sources": ["Asikpasazade, Tevarih-i Al-i Osman", "Nesri, Kitab-i Cihan-numa", "Ibn Iyas, Bada'i al-Zuhur"] },
+    { "id": "safavid", "name": "Safavid", "arabic": "الصفويون", "full": "Safavid Shahdom", "type": "Dynasty", "typeNote": "Shahdom (Twelver Shi'i state)",
+      "start": 1501, "end": 1736, "capital": "Isfahan", "capitalIds": ["tabriz", "isfahan"], "region": "Persia", "regions": ["Persia", "Azerbaijan", "Iraq (1508-1534)", "Khurasan", "Caucasus"],
+      "languages": ["Persian", "Azerbaijani Turkish", "Arabic"], "religion": "Islam (Twelver Shi'i)", "government": "Shahdom with a Persian bureaucracy and a Turkic military elite", "colour": "#4b9c52",
+      "summary": "The Safavids united Persia under a single dynasty and made Twelver Shi'ism the religion of the state, giving the region a distinct political and religious identity.",
+      "contributions": [
+        "Establishment of Twelver Shi'ism as the state religion and the organisation of its scholarly class.",
+        "Isfahan as an imperial capital, with the Naqsh-e Jahan square, its mosques and its bazaars.",
+        "Persian as the language of administration and of a renewed literary and philosophical tradition."
+      ],
+      "sources": ["Iskandar Beg Munshi, Tarikh-i Alam-ara-yi Abbasi", "Mirza Beg Junabadi, Rawdat al-Safaviyya"] },
+    { "id": "mughal", "name": "Mughal", "arabic": "المغول", "full": "Mughal Empire", "type": "Dynasty", "typeNote": "Empire of the Timurid line",
+      "start": 1526, "end": 1857, "capital": "Delhi", "capitalIds": ["delhi"], "region": "South Asia", "regions": ["North India", "Bengal", "Deccan (from 1687)", "Kabul", "Kashmir", "Gujarat"],
+      "languages": ["Persian (court)", "Urdu", "Arabic"], "religion": "Islam (Sunni, with a large non-Muslim population)", "government": "Empire with a mansabdari military-administrative system", "colour": "#3f9fc7",
+      "summary": "The Mughal emperors ruled most of the Indian subcontinent from Delhi and Agra, and their courts produced some of the finest architecture and manuscript art of the Muslim world.",
+      "contributions": [
+        "Administration: the mansabdari system of ranked office, revenue settlement and a Persian-language chancery.",
+        "Architecture of the imperial cities: Fatehpur Sikri, the Taj Mahal and the Red Fort at Delhi.",
+        "Court libraries and manuscript workshops, and the hadith scholarship of the Indian madrasas."
+      ],
+      "sources": ["Abu al-Fazl, Akbarnama", "Babur, Baburnama", "Sirhindi, Tarikh-i Mubarakshahi"] }
+  ]
+}
