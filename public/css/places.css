@@ -17,7 +17,7 @@
 .plc-sea { fill: transparent; }
 .plc-land { fill: #0c2029; stroke: #1b3d4c; stroke-width: 0.5; }
 .plc-land.main { fill: #0d222c; }
-.plc-graticule line { stroke: rgba(52, 246, 193, 0.06); stroke-width: 0.6; }
+.plc-graticule line { stroke: var(--accent-wash-soft); stroke-width: 0.6; }
 .plc-frame[data-layer="grid"] .plc-land { fill: #081820; }
 .plc-frame[data-layer="terrain"] .plc-land { fill: #102b26; }
 

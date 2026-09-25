@@ -31,7 +31,7 @@
   border-color: var(--teal);
   border-left-color: var(--teal);
   background: color-mix(in srgb, var(--teal) 8%, var(--panel-2));
-  box-shadow: 0 0 0 1px rgba(52, 246, 193, 0.25);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--teal) 25%, transparent);
 }
 .hd-card-top { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
 .hd-card-ref { font-family: var(--font-mono); font-size: 11px; color: var(--teal); }

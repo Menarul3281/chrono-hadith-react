@@ -22,12 +22,12 @@
 }
 .picker-button:hover {
   border-color: var(--teal);
-  box-shadow: 0 0 0 3px rgba(52, 246, 193, 0.08), 0 8px 24px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 0 3px var(--accent-ring), 0 8px 24px rgba(0, 0, 0, 0.25);
   transform: translateY(-1px);
 }
 .picker-button[aria-expanded="true"] {
   border-color: var(--teal);
-  box-shadow: 0 0 0 3px rgba(52, 246, 193, 0.12);
+  box-shadow: 0 0 0 3px var(--accent-wash);
 }
 
 .picker-button .picker-icon {
@@ -74,7 +74,7 @@
   background: linear-gradient(180deg, var(--panel-2), var(--panel));
   box-shadow:
     0 24px 70px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(52, 246, 193, 0.05);
+    0 0 0 1px color-mix(in srgb, var(--teal) 5%, transparent);
   z-index: 80;
   overflow: hidden;
   opacity: 0;
@@ -163,7 +163,7 @@
 .picker-chip:hover {
   border-color: var(--teal);
   color: var(--teal);
-  background: rgba(52, 246, 193, 0.06);
+  background: var(--accent-wash-soft);
 }
 .picker-chip.active {
   border-color: var(--teal);
@@ -184,7 +184,7 @@
 }
 .picker-item:hover,
 .picker-item.focused {
-  background: rgba(52, 246, 193, 0.06);
+  background: var(--accent-wash-soft);
   border-left-color: var(--teal);
 }
 
@@ -208,7 +208,7 @@
 .picker-item.focused .picker-item-icon {
   border-color: var(--teal);
   color: var(--teal);
-  box-shadow: 0 0 10px rgba(52, 246, 193, 0.3);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--teal) 30%, transparent);
 }
 
 .picker-item-main {

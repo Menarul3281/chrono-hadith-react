@@ -6,6 +6,16 @@
     <title>Chrono-Hadith · Islamic Knowledge Atlas</title>
     <meta name="description" content="An interactive Islamic knowledge atlas connecting the Prophet ﷺ, narrators, hadith reports, places, events, dynasties and books." />
     <link rel="icon" href="data:," />
+    <script>
+      // Resolve the saved theme before first paint so the shell never boots in
+      // the wrong palette. Keys mirror site-chrome.js (chrono.display.v1).
+      try {
+        var pref = JSON.parse(localStorage.getItem('chrono.display.v1') || 'null');
+        var dark = !(pref && pref.theme === 'studio');
+        document.documentElement.dataset.theme = dark ? 'circuit' : 'studio';
+        document.documentElement.dataset.themeResolved = dark ? 'dark' : 'light';
+      } catch (e) { /* defaults to Circuit dark via tokens.css */ }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&amp;family=DM+Sans:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" />

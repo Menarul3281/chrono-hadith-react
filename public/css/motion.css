@@ -11,8 +11,8 @@
 :root {
   --motion-fast: 140ms;
   --motion-ease: cubic-bezier(.22, .8, .25, 1);
-  --press-ring: rgba(52, 246, 193, 0.45);
-  --press-ring-soft: rgba(52, 246, 193, 0.16);
+  --press-ring: color-mix(in srgb, var(--teal) 45%, transparent);
+  --press-ring-soft: color-mix(in srgb, var(--teal) 16%, transparent);
   --lift-1: -1px;
 }
 
@@ -42,7 +42,7 @@
 .dsh-btn:hover, .dsh-chip:hover, .dy-arrow:hover { transform: translateY(var(--lift-1)); }
 .dsh-iconbtn:hover, .top-action:hover { transform: translateY(var(--lift-1)) scale(1.04); }
 .dsh-btn.primary:hover, .dsh-btn.primary:focus-visible {
-  box-shadow: 0 0 20px rgba(52, 246, 193, 0.22), 0 6px 18px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--teal) 22%, transparent), 0 6px 18px rgba(0, 0, 0, 0.3);
 }
 .dy-card:hover { box-shadow: 0 10px 26px rgba(0, 0, 0, 0.42), 0 0 0 1px var(--press-ring-soft); }
 .ev-row:hover { box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3); }
@@ -82,7 +82,7 @@
 @keyframes pressPop {
   0%   { box-shadow: 0 0 0 0 var(--press-ring), 0 0 0 0 var(--press-ring-soft); }
   45%  { box-shadow: 0 0 0 3px var(--press-ring-soft), 0 2px 6px rgba(0, 0, 0, 0.35) inset; }
-  100% { box-shadow: 0 0 0 10px rgba(52, 246, 193, 0), 0 0 0 0 rgba(52, 246, 193, 0); }
+  100% { box-shadow: 0 0 0 10px transparent, 0 0 0 0 transparent; }
 }
 .is-pressed { animation: pressPop 340ms var(--motion-ease); }
 
@@ -90,7 +90,7 @@
    as acknowledgement without flashing the whole panel. */
 @keyframes pressPopSoft {
   0%   { box-shadow: 0 0 0 0 var(--press-ring-soft); }
-  100% { box-shadow: 0 0 0 8px rgba(52, 246, 193, 0); }
+  100% { box-shadow: 0 0 0 8px transparent; }
 }
 .is-pressed-soft { animation: pressPopSoft 420ms var(--motion-ease); }
 
@@ -104,13 +104,13 @@
 .figure-card:focus-visible, .tlc-btn:focus-visible, .tlc-tab:focus-visible {
   outline: none;
   border-color: var(--teal);
-  box-shadow: 0 0 0 3px var(--press-ring-soft), 0 0 18px rgba(52, 246, 193, 0.22);
+  box-shadow: 0 0 0 3px var(--press-ring-soft), 0 0 18px color-mix(in srgb, var(--teal) 22%, transparent);
 }
 
 /* --- selected records settle in ---------------------------------------- */
 
 @keyframes recSelect {
-  from { background-color: rgba(52, 246, 193, 0.18); }
+  from { background-color: color-mix(in srgb, var(--teal) 18%, transparent); }
   to   { background-color: color-mix(in srgb, var(--teal) 8%, var(--panel-2)); }
 }
 .ev-row.selected, .dsh-chip.selected, .dy-card.selected { animation: recSelect 320ms var(--motion-ease); }

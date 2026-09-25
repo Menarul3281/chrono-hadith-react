@@ -60,7 +60,7 @@
   --ch-gold: var(--gold);
   --ch-plate: color-mix(in srgb, var(--teal) 22%, transparent);
   --ch-ring: repeating-radial-gradient(circle at 50% 40%,
-    rgba(52, 246, 193, .05) 0 1px, transparent 1px 92px);
+    color-mix(in srgb, var(--teal) .05%, transparent) 0 1px, transparent 1px 92px);
 }
 
 /* =====================================================================
@@ -72,7 +72,7 @@ html { background: var(--bg); }
 body {
   background-color: var(--bg);
   background-image:
-    radial-gradient(circle at 12% -6%, rgba(52, 246, 193, .07), transparent 34%),
+    radial-gradient(circle at 12% -6%, color-mix(in srgb, var(--teal) .07%, transparent), transparent 34%),
     radial-gradient(circle at 88% 2%, rgba(52, 201, 255, .05), transparent 30%),
     radial-gradient(circle at 50% 106%, rgba(255, 212, 94, .035), transparent 40%);
   background-attachment: fixed;
@@ -321,6 +321,19 @@ body {
   --shadow-md: 0 16px 42px #234f391b;
   --shadow-lg: 0 28px 72px #234f3930;
   --ch-ring: none;
+  /* Theme-derived surfaces for shared shell chrome (base/sidebar/overview). */
+  --surface-1: color-mix(in srgb, var(--panel) 83%, transparent);
+  --surface-2: color-mix(in srgb, var(--teal) 20%, transparent);
+  --overlay:   rgba(20, 52, 44, .38);
+  --accent-wash-strong: rgba(0, 133, 119, 0.15);
+  --accent-wash:        rgba(0, 133, 119, 0.12);
+  --accent-wash-soft:   rgba(0, 133, 119, 0.06);
+  --accent-wash-faint:  rgba(0, 133, 119, 0.04);
+  --accent-glow:        rgba(0, 133, 119, 0.5);
+  --accent-ring:        rgba(0, 133, 119, 0.08);
+  --danger-border:      rgba(179, 72, 88, 0.5);
+  --hero-top:           #dcefe7;
+  --shadow-cast:        rgba(20, 52, 44, 0.95);
   color-scheme: light;
 }
 :root[data-theme="circuit"] {
@@ -338,6 +351,19 @@ body {
   --shadow-sm: 0 3px 12px #0003;
   --shadow-md: 0 16px 42px #0005;
   --shadow-lg: 0 28px 72px #0007;
+  /* Theme-derived surfaces for shared shell chrome (base/sidebar/overview). */
+  --surface-1: color-mix(in srgb, var(--panel) 83%, transparent);
+  --surface-2: color-mix(in srgb, var(--teal) 20%, transparent);
+  --overlay:   rgba(2, 9, 15, .46);
+  --accent-wash-strong: rgba(117, 231, 199, 0.15);
+  --accent-wash:        rgba(117, 231, 199, 0.12);
+  --accent-wash-soft:   rgba(117, 231, 199, 0.06);
+  --accent-wash-faint:  rgba(117, 231, 199, 0.04);
+  --accent-glow:        rgba(117, 231, 199, 0.5);
+  --accent-ring:        rgba(117, 231, 199, 0.08);
+  --danger-border:      rgba(238, 153, 166, 0.55);
+  --hero-top:           #0e2a24;
+  --shadow-cast:        rgba(2, 9, 15, 0.95);
   color-scheme: dark;
 }
 
@@ -615,7 +641,8 @@ body.rail-expanded .rail-nav, body.rail-expanded .rail-tools { justify-items: st
 }
 
 /* Connect the replacement shell to the existing site palette. */
-body[data-theme="dark"] {
+body[data-theme="dark"],
+html[data-theme-resolved="dark"]:not(body[data-theme]) {
   background: linear-gradient(150deg, #071210, #040a09 35%, #06100d 65%, #081410);
   background-size: 220% 220%;
 }
@@ -661,7 +688,7 @@ body[data-theme="dark"] {
   }
   .nav-scrim {
     display: block; position: fixed; inset: 0; z-index: 55; padding: 0;
-    background: rgba(2, 9, 15, .46); opacity: 0; visibility: hidden;
+    background: var(--overlay); opacity: 0; visibility: hidden;
     pointer-events: none; backdrop-filter: blur(3px);
     transition: opacity .28s ease, visibility .28s ease;
   }

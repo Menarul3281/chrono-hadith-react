@@ -38,7 +38,7 @@
 }
 .figures-search:focus-within {
   border-color: var(--teal);
-  box-shadow: 0 0 0 3px rgba(52, 246, 193, 0.08);
+  box-shadow: 0 0 0 3px var(--accent-ring);
 }
 .figures-search input {
   flex: 1;
@@ -72,13 +72,13 @@
 .filter-chip:hover {
   border-color: var(--teal);
   color: var(--teal);
-  background: rgba(52, 246, 193, 0.05);
+  background: color-mix(in srgb, var(--teal) 5%, transparent);
 }
 .filter-chip.active {
   border-color: var(--teal);
   color: var(--bg);
   background: var(--teal);
-  box-shadow: 0 0 14px rgba(52, 246, 193, 0.3);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--teal) 30%, transparent);
 }
 
 /* ==================== Grid ==================== */
@@ -234,7 +234,7 @@
 .narrator-back:hover {
   color: var(--teal);
   border-color: var(--teal);
-  background: rgba(52, 246, 193, 0.06);
+  background: var(--accent-wash-soft);
   transform: translateX(-2px);
 }
 
@@ -350,7 +350,7 @@
 .hero-btn:hover {
   border-color: var(--teal);
   color: var(--teal);
-  background: rgba(52, 246, 193, 0.06);
+  background: var(--accent-wash-soft);
   transform: translateY(-1px);
 }
 
@@ -371,7 +371,7 @@
   transition: all var(--t-base) var(--ease);
 }
 .stat-tile:hover {
-  border-color: rgba(52, 246, 193, 0.3);
+  border-color: color-mix(in srgb, var(--teal) 30%, transparent);
   background: var(--panel-2);
 }
 .stat-tile strong {
@@ -553,9 +553,9 @@
 
 .hadith-row-badge {
   padding: 3px 9px;
-  border: 1px solid rgba(52, 246, 193, 0.35);
+  border: 1px solid var(--accent-glow);
   border-radius: var(--r-pill);
-  background: rgba(52, 246, 193, 0.06);
+  background: var(--accent-wash-soft);
   color: var(--teal);
   font-family: var(--font-sans);
   font-size: 9px;
@@ -617,7 +617,7 @@
   height: 340px;
   border-radius: var(--r-sm);
   background:
-    radial-gradient(circle at center, rgba(52, 246, 193, 0.06), transparent 60%),
+    radial-gradient(circle at center, var(--accent-wash-soft), transparent 60%),
     repeating-linear-gradient(0deg, rgba(31, 88, 105, 0.06) 0 1px, transparent 1px 24px),
     repeating-linear-gradient(90deg, rgba(31, 88, 105, 0.06) 0 1px, transparent 1px 24px),
     var(--bg-2);
@@ -667,7 +667,7 @@
 }
 /* The figure the card is about: the one node that is not a neighbour. */
 .nfg-node.centre {
-  box-shadow: 0 0 0 1px rgba(52, 246, 193, 0.35), 0 0 18px rgba(52, 246, 193, 0.15);
+  box-shadow: 0 0 0 1px var(--accent-glow), 0 0 18px var(--accent-wash-strong);
 }
 .nfg-node.selected { border-color: var(--teal); }
 .nfg-node.dim { opacity: 0.38; }

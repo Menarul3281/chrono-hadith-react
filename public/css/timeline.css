@@ -22,8 +22,8 @@
   --tl-line:        var(--line);
   --tl-line-2:      var(--line-2);
   --tl-line-hover:  var(--line-3);
-  --tl-grid:        rgba(52, 246, 193, 0.08);
-  --tl-grid-strong: rgba(52, 246, 193, 0.18);
+  --tl-grid:        var(--accent-ring);
+  --tl-grid-strong: color-mix(in srgb, var(--teal) 18%, transparent);
 
   /* lane colours — one per category row */
   --tl-figures:     var(--teal-soft);
@@ -606,7 +606,7 @@
 .tlc.lifespan .tlc-axis-band {
   position: sticky;
   top: var(--topbar-h);
-  box-shadow: 0 12px 20px -16px rgba(2, 9, 15, 0.95);
+  box-shadow: 0 12px 20px -16px var(--shadow-cast);
 }
 
 .tlc-span { cursor: pointer; }
@@ -889,7 +889,7 @@
   gap: 8px;
   border: 1px solid var(--teal);
   border-radius: var(--r-sm);
-  background: rgba(52, 246, 193, 0.06);
+  background: var(--accent-wash-soft);
   color: var(--teal);
   font-size: 12px;
   font-weight: 600;
@@ -899,7 +899,7 @@
   background: var(--teal);
   color: var(--bg);
   transform: translateY(-1px);
-  box-shadow: 0 8px 22px rgba(52, 246, 193, 0.25);
+  box-shadow: 0 8px 22px color-mix(in srgb, var(--teal) 25%, transparent);
 }
 
 /* --- tabs --- */

@@ -1,31 +1,33 @@
 :root {
-  /* Backgrounds */
-  --bg:        #02090f;
-  --bg-2:      #06121a;
-  --panel:     #071722;
-  --panel-2:   #0a1d29;
-  --panel-3:   #0d2431;
+  /* Backgrounds — Circuit dark is the default palette so the shell never
+     flashes light before site-chrome.js applies the saved preference.
+     Overridden per theme by :root[data-theme="studio"] in site-locked.css. */
+  --bg:        #061512;
+  --bg-2:      #081e19;
+  --panel:     #0d2420;
+  --panel-2:   #12302a;
+  --panel-3:   #193e33;
 
   /* Borders */
-  --line:      #174153;
-  --line-2:    #24556a;
-  --line-3:    #2f6b83;
+  --line:      #24483a;
+  --line-2:    #39745c;
+  --line-3:    #539e7d;
 
   /* Text */
-  --text:      #eef8fb;
-  --text-2:    #b7cad3;
-  --muted:     #91a9b5;
-  --muted-2:   #607b89;
+  --text:      #e7faf1;
+  --text-2:    #bbd8cc;
+  --muted:     #95b9ab;
+  --muted-2:   #799e8f;
 
   /* Accents */
-  --teal:      #34f6c1;
-  --teal-soft: #62f59a;
-  --cyan:      #34c9ff;
-  --blue:      #5a8dff;
-  --purple:    #ad68ff;
-  --gold:      #ffd45e;
-  --orange:    #ff9648;
-  --red:       #ff5f70;
+  --teal:      #75e7c7;
+  --teal-soft: #a1eccd;
+  --cyan:      #79c9e6;
+  --blue:      #8eb6fa;
+  --purple:    #c3a0ee;
+  --gold:      #e8cd88;
+  --orange:    #eaaa7f;
+  --red:       #ee99a6;
 
   /* Overview ribbon (dark values are the default body theme). */
   --pill-bg:          rgba(232,199,119,.09);
@@ -39,13 +41,27 @@
   --shimmer-opacity:  .35;
 
   /* Generation colors */
-  --gen-prophet:    #ff5f70;
-  --gen-sahabi:     #62f59a;
-  --gen-tabii:      #ad68ff;
-  --gen-taba-tabii: #34c9ff;
-  --gen-later:      #ffd45e;
-  --gen-compiler:   #ff9648;
-  --gen-book:       #34f6c1;
+  --gen-prophet:    #ee99a6;
+  --gen-sahabi:     #a1eccd;
+  --gen-tabii:      #c3a0ee;
+  --gen-taba-tabii: #79c9e6;
+  --gen-later:      #e8cd88;
+  --gen-compiler:   #eaaa7f;
+  --gen-book:       #75e7c7;
+
+  /* Theme-derived surfaces (overridden by site-locked.css per palette). */
+  --surface-1: color-mix(in srgb, var(--panel) 83%, transparent);
+  --surface-2: color-mix(in srgb, var(--teal) 20%, transparent);
+  --overlay:   rgba(2, 9, 15, .46);
+  --accent-wash-strong: var(--accent-wash-strong);
+  --accent-wash:        var(--accent-wash);
+  --accent-wash-soft:   var(--accent-wash-soft);
+  --accent-wash-faint:  var(--accent-wash-faint);
+  --accent-glow:        var(--accent-glow);
+  --accent-ring:        var(--accent-ring);
+  --danger-border:      rgba(255, 95, 112, 0.5);
+  --hero-top:           #0a2330;
+  --shadow-cast:        rgba(2, 9, 15, 0.95);
 
   /* Layout */
   --sidebar-w: 280px;

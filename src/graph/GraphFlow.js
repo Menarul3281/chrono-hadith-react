@@ -917,10 +917,11 @@ function App({ initialId }) {
             onlyRenderVisibleElements=${true}
             minZoom=${MIN_ZOOM}
             maxZoom=${MAX_ZOOM}
+            colorMode="system"
             nodesConnectable=${false}>
-            <${Background} variant=${BackgroundVariant.Lines} gap=${26} size=${1} color="rgba(52,246,193,0.07)" />
+            <${Background} variant=${BackgroundVariant.Lines} gap=${26} size=${1} color="color-mix(in srgb, var(--teal) 7%, transparent)" />
             <${Controls} showInteractive=${false} />
-            <${MiniMap} pannable=${true} zoomable=${true} nodeColor=${miniNodeColour} maskColor="rgba(2,9,15,0.78)" />
+            <${MiniMap} pannable=${true} zoomable=${true} nodeColor=${miniNodeColour} maskColor="var(--overlay)" />
           <//>
         </div>
         <div className="gph-slot" hidden=${mode !== 'table'}>

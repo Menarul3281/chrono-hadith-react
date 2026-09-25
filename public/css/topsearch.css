@@ -99,7 +99,7 @@
 .tps-chip.active {
   color: var(--teal);
   border-color: var(--teal);
-  background: rgba(52, 246, 193, 0.12);
+  background: var(--accent-wash);
 }
 
 .tps-body {
@@ -147,7 +147,7 @@
 }
 .tps-row:hover, .tps-row.focused {
   border-color: color-mix(in srgb, var(--teal) 55%, transparent);
-  background: rgba(52, 246, 193, 0.08);
+  background: var(--accent-ring);
 }
 .tps-row.focused .tps-row-label { color: var(--teal); }
 

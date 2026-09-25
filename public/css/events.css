@@ -27,11 +27,11 @@
   transition: all var(--t-fast) var(--ease);
 }
 .dsh-view-btn .nav-icon { width: 14px; height: 14px; }
-.dsh-view-btn:hover { color: var(--text); background: rgba(52, 246, 193, 0.06); }
+.dsh-view-btn:hover { color: var(--text); background: var(--accent-wash-soft); }
 .dsh-view-btn.active {
   color: var(--teal);
   border-color: var(--teal);
-  background: rgba(52, 246, 193, 0.12);
+  background: var(--accent-wash);
 }
 
 /* ==================== PERIOD STRIP AND RAIL ==================== */
@@ -114,7 +114,7 @@
 .ev-row.selected {
   border-color: var(--teal);
   background: color-mix(in srgb, var(--teal) 8%, var(--panel-2));
-  box-shadow: 0 0 0 1px rgba(52, 246, 193, 0.25);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--teal) 25%, transparent);
 }
 .ev-row:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
 
@@ -166,7 +166,7 @@
   stroke-width: 0.6;
 }
 .evm-land.main { fill: #0e2833; }
-.evm-grid { stroke: rgba(52, 246, 193, 0.07); stroke-width: 0.6; }
+.evm-grid { stroke: color-mix(in srgb, var(--teal) 7%, transparent); stroke-width: 0.6; }
 .evm-pin { fill: var(--red); stroke: #fff; stroke-width: 1.4; }
 .evm-pin-stem { stroke: var(--red); stroke-width: 1.6; }
 .evm-label { font-size: 12px; font-weight: 600; fill: var(--text); }

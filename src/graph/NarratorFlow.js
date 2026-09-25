@@ -152,6 +152,7 @@ function Card({ centre, nodes }) {
         zoomOnScroll=${false}
         panOnScroll=${false}
         preventScrolling=${false}
+        colorMode="system"
         nodesConnectable=${false}>
         <${Controls} showInteractive=${false} />
       <//>

@@ -117,7 +117,7 @@
   color: var(--muted);
   transition: border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
 }
-.dsh-search:focus-within { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(52, 246, 193, 0.08); }
+.dsh-search:focus-within { border-color: var(--teal); box-shadow: 0 0 0 3px var(--accent-ring); }
 .dsh-search .nav-icon { width: 15px; height: 15px; }
 .dsh-search input {
   flex: 1; min-width: 0;
@@ -143,7 +143,7 @@
   cursor: pointer;
   transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
 }
-.dsh-check:hover { background: rgba(52, 246, 193, 0.05); color: var(--text); }
+.dsh-check:hover { background: color-mix(in srgb, var(--teal) 5%, transparent); color: var(--text); }
 .dsh-check input { position: absolute; opacity: 0; width: 0; height: 0; }
 .dsh-box {
   width: 15px; height: 15px; flex: 0 0 auto;
@@ -162,7 +162,7 @@
   transform: scale(0.5);
   transition: all var(--t-fast) var(--ease);
 }
-.dsh-check input:checked + .dsh-box { border-color: var(--teal); background: rgba(52, 246, 193, 0.12); }
+.dsh-check input:checked + .dsh-box { border-color: var(--teal); background: var(--accent-wash); }
 .dsh-check input:checked + .dsh-box::after { opacity: 1; transform: scale(1); }
 .dsh-check input:focus-visible + .dsh-box { outline: 2px solid var(--teal); outline-offset: 2px; }
 .dsh-check-label { flex: 1; min-width: 0; }
@@ -200,14 +200,14 @@
   background: color-mix(in srgb, var(--teal) 16%, var(--panel));
   color: var(--teal);
 }
-.dsh-btn.primary:hover { background: color-mix(in srgb, var(--teal) 24%, var(--panel)); box-shadow: 0 0 18px rgba(52, 246, 193, 0.18); }
+.dsh-btn.primary:hover { background: color-mix(in srgb, var(--teal) 24%, var(--panel)); box-shadow: 0 0 18px color-mix(in srgb, var(--teal) 18%, transparent); }
 .dsh-btn.small { height: 30px; padding: 0 10px; font-size: 11px; }
 .dsh-btn.tiny { height: 26px; padding: 0 8px; font-size: 10px; }
 .dsh-btn.block { width: 100%; }
 .dsh-btn.dirty { animation: dshPulse 1.6s var(--ease) infinite; }
 @keyframes dshPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(52, 246, 193, 0); }
-  50% { box-shadow: 0 0 0 4px rgba(52, 246, 193, 0.14); }
+  0%, 100% { box-shadow: 0 0 0 0 transparent; }
+  50% { box-shadow: 0 0 0 4px color-mix(in srgb, var(--teal) 14%, transparent); }
 }
 
 .dsh-iconbtn {
@@ -219,7 +219,7 @@
   color: var(--text-2);
   transition: all var(--t-fast) var(--ease);
 }
-.dsh-iconbtn:hover { color: var(--teal); border-color: var(--teal); background: rgba(52, 246, 193, 0.08); }
+.dsh-iconbtn:hover { color: var(--teal); border-color: var(--teal); background: var(--accent-ring); }
 .dsh-iconbtn .nav-icon { width: 15px; height: 15px; }
 
 .dsh-chip {
@@ -343,7 +343,7 @@
   border-radius: 50% 50% 50% 0;
   transform: rotate(-45deg);
   background: var(--teal);
-  box-shadow: 0 0 8px rgba(52, 246, 193, 0.4);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--teal) 40%, transparent);
 }
 
 /* Tabs */
@@ -363,11 +363,11 @@
   white-space: nowrap;
   transition: all var(--t-fast) var(--ease);
 }
-.ev-tab:hover { color: var(--text); background: rgba(52, 246, 193, 0.06); }
+.ev-tab:hover { color: var(--text); background: var(--accent-wash-soft); }
 .ev-tab.active {
   color: var(--teal);
   border-bottom-color: var(--teal);
-  background: rgba(52, 246, 193, 0.09);
+  background: color-mix(in srgb, var(--teal) 9%, transparent);
 }
 .ev-tab em { font-style: normal; color: var(--muted-2); }
 

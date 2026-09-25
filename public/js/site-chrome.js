@@ -22,6 +22,9 @@ const SiteChrome = (() => {
     const root = document.documentElement;
     root.dataset.theme = preferences.theme;
     document.body.dataset.theme = preferences.theme === 'studio' ? 'light' : 'dark';
+    // Mirror the resolved palette onto <html> so the theme applies even before
+    // body exists (the React shell mounts asynchronously after this script).
+    root.dataset.themeResolved = document.body.dataset.theme;
     if (preferences.atmosphere) document.body.classList.remove('no-fx');
     else document.body.classList.add('no-fx');
     root.dataset.atmosphere = preferences.atmosphere ? 'on' : 'off';
