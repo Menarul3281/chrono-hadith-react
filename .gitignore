@@ -1,15 +1,1 @@
-node_modules
-dist
-.env
-.env.local
-*.log
-*.bak*
-.stage01-backups/
-# Scratch files used while checking a change by hand.
-_*.txt
-_diag*
-_cdp*
-_verify.html
-_check.mjs
-_cdp-out/
-shot-*.png
+(empty)
