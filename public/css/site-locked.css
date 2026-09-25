@@ -269,8 +269,8 @@ body {
 }
 .dsh-footnote { color: var(--muted-2); }
 
-/* Reference V12: paired Studio / Circuit themes. These semantic tokens cover
-   every route; the archive's category colors keep their distinct meanings. */
+/* Shared light palette. These semantic tokens cover every route; the archive's
+   category colors keep their distinct meanings. */
 :root {
   --font-sans: 'DM Sans', system-ui, sans-serif;
   --font-mono: 'Space Grotesk', ui-monospace, monospace;
@@ -323,24 +323,6 @@ body {
   --ch-ring: none;
   color-scheme: light;
 }
-:root[data-theme="circuit"] {
-  --bg: #061512; --bg-2: #081e19;
-  --panel: #0d2420; --panel-2: #12302a; --panel-3: #193e33;
-  --text: #e7faf1; --text-2: #bbd8cc;
-  --muted: #95b9ab; --muted-2: #799e8f;
-  --line: #24483a; --line-2: #39745c; --line-3: #539e7d;
-  --teal: #75e7c7; --teal-soft: #a1eccd; --cyan: #79c9e6;
-  --blue: #8eb6fa; --purple: #c3a0ee; --gold: #e8cd88;
-  --orange: #eaaa7f; --red: #ee99a6;
-  --gen-prophet: #ee99a6; --gen-sahabi: #a1eccd; --gen-tabii: #c3a0ee;
-  --gen-taba-tabii: #79c9e6; --gen-later: #e8cd88; --gen-compiler: #eaaa7f; --gen-book: #75e7c7;
-  --map-water: #081d19; --map-land: #284c3d;
-  --shadow-sm: 0 3px 12px #0003;
-  --shadow-md: 0 16px 42px #0005;
-  --shadow-lg: 0 28px 72px #0007;
-  color-scheme: dark;
-}
-
 /* One quiet atmospheric background, behind all pages. */
 body { background: var(--bg); color: var(--text); font-family: var(--font-sans); isolation: isolate; }
 body::before, body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: -1; }
@@ -548,13 +530,6 @@ body.rail-expanded .rail-nav, body.rail-expanded .rail-tools { justify-items: st
 .display-head h2 { margin-top: 8px; font: 400 31px var(--ch-serif); }
 .display-close { width: 32px; height: 32px; flex: 0 0 auto; border: 1px solid var(--line); border-radius: 50%; font-size: 22px; }
 .display-intro { color: var(--muted); font-size: 13px; margin: 12px 0 22px; }
-.theme-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 22px; }
-.theme-choice { display: grid; gap: 6px; padding: 12px; border-radius: 14px; border: 1px solid var(--line); text-align: left; }
-.theme-choice[aria-pressed="true"] { border-color: var(--teal); box-shadow: 0 0 0 2px color-mix(in srgb, var(--teal) 17%, transparent); }
-.theme-choice small { font-size: 10px; color: var(--muted); }
-.theme-swatch { height: 64px; border-radius: 9px; border: 1px solid #46785f38; }
-.theme-studio .theme-swatch { background: radial-gradient(ellipse at 20% 30%, #badbda, transparent), linear-gradient(130deg,#f5fbfa,#ccebdc); }
-.theme-circuit .theme-swatch { background: radial-gradient(ellipse at 70% 30%,#275849,transparent),linear-gradient(130deg,#061512,#11392d); }
 .display-option { display: flex; gap: 15px; align-items: center; justify-content: space-between; padding: 17px 0; border-top: 1px solid var(--line); cursor: pointer; }
 .display-option strong { display: block; font-size: 13px; }
 .display-option small { display: block; margin-top: 5px; font-size: 11px; color: var(--muted); }
@@ -614,11 +589,6 @@ body.rail-expanded .rail-nav, body.rail-expanded .rail-tools { justify-items: st
   .ov8-board { transform: none; }
 }
 
-/* Connect the replacement shell to the existing site palette. */
-body[data-theme="dark"] {
-  background: linear-gradient(150deg, #071210, #040a09 35%, #06100d 65%, #081410);
-  background-size: 220% 220%;
-}
 .rail-switch { flex: 0 0 auto; }
 .rail-switch .nav-label { display: block; }
 .rail-brand { flex: 0 0 auto; }

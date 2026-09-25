@@ -1,8 +1,7 @@
-/* Shared presentation controls. Archive records and page renderers stay independent
-   of the chosen theme. Storage is optional: blocked storage must not prevent boot. */
+/* Shared presentation controls. Storage is optional: blocked storage must not prevent boot. */
 const SiteChrome = (() => {
   const KEY = 'chrono.display.v1';
-  const defaults = { theme: 'studio', atmosphere: true, motion: true };
+  const defaults = { atmosphere: true, motion: true };
   let preferences = { ...defaults };
   let initialized = false;
   let returnFocus = null;
@@ -11,7 +10,6 @@ const SiteChrome = (() => {
     try {
       const value = JSON.parse(localStorage.getItem(KEY));
       return {
-        theme: value?.theme === 'circuit' ? 'circuit' : 'studio',
         atmosphere: typeof value?.atmosphere === 'boolean' ? value.atmosphere : true,
         motion: typeof value?.motion === 'boolean' ? value.motion : true,
       };
@@ -20,30 +18,10 @@ const SiteChrome = (() => {
 
   function applyPreferences(save = false, onlyControl = null) {
     const root = document.documentElement;
-    root.dataset.theme = preferences.theme;
-    document.body.dataset.theme = preferences.theme === 'studio' ? 'light' : 'dark';
     if (preferences.atmosphere) document.body.classList.remove('no-fx');
     else document.body.classList.add('no-fx');
     root.dataset.atmosphere = preferences.atmosphere ? 'on' : 'off';
     root.dataset.motion = preferences.motion ? 'on' : 'off';
-    root.style.colorScheme = preferences.theme === 'studio' ? 'light' : 'dark';
-    document.querySelectorAll('[data-theme-choice]').forEach((button) => {
-      button.setAttribute('aria-pressed', String(button.dataset.themeChoice === preferences.theme));
-    });
-    // Each rail switch is synced only when its own preference is applied.
-    // A theme change must never rewrite the FX checkbox and vice versa —
-    // programmatic .checked assignment does not fire `change`, so the two
-    // controls stay visually and logically decoupled.
-    if (!onlyControl || onlyControl === 'theme') {
-      const theme = document.querySelector('[data-theme-toggle]');
-      theme?.setAttribute('aria-label', preferences.theme === 'studio'
-        ? 'Switch to Circuit dark theme' : 'Switch to Studio light theme');
-      document.querySelectorAll('[data-theme-toggle]').forEach((input) => {
-        if ('checked' in input && input.checked !== (preferences.theme === 'studio')) {
-          input.checked = preferences.theme === 'studio';
-        }
-      });
-    }
     if (!onlyControl || onlyControl === 'atmosphere') {
       document.querySelectorAll('[data-grain-toggle]').forEach((input) => {
         if ('checked' in input && input.checked !== preferences.atmosphere) {
@@ -51,7 +29,6 @@ const SiteChrome = (() => {
         }
       });
     }
-    if (typeof OverviewGraph !== 'undefined') OverviewGraph.setMode(document.body.dataset.theme);
     const atmosphere = document.querySelector('[data-atmosphere]');
     const motion = document.querySelector('[data-motion]');
     if (atmosphere) atmosphere.checked = preferences.atmosphere;
@@ -62,7 +39,6 @@ const SiteChrome = (() => {
   }
 
   function setPreference(key, value) {
-    if (key === 'theme' && !['studio', 'circuit'].includes(value)) return;
     if (['motion', 'atmosphere'].includes(key) && typeof value !== 'boolean') return;
     if (!(key in defaults)) return;
     if (preferences[key] === value) return;
@@ -103,7 +79,7 @@ const SiteChrome = (() => {
     if (initialized) return;
     initialized = true;
     preferences = readPreferences();
-    applyPreferences();
+    applyPreferences(true);
     syncRouteTabs();
     window.addEventListener('hashchange', syncRouteTabs);
 
@@ -122,13 +98,6 @@ const SiteChrome = (() => {
       });
     });
     document.querySelector('[data-display-close]')?.addEventListener('click', closeDisplay);
-    document.querySelectorAll('[data-theme-choice]').forEach((button) => {
-      button.addEventListener('click', () => setPreference('theme', button.dataset.themeChoice));
-    });
-    const themeToggle = document.querySelector('[data-theme-toggle]');
-    // The shell checkbox change is owned by app.js; retain support for button shells.
-    if (themeToggle && themeToggle.type !== 'checkbox') themeToggle.addEventListener('click', () =>
-      setPreference('theme', preferences.theme === 'studio' ? 'circuit' : 'studio'));
     for (const key of ['atmosphere', 'motion']) {
       document.querySelector(`[data-${key}]`)?.addEventListener('change', (event) => setPreference(key, event.target.checked));
     }

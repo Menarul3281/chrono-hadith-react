@@ -25,4 +25,4 @@ Run `npm.cmd run build` from this directory. The former regression test files we
 
 The production build passed after restoring declared dependencies and aligning `@vitejs/plugin-react` with Vite 8. Browser visual and interactive QA could not run because no browser connection was available; desktop and mobile rendering still need visual verification.
 
-The app still uses the existing incremental React/legacy architecture. Settings, theme and the global Filters button remain existing “coming soon” controls; this review does not turn them into new features or change the historical dataset.
+The app still uses the existing incremental React/legacy architecture. Settings and the global Filters button remain existing “coming soon” controls; this review does not turn them into new features or change the historical dataset. The interface currently ships with one fixed light palette.

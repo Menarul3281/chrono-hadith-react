@@ -1,7 +1,6 @@
 /* Isolated reference graph mounted inside the live Overview. */
 const OverviewGraph = (() => {
   'use strict';
-  const body = document.body;
   let panel = null, ro = null, cleanup = null;
   const ROUTES = {
     prophets: '#graph', companions: '#history?view=timeline',
@@ -26,16 +25,11 @@ const OverviewGraph = (() => {
     panel?.replaceChildren();
     panel = null;
   }
-  function setMode(mode) {
-    body.classList.toggle('graph-light', mode === 'light');
-    body.classList.toggle('graph-dark', mode !== 'light');
-  }
   function mount(host) {
     if (!host) return;
     unmount();
     panel = host;
     panel.classList.add('variation');
-    panel.dataset.variant = 'studio';
     host.innerHTML = GRAPH_MARKUP;
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   function resize(p){
@@ -225,5 +219,5 @@ const OverviewGraph = (() => {
   };
 
   }
-  return { mount, unmount, setMode };
+  return { mount, unmount };
 })();

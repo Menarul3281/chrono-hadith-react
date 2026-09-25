@@ -282,14 +282,8 @@
     if (!btn) return;
     showToast(`${btn.dataset.action} — coming soon`);
   });
-  document.querySelector('[data-theme-toggle]')?.addEventListener('change', (ev) => {
-    document.body.dataset.theme = ev.target.checked ? 'light' : 'dark'; // theme-only, never touches FX
-    if (typeof SiteChrome !== 'undefined') SiteChrome.setPreference('theme', ev.target.checked ? 'studio' : 'circuit'); // theme-only
-    if (typeof OverviewGraph !== 'undefined') OverviewGraph.setMode(ev.target.checked ? 'light' : 'dark');
-    /* theme handler owns palette + graph only; FX untouched */
-  });
   document.querySelector('[data-grain-toggle]')?.addEventListener('change', (ev) => {
-    document.body.classList.toggle('no-fx', !ev.target.checked); // fx-only, never touches theme
+    document.body.classList.toggle('no-fx', !ev.target.checked);
     document.documentElement.dataset.atmosphere = ev.target.checked ? 'on' : 'off';
     if (typeof SiteChrome !== 'undefined') SiteChrome.setPreference('atmosphere', ev.target.checked);
   });

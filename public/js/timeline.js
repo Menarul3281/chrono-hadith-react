@@ -1750,7 +1750,7 @@ const Timeline = (() => {
   function template() {
     return `
       <div class="timeline-page">
-        <section class="tlc" id="tlc" data-tl-theme="dark"
+        <section class="tlc" id="tlc"
                  style="--tl-axis-h:${AXIS_H}px;--tl-select-h:${SELECT_H}px;--tl-side-pad:${SIDE_PAD}px">
           <header class="tlc-head">
             <div>

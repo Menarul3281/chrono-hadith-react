@@ -48,11 +48,6 @@ export const shellMarkup = `
         <button aria-label="Filters" class="nav-item rail-btn" data-action="filters" data-tooltip="Filters" style="--n:7" type="button">
           <span class="nav-icon" data-icon="filters"></span><span class="nav-label">Filters</span>
         </button>
-        <label class="rail-switch" data-tooltip="Light / dark theme" style="--n:8">
-          <input type="checkbox" data-theme-toggle checked />
-          <span class="rail-switch-track" aria-hidden="true"><span class="rail-switch-thumb"></span></span>
-          <span class="nav-label">Light</span>
-        </label>
         <label class="rail-switch" data-tooltip="Grain and atmosphere" style="--n:9">
           <input type="checkbox" data-grain-toggle checked />
           <span class="rail-switch-track" aria-hidden="true"><span class="rail-switch-thumb"></span></span>

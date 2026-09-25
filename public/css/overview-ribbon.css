@@ -95,7 +95,7 @@
   transform: translateX(-150%) skewX(-14deg);
   animation: overview-ribbon-shimmer 6.4s linear infinite;
 }
-body[data-theme="light"] .overview-ribbon-verse::after { mix-blend-mode: multiply; }
+.overview-ribbon-verse::after { mix-blend-mode: multiply; }
 .overview-ribbon-arabic {
   color: transparent;
   background-image: linear-gradient(90deg,

@@ -9,18 +9,8 @@
 .node:focus-visible{transform:translate(-50%,calc(-50% - 7px));z-index:7;border-color:var(--tone);box-shadow:0 11px 0 #07161c,0 14px 0 var(--tone),0 22px 29px #000a,0 0 30px color-mix(in srgb,var(--tone) 25%,transparent)}.node[aria-pressed=true]{border-color:var(--tone);z-index:6;box-shadow:0 7px 0 #07161c,0 9px 0 var(--tone),0 0 32px color-mix(in srgb,var(--tone) 27%,transparent)}.scene.has-selection .node:not([aria-pressed=true]),
 .scene.has-selection .root{filter:brightness(.53);opacity:.67}.node-icon{display:grid;place-items:center;width:33px;height:33px;flex:none;border-radius:9px;border:1px solid color-mix(in srgb,var(--tone) 40%,transparent);background:color-mix(in srgb,var(--tone) 14%,transparent);color:var(--tone);font-size:19px}.node-copy{display:flex;flex-direction:column;gap:5px;flex:1;min-width:0}.node-copy strong{font-size:13px;font-weight:700;white-space:nowrap}.node-copy small{font-size:8px;letter-spacing:.12em;color:var(--muted);white-space:nowrap}.node-arrow{color:var(--tone);font-size:14px}.root{--tone:var(--accent);left:490px;top:310px;width:185px;height:123px;border-radius:17px;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;background:radial-gradient(circle at 50% 23%,color-mix(in srgb,var(--accent) 28%,transparent),transparent 65%),linear-gradient(150deg,#153640,#06151e 80%);box-shadow:0 11px 0 #051116,0 14px 0 color-mix(in srgb,var(--accent) 70%,transparent),0 30px 37px #000d,0 0 45px color-mix(in srgb,var(--accent) 15%,transparent)}.root:hover,
 .root:focus-visible{transform:translate(-50%,-54%)}.root-overline{color:var(--accent);letter-spacing:.21em;font-size:8px;font-weight:700}.root-glyph{font-size:30px;color:var(--accent);line-height:1}.root strong{font-size:15px;font-weight:700}.root small{font-size:9px;color:var(--muted)}.coordinate{position:absolute;bottom:22px;left:36px;font-size:9px;letter-spacing:.13em;color:var(--muted)}.coordinate span{color:var(--accent);margin:0 8px}.stage-footer{border-top:1px solid color-mix(in srgb,var(--accent) 13%,transparent);min-height:38px}.selection-summary{margin:8px 24px 0 30px;border:1px solid color-mix(in srgb,var(--accent) 32%,transparent);background:color-mix(in srgb,var(--surface) 87%,transparent);display:flex;min-height:71px;align-items:center;gap:15px;padding:13px 19px;border-radius:11px}.summary-bar{width:3px;align-self:stretch;border-radius:4px;background:var(--accent);box-shadow:0 0 15px var(--accent)}.summary-copy{display:flex;flex-direction:column;gap:3px;flex:1}.summary-copy small{font-size:9px;letter-spacing:.13em;color:var(--accent);font-weight:700}.summary-copy strong{font-size:13px;font-weight:700}.summary-copy>span{font-size:11px;color:var(--muted);line-height:1.45}.summary-index{white-space:nowrap;align-self:start;font-size:10px;color:var(--muted)}.mobile-categories{display:none}
-/* 01: Beveled circuit — original concept 03 with actual board depth */
-.variation[data-variant=circuit]{--bg:#061118;--accent:#7bf2d8;--line:#57bdc1;--surface:#0c2228}.variation[data-variant=circuit] .hero-shell{background:radial-gradient(ellipse at 76% 30%,#0c3f44,#051019 58%,#050a0f)}
-/* 02: Glass orbital observatory */
-.variation[data-variant=orbit]{--bg:#07121d;--surface:#102334;--accent:#a4e6ff;--line:#82bfff;--chip:#0b1e2d;--prophets:#81efd3;--companions:#85c9ff;--narrators:#baa2fa;--sources:#f4c78e;--places:#bea2ff;--dynasties:#f69cbf;--themes:#faa66e;--events:#f68da5}.variation[data-variant=orbit] .hero-shell{background:radial-gradient(ellipse at 78% 50%,#103858,#07111b 61%)}.variation[data-variant=orbit] .board{border-radius:50%;background:radial-gradient(circle,#1a5c6880 0%,#092339 49%,#07131b 75%);border:2px solid #a4e6ff7d;box-shadow:0 0 90px #4faaca22,inset 0 0 75px #8bd4fc14}.variation[data-variant=orbit] .board-under{border-radius:50%;background:#10334f;box-shadow:0 12px 0 #1e4560,0 27px 0 #061726,0 48px 35px #000a}.variation[data-variant=orbit] .node{border-radius:27px;box-shadow:0 4px 0 #061321,0 12px 30px #0007,inset 0 1px 0 #ffffff20;backdrop-filter:blur(12px)}.variation[data-variant=orbit] .node:hover{box-shadow:0 10px 0 #061321,0 13px 30px #000b,0 0 20px color-mix(in srgb,var(--tone) 33%,transparent)}.variation[data-variant=orbit] .root{border-radius:50%;width:139px;height:139px;box-shadow:0 6px 0 #091723,0 14px 0 #276079,0 21px 25px #0009,0 0 60px #6fdcf749}
-/* 03: Dramatic metal gallery plinth */
-.variation[data-variant=monolith]{--bg:#0e1015;--surface:#25232a;--foreground:#f5f0e8;--muted:#b8aba6;--accent:#f3c994;--line:#bfa17a;--chip:#27232a;--prophets:#93e6cb;--companions:#8bbff4;--narrators:#c1a8e9;--sources:#f5c887;--places:#bea0dd;--dynasties:#e99aad;--themes:#f5b982;--events:#f2a4ab}.variation[data-variant=monolith] .hero-shell{background:radial-gradient(ellipse at 74% 40%,#29282c,#0a0e13 64%)}.variation[data-variant=monolith] .board{border-radius:6px;background:linear-gradient(125deg,#2c2929,#10191c 40%,#21272a);border-color:#bfa17a8c;box-shadow:inset 0 0 25px #f3c99413,0 0 80px #b99b7940}.variation[data-variant=monolith] .board-under{border-radius:6px;background:#413d3b;box-shadow:0 10px 0 #352c29,0 26px 0 #111313,0 45px 0 #070707}.variation[data-variant=monolith] .board-orbit{border-radius:8px;transform:translate(-50%,-50%) rotate(45deg)}.variation[data-variant=monolith] .node,
-.variation[data-variant=monolith] .root{border-radius:5px}.variation[data-variant=monolith] .node-icon{border-radius:4px}
-/* 04: transparent workstation hologram */
-.variation[data-variant=hologram]{--bg:#06121c;--accent:#6becff;--line:#6becff;--surface:#0a2330;--chip:#092530}.variation[data-variant=hologram] .hero-shell{background:linear-gradient(110deg,#06111a,#072430 67%,#06111b)}.variation[data-variant=hologram] .hero-shell::before{background:repeating-linear-gradient(0deg,transparent 0 23px,#78e4fd09 24px),radial-gradient(ellipse at 75% 55%,#188aa522,transparent 55%)}.variation[data-variant=hologram] .board{background:linear-gradient(110deg,#1a60682b,#0b1c2b60);backdrop-filter:blur(16px);border:1px solid #69d9fb99;box-shadow:inset 0 0 70px #5cd9f013,0 0 55px #31bdda22}.variation[data-variant=hologram] .board-under{opacity:.28;box-shadow:0 10px 0 #0f5667,0 30px 0 #071e2e}.variation[data-variant=hologram] .node,
-.variation[data-variant=hologram] .root{background:linear-gradient(140deg,#1c4850b8,#061522de);backdrop-filter:blur(14px);border-radius:4px;box-shadow:0 1px 0 var(--tone,var(--accent)),0 0 21px #6becff18,inset 0 0 25px #60e0ff12}.variation[data-variant=hologram] .node:hover{box-shadow:0 8px 0 #061321,0 0 25px color-mix(in srgb,var(--tone) 40%,transparent)}.variation[data-variant=hologram] .root{border-radius:8px}
-/* 05: editorial archive with ivory tinted backdrop and inset display */
-.variation[data-variant=studio]{--bg:#dce4e1;--surface:#eef1ed;--foreground:#112e30;--muted:#506c6c;--accent:#145a56;--line:#246f69;--chip:#e7efec;--prophets:#217d61;--companions:#3570b4;--narrators:#7959b8;--sources:#a77925;--places:#7451a5;--dynasties:#b04c70;--themes:#a45f25;--events:#ba4d5a}.variation[data-variant=studio] .hero-shell{background:linear-gradient(120deg,#f1f4ee,#e1e9e4 69%,#d5e5de);border-color:#abc6bf}.variation[data-variant=studio] .hero-shell::before{background:radial-gradient(ellipse at 80% 40%,#8ab2b235,transparent 57%)}.variation[data-variant=studio] .board{background:linear-gradient(145deg,#d8e9e2,#8aada6 72%);border:1px solid #41766c;box-shadow:0 0 60px #11615022,inset 0 1px 8px #fff9}.variation[data-variant=studio] .board-under{background:#6a9990;box-shadow:0 10px 0 #568178,0 25px 0 #264840,0 41px 40px #193b3344}.variation[data-variant=studio] .board-grid{background-image:linear-gradient(#1e766c12 1px,transparent 1px),linear-gradient(90deg,#1e766c12 1px,transparent 1px)}.variation[data-variant=studio] .node{background:linear-gradient(135deg,#f1f6f0,#dce7e1);box-shadow:0 5px 0 #a5c6b9,0 7px 0 var(--tone),0 18px 21px #26494033,inset 0 1px 0 #fff}.variation[data-variant=studio] .node:hover{box-shadow:0 11px 0 #a5c6b9,0 13px 0 var(--tone),0 23px 27px #26494044}.variation[data-variant=studio] .root{background:linear-gradient(140deg,#e2f4e7,#c7ded4);box-shadow:0 8px 0 #9cc3b6,0 11px 0 #145a56,0 23px 24px #20493d55}.variation[data-variant=studio] .selection-summary{background:#f0f4ee;border-color:#638c814d}
+/* Editorial archive with ivory tinted backdrop and inset display. */
+.variation{--bg:#dce4e1;--surface:#eef1ed;--foreground:#112e30;--muted:#506c6c;--accent:#145a56;--line:#246f69;--chip:#e7efec;--prophets:#217d61;--companions:#3570b4;--narrators:#7959b8;--sources:#a77925;--places:#7451a5;--dynasties:#b04c70;--themes:#a45f25;--events:#ba4d5a}.variation .hero-shell{background:linear-gradient(120deg,#f1f4ee,#e1e9e4 69%,#d5e5de);border-color:#abc6bf}.variation .hero-shell::before{background:radial-gradient(ellipse at 80% 40%,#8ab2b235,transparent 57%)}.variation .board{background:linear-gradient(145deg,#d8e9e2,#8aada6 72%);border:1px solid #41766c;box-shadow:0 0 60px #11615022,inset 0 1px 8px #fff9}.variation .board-under{background:#6a9990;box-shadow:0 10px 0 #568178,0 25px 0 #264840,0 41px 40px #193b3344}.variation .board-grid{background-image:linear-gradient(#1e766c12 1px,transparent 1px),linear-gradient(90deg,#1e766c12 1px,transparent 1px)}.variation .node{background:linear-gradient(135deg,#f1f6f0,#dce7e1);box-shadow:0 5px 0 #a5c6b9,0 7px 0 var(--tone),0 18px 21px #26494033,inset 0 1px 0 #fff}.variation .node:hover{box-shadow:0 11px 0 #a5c6b9,0 13px 0 var(--tone),0 23px 27px #26494044}.variation .root{background:linear-gradient(140deg,#e2f4e7,#c7ded4);box-shadow:0 8px 0 #9cc3b6,0 11px 0 #145a56,0 23px 24px #20493d55}.variation .selection-summary{background:#f0f4ee;border-color:#638c814d}
 @media(max-width:1440px){.hero-layout{grid-template-columns:minmax(310px,.72fr) minmax(0,1.2fr)}}
 @media(max-width:1120px){.hero-layout{grid-template-columns:1fr}.visual-area{max-width:990px;width:100%;justify-self:center;padding:0 12px 24px}.hero-shell{min-height:unset}.stage{max-width:960px}}
 @media(max-width:700px){.hero-shell{border-radius:14px}.stage-toolbar,
@@ -61,7 +51,7 @@
 @media(min-width:1750px){.ov-graph-mount .hero-layout{grid-template-columns:minmax(420px,.78fr) minmax(0,1.43fr)}.ov-graph-mount .stage{max-width:1200px}}
 @media (min-width:1121px) and (max-width:1530px){.ov-graph-mount .hero-layout{grid-template-columns:1fr!important;align-items:start}.ov-graph-mount .visual-area{width:100%;max-width:1200px;justify-self:center;padding:0 20px 32px}}
 /* Featured Scholar is a deliberate visual outlier, consistently dark and heavily framed. */
-/* Footer deliberately stays dark even in light mode. */
+/* Footer uses a high-contrast treatment. */
 /* Root hover: slower pulse and distance-staggered illumination; no permanent selection. */
 .ov-graph-mount .ch-spatial-rig .root{transition:transform .6s cubic-bezier(.18,.75,.25,1),box-shadow .7s}
 .ov-graph-mount .ch-spatial-rig.is-root-spreading .root{transform:translate(-50%,-50%) translateZ(51px)!important;box-shadow:0 10px 0 #102b29,0 16px 0 #6af9dd,0 27px 35px #000a,0 0 45px #7ff3da63}
@@ -73,22 +63,22 @@
 /* ================================================================
    CHRONO—HADITH Overview V3: targeted visual & interaction repairs
    ================================================================ */
-/* Legible light theme: pale surfaces receive ink, while the intentionally
-   dark hero copy and the biography artifact retain their own light ink. */
-body.graph-light .ov-graph-mount.variation[data-variant="studio"]{color:#173a37;--foreground:#153630;--muted:#527068;--surface:#f0f7f3;--bg:#ecf4ee}
-body.graph-light .ov-graph-mount .stage-toolbar,
-body.graph-light .ov-graph-mount .stage-footer,
-body.graph-light .ov-graph-mount .selection-summary,
-body.graph-light .ov-graph-mount .selection-summary .summary-copy strong,
-body.graph-light .ov-graph-mount .selection-summary .summary-copy>span{color:#183b37}
-body.graph-light .ov-graph-mount .selection-summary{background:#f4faf6;border-color:#6f9f90aa}
-body.graph-light .ov-graph-mount .stage-toolbar .micro-btn,
-body.graph-light .ov-graph-mount .stage-footer .micro-btn{color:#205c50}
-body.graph-light .ov-graph-mount .stage-toolbar .toolbar-muted{color:#577a70}
-body.graph-light .ov-graph-mount .node,
-body.graph-light .ov-graph-mount .root{color:#133f37}
-body.graph-light .ov-graph-mount .node-copy small,
-body.graph-light .ov-graph-mount .root small{color:#40665a}
+/* Pale surfaces receive ink, while the intentionally dark hero copy and the
+   biography artifact retain their own light ink. */
+.ov-graph-mount.variation{color:#173a37;--foreground:#153630;--muted:#527068;--surface:#f0f7f3;--bg:#ecf4ee}
+.ov-graph-mount .stage-toolbar,
+.ov-graph-mount .stage-footer,
+.ov-graph-mount .selection-summary,
+.ov-graph-mount .selection-summary .summary-copy strong,
+.ov-graph-mount .selection-summary .summary-copy>span{color:#183b37}
+.ov-graph-mount .selection-summary{background:#f4faf6;border-color:#6f9f90aa}
+.ov-graph-mount .stage-toolbar .micro-btn,
+.ov-graph-mount .stage-footer .micro-btn{color:#205c50}
+.ov-graph-mount .stage-toolbar .toolbar-muted{color:#577a70}
+.ov-graph-mount .node,
+.ov-graph-mount .root{color:#133f37}
+.ov-graph-mount .node-copy small,
+.ov-graph-mount .root small{color:#40665a}
 /* Make the fully dark Featured Biography intentionally immune to studio ink overrides. */
 /* Existing 3D scale/rotation and hover timing remain unmodified. The
    old 'filter:drop-shadow' rasterized the entire card (including its glyphs).
@@ -103,7 +93,7 @@ body.graph-light .ov-graph-mount .root small{color:#40665a}
 .ov-graph-mount .ch-spatial-rig .board-engrave,
 .ov-graph-mount .ch-spatial-rig .coordinate{display:none!important}
 .ov-graph-mount .ch-stage-brand{color:var(--accent);font-size:10px;font-weight:800;letter-spacing:.16em;white-space:nowrap}
-body.graph-light .ov-graph-mount .ch-stage-brand{color:#1e6458}
+.ov-graph-mount .ch-stage-brand{color:#1e6458}
 /* One continuous moving gradient, behind a subtle, fixed particle layer. */
 @keyframes chPageBreathe{0%{background-position:0% 25%}100%{background-position:100% 72%}}
 @keyframes chParticle{0%{opacity:0;transform:translate3d(0,16px,0)}20%{opacity:.27}75%{opacity:.20}100%{opacity:0;transform:translate3d(var(--p-drift),-85px,0)}}
@@ -136,38 +126,36 @@ body.graph-light .ov-graph-mount .ch-stage-brand{color:#1e6458}
 .ov-graph-mount #tiltToggle{display:inline-flex;align-items:center;gap:7px;border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:9px;padding:7px 10px;white-space:nowrap}
 .ch-motion-icon{width:17px;height:17px;display:grid;place-items:center}.ch-motion-icon svg{width:17px;height:17px}.ch-motion-label{font-size:10px;letter-spacing:.08em}.ch-motion-dot{width:7px;height:7px;display:inline-block;border-radius:50%;background:#6affb9;box-shadow:0 0 5px #6affb9,0 0 12px #6affb980}
 #tiltToggle[aria-pressed="false"] .ch-motion-dot{background:#80928e;box-shadow:none}
-body.graph-light #tiltToggle{color:#1d584a}
-body.graph-light #tiltToggle[aria-pressed="false"] .ch-motion-dot{background:#99a5a1}
+#tiltToggle{color:#1d584a}
+#tiltToggle[aria-pressed="false"] .ch-motion-dot{background:#99a5a1}
 @media(prefers-reduced-motion:reduce){.ov-graph-mount .ch-spatial-rig.is-root-spreading .wire,
 .ov-graph-mount .ch-spatial-rig.is-root-spreading .node{animation:none!important;opacity:1;transition-delay:0s!important}}
 
 
-/* ===== V4 / Theme legibility + contextual navigation labels + softer corners =====
-   Only the current preview layers are affected. The original two theme
-   palettes, spatial graph and hover-motion definitions are preserved. */
+/* ===== V4 / Legibility + contextual navigation labels + softer corners ===== */
 .ov-graph-mount { --ch-soft-radius: 14px; }
 /* The studio page has both pale surfaces and a purposely dark hero artifact.
    Establish local contrast per surface instead of inheriting light-page ink
    through the dark hero or the biography card. */
-body.graph-light .ov-graph-mount.variation[data-variant="studio"] {
+.ov-graph-mount.variation {
  --foreground:#173b35; --muted:#4b6c63; color:#173b35;
 }
 /* Light page: readable text on pale graph and Discover canvases. */
-body.graph-light .variation[data-variant="studio"] .visual-area,
-body.graph-light .variation[data-variant="studio"] .stage-toolbar,
-body.graph-light .variation[data-variant="studio"] .stage-footer,
-body.graph-light .variation[data-variant="studio"] .selection-summary,
-body.graph-light .variation[data-variant="studio"] .selection-summary strong,
-body.graph-light .variation[data-variant="studio"] .selection-summary .summary-copy>span,
-body.graph-light .variation[data-variant="studio"] .mobile-categories-title {color:#173b35;}
-body.graph-light .variation[data-variant="studio"] .stage-toolbar .toolbar-muted,
-body.graph-light .variation[data-variant="studio"] .stage-footer>span,
-body.graph-light .variation[data-variant="studio"] .coordinate {color:#496d65;}
-body.graph-light .variation[data-variant="studio"] .node,
-body.graph-light .variation[data-variant="studio"] .root,
-body.graph-light .variation[data-variant="studio"] .node-copy strong {color:#163c37;}
-body.graph-light .variation[data-variant="studio"] .node-copy small,
-body.graph-light .variation[data-variant="studio"] .root small {color:#416960;}
+.variation .visual-area,
+.variation .stage-toolbar,
+.variation .stage-footer,
+.variation .selection-summary,
+.variation .selection-summary strong,
+.variation .selection-summary .summary-copy>span,
+.variation .mobile-categories-title {color:#173b35;}
+.variation .stage-toolbar .toolbar-muted,
+.variation .stage-footer>span,
+.variation .coordinate {color:#496d65;}
+.variation .node,
+.variation .root,
+.variation .node-copy strong {color:#163c37;}
+.variation .node-copy small,
+.variation .root small {color:#416960;}
 /* Sidebar flyout is portaled directly under body, beyond the scrolling nav
    container's clipping bounds; it works on mouse and keyboard focus. */
 /* Preserve the proportions and all graph transforms: round chrome only. */
@@ -185,8 +173,7 @@ body.graph-light .variation[data-variant="studio"] .root small {color:#416960;}
 /* The noise is attached only to the gradient atmosphere, not to labels or cards. */
 /* Show the blended aurora inside the existing landing panel without changing the copy or board. */
 .ov-graph-mount .hero-shell::before{background:radial-gradient(ellipse at 80% 30%,#72b8fb1b,transparent 55%),radial-gradient(ellipse at 14% 90%,#d39bec0f,transparent 48%),radial-gradient(ellipse at 60% 70%,#99ffe919,transparent 54%);background-size:180% 180%;animation:chAuraLoop 29s ease-in-out infinite alternate;}
-body.graph-light .ov-graph-mount .hero-shell::before{background:radial-gradient(ellipse at 85% 24%,#87c7f421,transparent 54%),radial-gradient(ellipse at 18% 82%,#edaddd16,transparent 52%),radial-gradient(ellipse at 55% 68%,#a6f1d12d,transparent 52%);background-size:180% 180%;animation:chAuraLoop 29s ease-in-out infinite alternate;}
-/* Light mode: mint accent, with neon used only on small interaction surfaces. */
+.ov-graph-mount .hero-shell::before{background:radial-gradient(ellipse at 85% 24%,#87c7f421,transparent 54%),radial-gradient(ellipse at 18% 82%,#edaddd16,transparent 52%),radial-gradient(ellipse at 55% 68%,#a6f1d12d,transparent 52%);background-size:180% 180%;animation:chAuraLoop 29s ease-in-out infinite alternate;}
 /* The existing sticky header remains above all site sections; only scroll state changes. */
 @keyframes chVerseIridescence{from{background-position:0% 50%}to{background-position:100% 50%}}
 /* Existing particles sit above the gradient, below all navigation and remain noninteractive. */
@@ -194,7 +181,7 @@ body.graph-light .ov-graph-mount .hero-shell::before{background:radial-gradient(
 /* A tiny understated arrival flare behind the Arabic text. */
 @keyframes chQuoteBreath{from{opacity:.24;transform:scale(.95)}to{opacity:.68;transform:scale(1.03)}}
 @media(prefers-reduced-motion:reduce){.ov-graph-mount .hero-shell::before,
-body.graph-light .ov-graph-mount .hero-shell::before{animation:none!important}}
+.ov-graph-mount .hero-shell::before{animation:none!important}}
 
 
 /* V6 — targeted proportion/illustration repairs, preserving original graph and interactions. */
@@ -220,7 +207,6 @@ body.graph-light .ov-graph-mount .hero-shell::before{animation:none!important}}
 /* Historical context: hand-drawn horizon and distant skyline, no embedded picture. */
 /* Network: large linked orbits behind the existing tiny relation glyph. */
 @keyframes chNetworkOrbit{to{transform:rotate(346deg)}}
-/* Dark mode uses the same two illustrations without pale card backgrounds. */
 /* The standalone-build disclaimer is not a design element. */
 /* Responsive: prioritize readable content and keep cards visually substantial. */
 @media (max-width:1600px){
@@ -243,44 +229,27 @@ body.graph-light .ov-graph-mount .hero-shell::before{animation:none!important}}
 /* Final spacing corrections: make the four figures distinct at every width. */
 
 /* ================================================================
-   V7 APPROVED FIX: paired light/dark surfaces, no biography shadow slab,
-   static visible page-wide mint / sky / lilac / blush atmosphere.
-   Original layout, routing, sidebar and graph interactions remain intact.
+   V7 APPROVED FIX: no biography shadow slab, with a static visible
+   page-wide mint / sky / lilac / blush atmosphere.
    ================================================================ */
 /* A single quiet gradient belongs to the actual PAGE, not a hidden overlay. */
-.ov-graph-mount .hero-shell::before,
-body.graph-light .ov-graph-mount .hero-shell::before{
+.ov-graph-mount .hero-shell::before{
   animation:none!important;background:none!important;
 }
 /* Tint both chapter canvases, so the background is visible THROUGH them. */
-body.graph-light .ov-graph-mount .hero-shell{
+.ov-graph-mount .hero-shell{
   background:linear-gradient(136deg,rgba(255,255,255,.45),rgba(237,255,247,.20) 62%,rgba(233,229,255,.29))!important;
   border-color:#93bdb18c;
 }
-body.graph-dark .ov-graph-mount.variation[data-variant="circuit"] .hero-shell{
-  background:
-    radial-gradient(ellipse at 98% 3%,rgba(29,105,99,.85) 0%,rgba(24,74,77,.45) 25%,transparent 54%),
-    radial-gradient(ellipse at 17% 95%,rgba(35,57,99,.67) 0%,transparent 56%),
-    linear-gradient(125deg,#171d2a 0%,#171c2a 51%,#111623 100%)!important;
-}
-/* Light mode is the SAME COMPONENTS and geometry as dark, not a dark hero pasted
-   onto the pale page. Keep the exact same type, padding, sizes, and interactions. */
-/* A visible restrained glow in BOTH modes; the lettering stays crisp. */
+/* The same component geometry, type, padding, sizes, and interactions are used throughout. */
+/* A visible restrained glow keeps the lettering crisp. */
 /* Remove the 9px dark offset-plinth: it was the large dark slab BELOW the
    biography's border in the screenshot. Card overflow/clipping stays as-is. */
-/* The biography is an actual LIGHT companion of the dark biography: identical
-   split, measurements, margins, typefaces, CTA, dots, and hover geometry. */
-/* Match the reference geometry but invert its palette instead of leaving
-   a dark footer isolated at the bottom of the light chapter. */
-/* Keep the other two Discover cards light in light theme and dark in dark. */
+/* Biography split, measurements, margins, typefaces, CTA, dots, and hover geometry stay intact. */
 
 
-/* ================================================================
-   V9 LIGHT PALETTE PARITY — COLOR VALUES ONLY.
-   The dark mode, layout, sizing, spacing, typography, animations,
-   3D graph, markup and interactions are unchanged.
-   ================================================================ */
-body.graph-light .ov-graph-mount .hero-shell {
+/* V9 light palette color values. */
+.ov-graph-mount .hero-shell {
   background:
     radial-gradient(ellipse at 98% 3%, rgba(80, 189, 174, .38) 0%, rgba(147, 223, 209, .20) 25%, transparent 54%),
     radial-gradient(ellipse at 17% 95%, rgba(127, 164, 228, .33) 0%, transparent 56%),
@@ -289,80 +258,7 @@ body.graph-light .ov-graph-mount .hero-shell {
 }
 
 
-/* V10: THEME PARITY — one studio-layout DOM, dark mode is palette-only. */
-body.graph-dark .ov-graph-mount.variation[data-variant="studio"]{
- --bg:#061118;--surface:#10232b;--foreground:#f4fbfd;--muted:#9eb5c0;
- --accent:#7bf2d8;--line:#57bdc1;--chip:#0e1e27;
- --prophets:#6ce5bf;--companions:#68bcfa;--narrators:#ba9cff;
- --sources:#f4c77f;--places:#c49cff;--dynasties:#ff9eaf;
- --themes:#edac74;--events:#fa8ca0;
- color:#f4fbfd;
-}
-body.graph-dark .ov-graph-mount .hero-shell{
- background:radial-gradient(ellipse at 83% 13%,#103b3a 0%,#102127 44%,#111a2b 100%)!important;
- border-color:#345551!important; box-shadow:0 18px 70px #0007!important;
-}
-body.graph-dark .ov-graph-mount .hero-shell::before{
- background:radial-gradient(ellipse at 78% 22%,#63e6c40c,transparent 62%)!important;
-}
-body.graph-dark .ov-graph-mount .stage-toolbar,
-body.graph-dark .ov-graph-mount .stage-footer,
-body.graph-dark .ov-graph-mount .coordinate,
-body.graph-dark .ov-graph-mount .micro-btn{color:#acc5c4!important;}
-body.graph-dark .ov-graph-mount .live-dot{background:#7bf2d8!important;box-shadow:0 0 9px #7bf2d8!important;}
-body.graph-dark .ov-graph-mount .board{
- background:radial-gradient(ellipse at 51% 41%,#27786a27,transparent 62%),linear-gradient(145deg,#173a3b,#102930 73%)!important;
- border-color:#5caf9f!important;box-shadow:0 0 60px #5bdeae18,inset 0 1px 8px #ffffff0b!important;
-}
-body.graph-dark .ov-graph-mount .board-under{
- background:#153e39!important;box-shadow:0 10px 0 #123e38,0 25px 0 #0b2223,0 41px 40px #0007!important;
-}
-body.graph-dark .ov-graph-mount .board-grid{
- background-image:linear-gradient(#9aeadd12 1px,transparent 1px),linear-gradient(90deg,#9aeadd12 1px,transparent 1px)!important;
-}
-body.graph-dark .ov-graph-mount .board-orbit{border-color:#7dbcb35a!important;box-shadow:0 0 20px #73dbc814!important;}
-body.graph-dark .ov-graph-mount .board-cross{opacity:.42!important;}
-body.graph-dark .ov-graph-mount .board-engrave{color:#b6f4e2!important;}
-body.graph-dark .ov-graph-mount .wire{stroke:#76b5b5a0!important;}
-body.graph-dark .ov-graph-mount .ch-spatial-rig.is-preview .wire.is-route{stroke:var(--ch-route)!important;}
-body.graph-dark .ov-graph-mount .ch-spatial-rig .node.is-active{
- box-shadow:0 8px 0 #07181b,0 11px 0 var(--tone),0 21px 28px #0008,0 0 25px color-mix(in srgb,var(--tone) 42%,transparent)!important;
-}
-body.graph-dark .ov-graph-mount .node{
- color:#f5fffe!important;background:linear-gradient(145deg,#192b32,#14242b)!important;
- border-color:color-mix(in srgb,var(--tone) 62%,#1c3c3f)!important;
- box-shadow:0 5px 0 #07181b,0 7px 0 var(--tone),0 18px 21px #0007,inset 0 1px 0 #ffffff16!important;
-}
-body.graph-dark .ov-graph-mount .node:hover,
-body.graph-dark .ov-graph-mount .node:focus-visible{
- box-shadow:0 11px 0 #07181b,0 13px 0 var(--tone),0 23px 27px #0009,0 0 26px color-mix(in srgb,var(--tone) 24%,transparent)!important;
-}
-body.graph-dark .ov-graph-mount .node-copy strong{color:#f4fbfd!important;}
-body.graph-dark .ov-graph-mount .node-copy small,
-body.graph-dark .ov-graph-mount .root small{color:#9db8b8!important;}
-body.graph-dark .ov-graph-mount .node-icon{
- background:color-mix(in srgb,var(--tone) 14%,transparent)!important;border-color:color-mix(in srgb,var(--tone) 50%,transparent)!important;
-}
-body.graph-dark .ov-graph-mount .root{
- color:#f4fffb!important;background:radial-gradient(ellipse at 50% 17%,#2a75623b,transparent 65%),linear-gradient(145deg,#173f3a,#0c2528)!important;
- border-color:#77d6bc!important;box-shadow:0 8px 0 #081b20,0 11px 0 #4d9888,0 23px 24px #0008!important;
-}
-body.graph-dark .ov-graph-mount .root strong{color:#f4fffb!important;}
-body.graph-dark .ov-graph-mount .selection-summary{
- background:linear-gradient(145deg,#0d272a,#11252b)!important;border-color:#47877b7a!important;
- box-shadow:0 11px 35px #0002!important;
-}
-body.graph-dark .ov-graph-mount .summary-copy small,
-body.graph-dark .ov-graph-mount .summary-bar{color:#a9f6db!important;background:#9cedd4!important;}
-body.graph-dark .ov-graph-mount .summary-copy strong{color:#f0fff9!important;}
-body.graph-dark .ov-graph-mount .summary-copy >span,
-body.graph-dark .ov-graph-mount .summary-index{color:#a7c1bd!important;}
-body.graph-dark .ov-graph-mount .stage-footer{border-top-color:#8fd8ca2c!important;}
-/* Theme button: one compact icon + the one-word action label; same size in both palettes. */
-
-
-/* V11: SEAMLESS GLOBAL ATMOSPHERE — the *same* geometry in both themes.
-   Only the palette changes; existing interactions/graph geometry are not modified. */
+/* V11: seamless global atmosphere. */
 /* A full-viewport gradient layer is visible through BOTH chapter canvases.
    Radial origins match the supplied teal-left, blue/rose-top, lilac-right diagram. */
 @keyframes chEntirePageGradient{
@@ -374,37 +270,26 @@ body.graph-dark .ov-graph-mount .stage-footer{border-top-color:#8fd8ca2c!importa
 /* Existing gently rising quote particles are drawn over the gradient and
    underneath all interactive/text elements. */
 /* Remove page-within-a-page wrappers; keep the original content coordinates. */
-.ov-graph-mount.variation[data-variant="studio"]{
+.ov-graph-mount.variation{
  background:transparent!important;box-shadow:none!important;
 }
-body.graph-light .ov-graph-mount .hero-shell,
-body.graph-dark .ov-graph-mount .hero-shell,
 .ov-graph-mount .hero-shell{
  background:transparent!important;border:0!important;border-radius:0!important;
  box-shadow:none!important;overflow:visible!important;
 }
-.ov-graph-mount .hero-shell::before,
-body.graph-light .ov-graph-mount .hero-shell::before,
-body.graph-dark .ov-graph-mount .hero-shell::before{
+.ov-graph-mount .hero-shell::before{
  content:none!important;display:none!important;background:none!important;animation:none!important;
 }
 /* Keep individual interactive cards readable without hiding the global aura. */
-body.graph-light .ov-graph-mount .selection-summary{
+.ov-graph-mount .selection-summary{
  background:rgba(247,255,252,.49)!important;backdrop-filter:blur(9px);
 }
-body.graph-dark .ov-graph-mount .selection-summary{
- background:rgba(9,30,35,.46)!important;backdrop-filter:blur(9px);
-}
-/* The old V10 dark selector accidentally painted every summary label mint,
-   creating a long horizontal bar across KNOWLEDGE ATLAS / READY. */
-body.graph-light .ov-graph-mount .summary-copy small,
-body.graph-dark .ov-graph-mount .summary-copy small,
+/* Keep the summary label from becoming a long horizontal bar. */
 .ov-graph-mount .summary-copy small{
  background:transparent!important;box-shadow:none!important;
  width:auto!important;display:block!important;
 }
-body.graph-dark .ov-graph-mount .summary-copy small{color:#a9f6db!important;}
-body.graph-light .ov-graph-mount .summary-copy small{color:#136857!important;}
+.ov-graph-mount .summary-copy small{color:#136857!important;}
 /* Preserve just the short vertical mint accent on the left. */
 .ov-graph-mount .summary-bar{
  width:3px!important;flex:0 0 3px!important;
@@ -416,9 +301,7 @@ body.graph-light .ov-graph-mount .summary-copy small{color:#136857!important;}
 /* The glass header and rail now admit a little of the page-wide gradient. */
 
 
-/* V12: CHROMATIC CIRCULAR ATMOSPHERE. Only the background/noise layers change.
-   Left #213867 and top-right #1c5c5d are the actual glow centers in dark mode.
-   The original light palette stays legible: the same centers are softly blended over ivory. */
+/* V12: chromatic circular atmosphere. Only the background/noise layers change. */
 @keyframes chV12AmbientDrift{
   0%{transform:translate3d(-1%,.5%,0) scale(1.035)}
   50%{transform:translate3d(1%,-.7%,0) scale(1.055)}
@@ -443,14 +326,12 @@ body.graph-light .ov-graph-mount .summary-copy small{color:#136857!important;}
   background-size:7px 7px;
   opacity:.22;
 }
-body.graph-light .ov-graph-mount .hero-shell::after{opacity:.17;}
-/* Footer uses the same shared background; it is NOT a solid dark strip. */
+.ov-graph-mount .hero-shell::after{opacity:.17;}
+/* Footer uses the same shared background. */
 /* The quote uses the freed header width; leave the left logo untouched. */
 
 
-/* V14 — targeted repairs: the old HIGHER-SPECIFICITY dark aura rule was
-   overriding V13's general blue/teal gradient, leaving pink and purple on
-   the right. Keep both themes limited to the user's two requested hues. */
+/* V14 — targeted atmosphere repairs. */
 /* Keep the quotation/source next to one another rather than separating
    them across the empty width of the expanded two-column header. */
 /* Remove the inherited rose/purple highlight from the Arabic's moving
@@ -461,8 +342,7 @@ body.graph-light .ov-graph-mount .hero-shell::after{opacity:.17;}
 
 
 
-/* CHRONO — HADITH sidebar: custom SVG brand; visual treatment from the supplied sidebar reference.
-   One sidebar for both themes. Existing fold(), flyout and theme JS remain unchanged. */
+/* CHRONO — HADITH sidebar: custom SVG brand from the supplied sidebar reference. */
 /* The rail opens above content and does not change the app's width. */
 
 /* ================================================================

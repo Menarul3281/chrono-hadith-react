@@ -153,7 +153,6 @@ const OverviewView = (() => {
     host.innerHTML = shellHtml();
     if (typeof Icons !== 'undefined' && Icons.init) Icons.init(host);
     if (typeof OverviewGraph !== 'undefined') {
-      OverviewGraph.setMode(document.body.dataset.theme === 'light' ? 'light' : 'dark');
       OverviewGraph.mount(host.querySelector('#ovGraphMount'));
     }
     const fx = document.createElement('div');

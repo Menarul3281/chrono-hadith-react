@@ -1,51 +1,51 @@
 :root {
   /* Backgrounds */
-  --bg:        #02090f;
-  --bg-2:      #06121a;
-  --panel:     #071722;
-  --panel-2:   #0a1d29;
-  --panel-3:   #0d2431;
+  --bg:        #eef8f7;
+  --bg-2:      #e3f1ec;
+  --panel:     #f8fffc;
+  --panel-2:   #edf8f3;
+  --panel-3:   #dceee7;
 
   /* Borders */
-  --line:      #174153;
-  --line-2:    #24556a;
-  --line-3:    #2f6b83;
+  --line:      #c5ddd3;
+  --line-2:    #99c8b7;
+  --line-3:    #6da48e;
 
   /* Text */
-  --text:      #eef8fb;
-  --text-2:    #b7cad3;
-  --muted:     #91a9b5;
-  --muted-2:   #607b89;
+  --text:      #143e36;
+  --text-2:    #2f574f;
+  --muted:     #496e66;
+  --muted-2:   #5c7972;
 
   /* Accents */
-  --teal:      #34f6c1;
-  --teal-soft: #62f59a;
-  --cyan:      #34c9ff;
-  --blue:      #5a8dff;
-  --purple:    #ad68ff;
-  --gold:      #ffd45e;
-  --orange:    #ff9648;
-  --red:       #ff5f70;
+  --teal:      #008577;
+  --teal-soft: #267f66;
+  --cyan:      #147c9c;
+  --blue:      #3d68b0;
+  --purple:    #8055b4;
+  --gold:      #956721;
+  --orange:    #a25422;
+  --red:       #b34858;
 
-  /* Overview ribbon (dark values are the default body theme). */
-  --pill-bg:          rgba(232,199,119,.09);
-  --pill-border:      rgba(232,199,119,.32);
-  --pill-ink:         #e8c777;
-  --dot-gold:         #e8c777;
-  --dot-gold-glow:    rgba(232,199,119,.55);
-  --ar-glow:          rgba(232,199,119,.5);
-  --ar-glow-wide:     rgba(232,199,119,.22);
-  --shimmer-color:    rgba(232,199,119,.38);
-  --shimmer-opacity:  .35;
+  /* Overview ribbon */
+  --pill-bg:          rgba(138,106,30,.09);
+  --pill-border:      rgba(138,106,30,.32);
+  --pill-ink:         #8a6a1e;
+  --dot-gold:         #b89345;
+  --dot-gold-glow:    rgba(184,147,69,.45);
+  --ar-glow:          rgba(138,106,30,.35);
+  --ar-glow-wide:     rgba(138,106,30,.15);
+  --shimmer-color:    rgba(138,106,30,.35);
+  --shimmer-opacity:  .55;
 
   /* Generation colors */
-  --gen-prophet:    #ff5f70;
-  --gen-sahabi:     #62f59a;
-  --gen-tabii:      #ad68ff;
-  --gen-taba-tabii: #34c9ff;
-  --gen-later:      #ffd45e;
-  --gen-compiler:   #ff9648;
-  --gen-book:       #34f6c1;
+  --gen-prophet:    #b34858;
+  --gen-sahabi:     #267f66;
+  --gen-tabii:      #8055b4;
+  --gen-taba-tabii: #147c9c;
+  --gen-later:      #956721;
+  --gen-compiler:   #a25422;
+  --gen-book:       #008577;
 
   /* Layout */
   --sidebar-w: 280px;
@@ -82,39 +82,15 @@
   --font-mono:   'IBM Plex Mono', ui-monospace, monospace;
 
   /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(0,0,0,.25);
-  --shadow-md: 0 10px 40px rgba(0,0,0,.35);
-  --shadow-lg: 0 24px 70px rgba(0,0,0,.55);
+  --shadow-sm: 0 3px 12px #234f3910;
+  --shadow-md: 0 16px 42px #234f391b;
+  --shadow-lg: 0 28px 72px #234f3930;
 
   /* Motion */
   --t-fast: 140ms;
   --t-base: 220ms;
   --t-slow: 400ms;
   --ease:   cubic-bezier(.22,.8,.25,1);
-}
-
-body[data-theme="dark"] {
-  --pill-bg:          rgba(232,199,119,.09);
-  --pill-border:      rgba(232,199,119,.32);
-  --pill-ink:         #e8c777;
-  --dot-gold:         #e8c777;
-  --dot-gold-glow:    rgba(232,199,119,.55);
-  --ar-glow:          rgba(232,199,119,.5);
-  --ar-glow-wide:     rgba(232,199,119,.22);
-  --shimmer-color:    rgba(232,199,119,.38);
-  --shimmer-opacity:  .35;
-}
-
-body[data-theme="light"] {
-  --pill-bg:          rgba(138,106,30,.09);
-  --pill-border:      rgba(138,106,30,.32);
-  --pill-ink:         #8a6a1e;
-  --dot-gold:         #b89345;
-  --dot-gold-glow:    rgba(184,147,69,.45);
-  --ar-glow:          rgba(138,106,30,.35);
-  --ar-glow-wide:     rgba(138,106,30,.15);
-  --shimmer-color:    rgba(138,106,30,.35);
-  --shimmer-opacity:  .55;
 }
 
 

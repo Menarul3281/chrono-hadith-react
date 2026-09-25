@@ -1,8 +1,7 @@
 /* ==================== TIMELINE VIEW ====================
    One self-contained card: header controls, the era ribbon, the lane canvas and
    the legend footer, followed by the detail card for the selected record.
-   Every colour is a scoped --tl-* token, so the card ships on the app's dark
-   palette and swaps to the light skin at the bottom of this file. */
+   Every colour is a scoped --tl-* token in the app's light palette. */
 
 .timeline-page {
   animation: fadeUp 0.5s var(--ease) both;
@@ -12,44 +11,43 @@
 }
 
 .tlc {
-  /* --- app palette (default) --- */
-  --tl-bg:          var(--panel);
-  --tl-bg-soft:     var(--bg-2);
-  --tl-bg-raised:   var(--panel-2);
-  --tl-fg:          var(--text);
-  --tl-fg-2:        var(--text-2);
-  --tl-fg-3:        var(--muted);
-  --tl-line:        var(--line);
-  --tl-line-2:      var(--line-2);
-  --tl-line-hover:  var(--line-3);
-  --tl-grid:        rgba(52, 246, 193, 0.08);
-  --tl-grid-strong: rgba(52, 246, 193, 0.18);
+  --tl-bg:          #ffffff;
+  --tl-bg-soft:     #f7f9fb;
+  --tl-bg-raised:   #ffffff;
+  --tl-fg:          #16191d;
+  --tl-fg-2:        #5a646e;
+  --tl-fg-3:        #8d969e;
+  --tl-line:        #e4e8ec;
+  --tl-line-2:      #d3d9e0;
+  --tl-line-hover:  #c9d1d9;
+  --tl-grid:        rgba(20, 40, 60, 0.06);
+  --tl-grid-strong: rgba(20, 40, 60, 0.18);
 
   /* lane colours — one per category row */
-  --tl-figures:     var(--teal-soft);
-  --tl-companions:  var(--teal);
-  --tl-tabiun:      var(--blue);
-  --tl-scholars:    var(--purple);
-  --tl-books:       var(--gold);
-  --tl-events:      var(--red);
-  --tl-places:      var(--cyan);
-  --tl-dynasties:   var(--orange);
+  --tl-figures:     #2f9e44;
+  --tl-companions:  #0c8599;
+  --tl-tabiun:      #1c7ed6;
+  --tl-scholars:    #7048e8;
+  --tl-books:       #b8860b;
+  --tl-events:      #e5484d;
+  --tl-places:      #1971c2;
+  --tl-dynasties:   #e8590c;
 
   /* historical period accents (the period bar) */
-  --tl-era-1:       #a49ac4;
-  --tl-era-2:       var(--teal-soft);
-  --tl-era-3:       var(--teal);
-  --tl-era-4:       var(--gold);
-  --tl-era-5:       var(--purple);
-  --tl-era-6:       #b9b2d8;
+  --tl-era-1:       #8d969e;
+  --tl-era-2:       #2f9e44;
+  --tl-era-3:       #0c8599;
+  --tl-era-4:       #b8860b;
+  --tl-era-5:       #1971c2;
+  --tl-era-6:       #7048e8;
 
-  --tl-accent:      var(--teal);
-  --tl-switch-off:  rgba(255, 255, 255, 0.18);
-  --tl-sel:         #ffffff;
-  --tl-tip-bg:      rgba(4, 15, 22, 0.97);
-  --tl-tip-fg:      var(--text);
-  --tl-tip-line:    var(--line-2);
-  --tl-tip-mute:    var(--muted);
+  --tl-accent:      #0ca678;
+  --tl-switch-off:  #d7dde3;
+  --tl-sel:         #16191d;
+  --tl-tip-bg:      #14191f;
+  --tl-tip-fg:      #eef2f5;
+  --tl-tip-line:    rgba(255, 255, 255, 0.10);
+  --tl-tip-mute:    rgba(238, 242, 245, 0.62);
 
   /* geometry shared with the renderer (kept in px so JS can read them) */
   --tl-labels-w:    224px;
@@ -61,7 +59,7 @@
   background: var(--tl-bg);
   border: 1px solid var(--tl-line-2);
   border-radius: var(--r-lg);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.18);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -1077,46 +1075,8 @@
   color: var(--tl-tip-mute);
 }
 
-/* ==================== LIGHT SKIN ==================== */
-/* Add data-tl-theme="light" to the root div.tlc for the paper palette. */
-
-.tlc[data-tl-theme='light'] {
-  --tl-bg:          #ffffff;
-  --tl-bg-soft:     #f7f9fb;
-  --tl-bg-raised:   #ffffff;
-  --tl-fg:          #16191d;
-  --tl-fg-2:        #5a646e;
-  --tl-fg-3:        #8d969e;
-  --tl-line:        #e4e8ec;
-  --tl-line-2:      #d3d9e0;
-  --tl-line-hover:  #c9d1d9;
-  --tl-grid:        rgba(20, 40, 60, 0.06);
-  --tl-grid-strong: rgba(20, 40, 60, 0.18);
-  --tl-figures:     #2f9e44;
-  --tl-companions:  #0c8599;
-  --tl-tabiun:      #1c7ed6;
-  --tl-scholars:    #7048e8;
-  --tl-books:       #b8860b;
-  --tl-events:      #e5484d;
-  --tl-places:      #1971c2;
-  --tl-dynasties:   #e8590c;
-  --tl-era-1:       #8d969e;
-  --tl-era-2:       #2f9e44;
-  --tl-era-3:       #0c8599;
-  --tl-era-4:       #b8860b;
-  --tl-era-5:       #1971c2;
-  --tl-era-6:       #7048e8;
-  --tl-accent:      #0ca678;
-  --tl-switch-off:  #d7dde3;
-  --tl-sel:         #16191d;
-  --tl-tip-bg:      #14191f;
-  --tl-tip-fg:      #eef2f5;
-  --tl-tip-line:    rgba(255, 255, 255, 0.10);
-  --tl-tip-mute:    rgba(238, 242, 245, 0.62);
-  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.18);
-}
-.tlc[data-tl-theme='light'] .tlc-menu { box-shadow: 0 18px 44px rgba(10, 20, 30, 0.18); }
-.tlc[data-tl-theme='light'] .tlc-detail { box-shadow: 0 18px 44px rgba(10, 20, 30, 0.14); }
+.tlc-menu { box-shadow: 0 18px 44px rgba(10, 20, 30, 0.18); }
+.tlc-detail { box-shadow: 0 18px 44px rgba(10, 20, 30, 0.14); }
 
 /* ==================== RESPONSIVE ==================== */
 
