@@ -323,6 +323,33 @@ body {
   --ch-ring: none;
   color-scheme: light;
 }
+:root[data-theme="dark"] {
+  --bg: #061512; --bg-2: #081e19;
+  --panel: #0d2420; --panel-2: #12302a; --panel-3: #193e33;
+  --text: #e7faf1; --text-2: #bbd8cc;
+  --muted: #95b9ab; --muted-2: #799e8f;
+  --line: #24483a; --line-2: #39745c; --line-3: #539e7d;
+  --teal: #75e7c7; --teal-soft: #a1eccd; --cyan: #79c9e6;
+  --blue: #8eb6fa; --purple: #c3a0ee; --gold: #e8cd88;
+  --orange: #eaaa7f; --red: #ee99a6;
+  --gen-prophet: #ee99a6; --gen-sahabi: #a1eccd; --gen-tabii: #c3a0ee;
+  --gen-taba-tabii: #79c9e6; --gen-later: #e8cd88; --gen-compiler: #eaaa7f; --gen-book: #75e7c7;
+  --pill-bg: rgba(232,199,119,.09);
+  --pill-border: rgba(232,199,119,.32);
+  --pill-ink: #e8c777;
+  --dot-gold: #e8c777;
+  --dot-gold-glow: rgba(232,199,119,.55);
+  --ar-glow: rgba(232,199,119,.5);
+  --ar-glow-wide: rgba(232,199,119,.22);
+  --shimmer-color: rgba(232,199,119,.38);
+  --shimmer-opacity: .35;
+  --ch-mint: #a1eccd;
+  --map-water: #081d19; --map-land: #284c3d;
+  --shadow-sm: 0 3px 12px #0003;
+  --shadow-md: 0 16px 42px #0005;
+  --shadow-lg: 0 28px 72px #0007;
+  color-scheme: dark;
+}
 /* One quiet atmospheric background, behind all pages. */
 body { background: var(--bg); color: var(--text); font-family: var(--font-sans); isolation: isolate; }
 body::before, body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: -1; }
@@ -697,5 +724,4 @@ body.rail-expanded .rail-nav, body.rail-expanded .rail-tools { justify-items: st
     max-width: 190px; opacity: 1; line-height: 1.2; transform: translateX(0);
   }
 }
-
 

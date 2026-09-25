@@ -1,7 +1,7 @@
 /* Shared presentation controls. Storage is optional: blocked storage must not prevent boot. */
 const SiteChrome = (() => {
   const KEY = 'chrono.display.v1';
-  const defaults = { atmosphere: true, motion: true };
+  const defaults = { theme: 'light', atmosphere: true, motion: true };
   let preferences = { ...defaults };
   let initialized = false;
   let returnFocus = null;
@@ -10,6 +10,7 @@ const SiteChrome = (() => {
     try {
       const value = JSON.parse(localStorage.getItem(KEY));
       return {
+        theme: value?.theme === 'dark' || value?.theme === 'circuit' ? 'dark' : 'light',
         atmosphere: typeof value?.atmosphere === 'boolean' ? value.atmosphere : true,
         motion: typeof value?.motion === 'boolean' ? value.motion : true,
       };
@@ -18,10 +19,26 @@ const SiteChrome = (() => {
 
   function applyPreferences(save = false, onlyControl = null) {
     const root = document.documentElement;
+    root.dataset.theme = preferences.theme;
+    document.body.dataset.theme = preferences.theme;
+    root.style.colorScheme = preferences.theme;
     if (preferences.atmosphere) document.body.classList.remove('no-fx');
     else document.body.classList.add('no-fx');
     root.dataset.atmosphere = preferences.atmosphere ? 'on' : 'off';
     root.dataset.motion = preferences.motion ? 'on' : 'off';
+    if (!onlyControl || onlyControl === 'theme') {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      const dark = preferences.theme === 'dark';
+      if (toggle) {
+        toggle.setAttribute('aria-pressed', String(dark));
+        toggle.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} theme`);
+        toggle.dataset.tooltip = `Switch to ${dark ? 'light' : 'dark'} theme`;
+        const label = toggle.querySelector('[data-theme-label]');
+        if (label) label.textContent = `${dark ? 'Dark' : 'Light'} theme`;
+        const icon = toggle.querySelector('[data-theme-icon]');
+        if (icon) icon.textContent = dark ? '☾' : '☼';
+      }
+    }
     if (!onlyControl || onlyControl === 'atmosphere') {
       document.querySelectorAll('[data-grain-toggle]').forEach((input) => {
         if ('checked' in input && input.checked !== preferences.atmosphere) {
@@ -39,6 +56,7 @@ const SiteChrome = (() => {
   }
 
   function setPreference(key, value) {
+    if (key === 'theme' && !['light', 'dark'].includes(value)) return;
     if (['motion', 'atmosphere'].includes(key) && typeof value !== 'boolean') return;
     if (!(key in defaults)) return;
     if (preferences[key] === value) return;
@@ -98,6 +116,8 @@ const SiteChrome = (() => {
       });
     });
     document.querySelector('[data-display-close]')?.addEventListener('click', closeDisplay);
+    document.querySelector('[data-theme-toggle]')?.addEventListener('click', () =>
+      setPreference('theme', preferences.theme === 'light' ? 'dark' : 'light'));
     for (const key of ['atmosphere', 'motion']) {
       document.querySelector(`[data-${key}]`)?.addEventListener('change', (event) => setPreference(key, event.target.checked));
     }
