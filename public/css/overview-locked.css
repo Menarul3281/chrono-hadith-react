@@ -263,19 +263,20 @@ body.no-fx .fx-grain, body.no-fx .ov8-sweep { display: none; }
 .ov8 { position: relative; }
 body.no-fx .ov8-particles { display: none; }
 
-/* 12. Light presentation — grain + atmosphere stay visible here too.
+/* 12. Theme presentation — grain + atmosphere stay visible in both themes.
    The page always has its halo (body::before/::after live in site-locked.css);
    only the independent FX control can hide it. */
 body.no-fx::before, body.no-fx::after { display: none; }
-body { background: linear-gradient(150deg,#f2faf6,#e8f4ee 40%,#eef7f2); color: #0d1a16; animation: none; }
-.fx-grain { opacity: .09; mix-blend-mode: multiply; }
-.atlas-band, .sidebar.rail, .topbar, .ov8-readout,
-.ov8-explore-card, .ov8-scholar {
+body[data-theme="light"] { background: linear-gradient(150deg,#f2faf6,#e8f4ee 40%,#eef7f2); color: #0d1a16; animation: none; }
+body[data-theme="light"] .fx-grain { opacity: .09; mix-blend-mode: multiply; }
+body[data-theme="light"] .atlas-band, body[data-theme="light"] .sidebar.rail,
+body[data-theme="light"] .topbar, body[data-theme="light"] .ov8-readout,
+body[data-theme="light"] .ov8-explore-card, body[data-theme="light"] .ov8-scholar {
   background: rgba(255,255,255,.82); border-color: rgba(13,60,50,.16); color: #0d1a16;
 }
-.ov8-lead, .ov8-explore-card-desc,
-.ov8-readout-desc, .topbar-sub { color: #4c6660; }
-.ov8-title, .ov8-explore-card-title { color: #0d1a16; }
+body[data-theme="light"] .ov8-lead, body[data-theme="light"] .ov8-explore-card-desc,
+body[data-theme="light"] .ov8-readout-desc, body[data-theme="light"] .topbar-sub { color: #4c6660; }
+body[data-theme="light"] .ov8-title, body[data-theme="light"] .ov8-explore-card-title { color: #0d1a16; }
 
 /* 13. focus polish */
 a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
