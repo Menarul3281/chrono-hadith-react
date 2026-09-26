@@ -18,6 +18,7 @@
 - Reduced-motion support and removal of perpetual selected-card border animations.
 - Click feedback uses the animation API instead of forcing synchronous layout.
 - Mobile navigation closes after choosing a page, and search displays the correct platform shortcut.
+- A dark theme sits beside the light palette. The choice is one attribute on the document, written before the first paint so no route flashes the wrong field, and it is remembered per browser. Until the reader chooses, the operating system decides; the rail switch then states the action, not just the state.
 
 ## Verification
 

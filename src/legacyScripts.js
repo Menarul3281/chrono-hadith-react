@@ -7,7 +7,6 @@ export const legacyScripts = [
   "icons.js",
   "loader.js",
   "clipboard.js",
-  "hadith-of-day.js",
   "picker.js",
   "isnad-view.js",
   "network.js",
@@ -29,5 +28,7 @@ export const legacyScripts = [
   "tooltips.js",
   "topsearch.js",
   "site-chrome.js",
+  "theme.js",
+  "hadith-of-day.js",
   "app.js"
 ].map((file) => `${publicBase}js/${file}`);

@@ -97,19 +97,6 @@ const OverviewView = (() => {
       </section>`;
   }
 
-  function hodHtml() {
-    return `
-      <section aria-label="Hadith of the Day" class="ov8-hod" id="hadithOfDay">
-        <div class="hod-eyebrow"><span class="hod-star" data-icon="hod"></span><span>Hadith of the Day</span></div>
-        <div class="hod-arabic" dir="rtl" id="hodArabic" lang="ar">—</div>
-        <div class="hod-translation" id="hodTranslation">—</div>
-        <div class="hod-meta">
-          <span class="hod-badge" id="hodGrade">—</span>
-          <span class="hod-ref" id="hodRef">—</span>
-        </div>
-        <a class="hod-link" href="#isnad" id="hodLink"><span>See isnad</span><span class="hod-arrow" data-icon="external"></span></a>
-      </section>`;
-  }
   function shellHtml() {
     return `
       <div class="ov8">
@@ -129,7 +116,6 @@ const OverviewView = (() => {
         </section>
         ${exploreHtml()}
         ${scholarHtml()}
-        ${hodHtml()}
         <footer class="ov8-footer">
           <span class="ov8-footer-tag">Knowledge Connects Generations</span>
           <span class="ov8-footer-ar" dir="rtl" lang="ar">السيرة النبوية</span>
@@ -175,7 +161,6 @@ const OverviewView = (() => {
       en.textContent = `“${ep.quote.english}”`;
       rf.textContent = `— ${ep.quote.ref || ep.event.name} ↗`;
     }
-    if (typeof HadithOfDay !== 'undefined' && HadithOfDay.init) HadithOfDay.init(DataLoader.listHadiths());
   }
 
   function searchScope() {

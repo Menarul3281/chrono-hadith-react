@@ -1,0 +1,315 @@
+/* =====================================================================
+   CHRONO—HADITH · DARK PALETTE                    (css/theme-dark.css)
+   =====================================================================
+   The atlas ships light. This file is the dark half of the palette and it
+   loads last, so every rule below answers one question: what does this
+   surface become when the reader asks for dark?
+
+   The reader's answer lives on <html data-theme="light|dark">. It is written
+   before the first paint by the inline script in index.html, and afterwards
+   by js/theme.js — which owns it exclusively. Only the dark value is
+   described here; the light values stay where they have always lived, in the
+   :root published by css/site-locked.css (with css/tokens.css behind it).
+
+   Sections follow the load order of the files they answer:
+     1. PALETTE   the semantic tokens every route reads
+     2. RIBBON    the gold micro-tokens of the unified ribbon
+     3. CHROME    the page field, the glass shell and the film grain
+     4. GRAPH     the Overview's reference graph
+     5. TIMELINE  the --tl-* lane palette
+     6. PLATFORM  colour-scheme, selection, tooltips, React Flow chrome
+   ===================================================================== */
+
+/* =====================================================================
+   1 · PALETTE
+   The dark twin of the :root css/site-locked.css publishes: same names, same
+   roles, the values the atlas used when it shipped two themes, so no view has
+   to learn a second vocabulary. Fonts, spacing, radii and type are untouched.
+   ===================================================================== */
+:root[data-theme="dark"] {
+  --bg:        #061512;
+  --bg-2:      #081e19;
+  --panel:     #0d2420;
+  --panel-2:   #12302a;
+  --panel-3:   #193e33;
+
+  --text:      #e7faf1;
+  --text-2:    #bbd8cc;
+  --muted:     #95b9ab;
+  --muted-2:   #799e8f;
+
+  --line:      #24483a;
+  --line-2:    #39745c;
+  --line-3:    #539e7d;
+
+  --teal:      #75e7c7;
+  --teal-soft: #a1eccd;
+  --cyan:      #79c9e6;
+  --blue:      #8eb6fa;
+  --purple:    #c3a0ee;
+  --gold:      #e8cd88;
+  --orange:    #eaaa7f;
+  --red:       #ee99a6;
+
+  /* Generation colours keep their one-to-one meaning with the light set. */
+  --gen-prophet:    #ee99a6;
+  --gen-sahabi:     #a1eccd;
+  --gen-tabii:      #c3a0ee;
+  --gen-taba-tabii: #79c9e6;
+  --gen-later:      #e8cd88;
+  --gen-compiler:   #eaaa7f;
+  --gen-book:       #75e7c7;
+
+  /* The tokens css/site-locked.css mixes out of the palette. */
+  --ch-mint:  #9ff5d8;
+  --ch-panel: color-mix(in srgb, var(--panel) 82%, transparent);
+  --ch-plate: color-mix(in srgb, var(--teal) 22%, transparent);
+  --glass:    color-mix(in srgb, var(--panel) 83%, transparent);
+
+  --map-water: #081d19;
+  --map-land:  #284c3d;
+
+  --shadow-sm: 0 3px 12px #0003;
+  --shadow-md: 0 16px 42px #0005;
+  --shadow-lg: 0 28px 72px #0007;
+
+  /* Native chrome: scrollbars, form controls, the search field's caret. */
+  color-scheme: dark;
+}
+
+/* =====================================================================
+   2 · RIBBON
+   The unified ribbon's gold utility tokens, plus the one blend mode that has
+   to change with the field it is painted on.
+   ===================================================================== */
+:root[data-theme="dark"] {
+  --pill-bg:          rgba(232,199,119,.09);
+  --pill-border:      rgba(232,199,119,.32);
+  --pill-ink:         #e8c777;
+  --dot-gold:         #e8c777;
+  --dot-gold-glow:    rgba(232,199,119,.55);
+  --ar-glow:          rgba(232,199,119,.5);
+  --ar-glow-wide:     rgba(232,199,119,.22);
+  --shimmer-color:    rgba(232,199,119,.38);
+  --shimmer-opacity:  .35;
+}
+/* The verse's sheen multiplies over the light page; on the dark field it has
+   to lighten instead, or the highlight disappears into the panel. */
+:root[data-theme="dark"] .overview-ribbon-verse::after { mix-blend-mode: screen; }
+
+/* =====================================================================
+   3 · CHROME
+   By day --bg carries the page alone. At night the atlas keeps the drifting
+   field its band was drawn against, and the three surfaces css/overview-locked.css
+   still paints by hand — the shell cards, their secondary ink and the grain —
+   follow the palette.
+   ===================================================================== */
+:root[data-theme="dark"] body {
+  background: linear-gradient(150deg, #071210, #040a09 35%, #06100d 65%, #081410);
+  background-size: 220% 220%;
+}
+/* Grain reads as dust on a dark field, so it lightens instead of multiplying. */
+:root[data-theme="dark"] .fx-grain { opacity: .07; mix-blend-mode: screen; }
+
+:root[data-theme="dark"] .atlas-band,
+:root[data-theme="dark"] .sidebar.rail,
+:root[data-theme="dark"] .topbar,
+:root[data-theme="dark"] .ov8-readout,
+:root[data-theme="dark"] .ov8-explore-card,
+:root[data-theme="dark"] .ov8-scholar {
+  background: color-mix(in srgb, var(--panel) 88%, transparent);
+  border-color: var(--line);
+  color: var(--text);
+}
+:root[data-theme="dark"] .ov8-lead,
+:root[data-theme="dark"] .ov8-explore-card-desc,
+:root[data-theme="dark"] .ov8-readout-desc,
+:root[data-theme="dark"] .topbar-sub { color: var(--muted); }
+:root[data-theme="dark"] .ov8-title,
+:root[data-theme="dark"] .ov8-explore-card-title { color: var(--text); }
+
+/* =====================================================================
+   4 · GRAPH
+   css/overview-graph.css closes on a light palette: the mount's own ink, the
+   variant tokens, the summary card, the stage chrome and the sheen over the
+   page. The dark half restores the treatment those values replaced, palette
+   only — every radius, shadow, transform and hover in that file still owns
+   the geometry.
+   ===================================================================== */
+:root[data-theme="dark"] .ov-graph-mount.variation {
+  --bg: #061118;
+  --surface: #10232b;
+  --foreground: #f4fbfd;
+  --muted: #9eb5c0;
+  --accent: #7bf2d8;
+  --line: #57bdc1;
+  --chip: #0e1e27;
+  --prophets: #6ce5bf;
+  --companions: #68bcfa;
+  --narrators: #ba9cff;
+  --sources: #f4c77f;
+  --places: #c49cff;
+  --dynasties: #ff9eaf;
+  --themes: #edac74;
+  --events: #fa8ca0;
+  color: #f4fbfd;
+}
+/* The grain layer sits denser against the dark field. */
+:root[data-theme="dark"] .ov-graph-mount .hero-shell::after { opacity: .22; }
+
+:root[data-theme="dark"] .ov-graph-mount .stage-toolbar,
+:root[data-theme="dark"] .ov-graph-mount .stage-footer,
+:root[data-theme="dark"] .ov-graph-mount .coordinate,
+:root[data-theme="dark"] .ov-graph-mount .micro-btn { color: #acc5c4 !important; }
+:root[data-theme="dark"] .ov-graph-mount .live-dot {
+  background: #7bf2d8 !important;
+  box-shadow: 0 0 9px #7bf2d8 !important;
+}
+
+:root[data-theme="dark"] .ov-graph-mount .board {
+  background: radial-gradient(ellipse at 51% 41%, #27786a27, transparent 62%),
+    linear-gradient(145deg, #173a3b, #102930 73%) !important;
+  border-color: #5caf9f !important;
+  box-shadow: 0 0 60px #5bdeae18, inset 0 1px 8px #ffffff0b !important;
+}
+:root[data-theme="dark"] .ov-graph-mount .board-under {
+  background: #153e39 !important;
+  box-shadow: 0 10px 0 #123e38, 0 25px 0 #0b2223, 0 41px 40px #0007 !important;
+}
+:root[data-theme="dark"] .ov-graph-mount .board-grid {
+  background-image: linear-gradient(#9aeadd12 1px, transparent 1px),
+    linear-gradient(90deg, #9aeadd12 1px, transparent 1px) !important;
+}
+:root[data-theme="dark"] .ov-graph-mount .board-orbit {
+  border-color: #7dbcb35a !important;
+  box-shadow: 0 0 20px #73dbc814 !important;
+}
+:root[data-theme="dark"] .ov-graph-mount .board-cross { opacity: .42 !important; }
+:root[data-theme="dark"] .ov-graph-mount .board-engrave { color: #b6f4e2 !important; }
+:root[data-theme="dark"] .ov-graph-mount .wire { stroke: #76b5b5a0 !important; }
+
+:root[data-theme="dark"] .ov-graph-mount .ch-spatial-rig .node.is-active {
+  box-shadow: 0 8px 0 #07181b, 0 11px 0 var(--tone), 0 21px 28px #0008,
+    0 0 25px color-mix(in srgb, var(--tone) 42%, transparent) !important;
+}
+:root[data-theme="dark"] .ov-graph-mount .node {
+  color: #f5fffe !important;
+  background: linear-gradient(145deg, #192b32, #14242b) !important;
+  border-color: color-mix(in srgb, var(--tone) 62%, #1c3c3f) !important;
+  box-shadow: 0 5px 0 #07181b, 0 7px 0 var(--tone), 0 18px 21px #0007,
+    inset 0 1px 0 #ffffff16 !important;
+}
+:root[data-theme="dark"] .ov-graph-mount .node:hover,
+:root[data-theme="dark"] .ov-graph-mount .node:focus-visible {
+  box-shadow: 0 11px 0 #07181b, 0 13px 0 var(--tone), 0 23px 27px #0009,
+    0 0 26px color-mix(in srgb, var(--tone) 24%, transparent) !important;
+}
+:root[data-theme="dark"] .ov-graph-mount .node-copy strong { color: #f4fbfd !important; }
+:root[data-theme="dark"] .ov-graph-mount .node-copy small,
+:root[data-theme="dark"] .ov-graph-mount .root small { color: #9db8b8 !important; }
+:root[data-theme="dark"] .ov-graph-mount .node-icon {
+  background: color-mix(in srgb, var(--tone) 14%, transparent) !important;
+  border-color: color-mix(in srgb, var(--tone) 50%, transparent) !important;
+}
+:root[data-theme="dark"] .ov-graph-mount .root {
+  color: #f4fffb !important;
+  background: radial-gradient(ellipse at 50% 17%, #2a75623b, transparent 65%),
+    linear-gradient(145deg, #173f3a, #0c2528) !important;
+  border-color: #77d6bc !important;
+  box-shadow: 0 8px 0 #081b20, 0 11px 0 #4d9888, 0 23px 24px #0008 !important;
+}
+:root[data-theme="dark"] .ov-graph-mount .root strong { color: #f4fffb !important; }
+
+:root[data-theme="dark"] .ov-graph-mount .selection-summary {
+  background: rgba(9, 30, 35, .46) !important;
+  backdrop-filter: blur(9px);
+}
+:root[data-theme="dark"] .ov-graph-mount .summary-copy small { color: #a9f6db !important; }
+:root[data-theme="dark"] .ov-graph-mount .summary-bar { background: #9cedd4 !important; }
+:root[data-theme="dark"] .ov-graph-mount .summary-copy strong { color: #f0fff9 !important; }
+:root[data-theme="dark"] .ov-graph-mount .summary-copy > span,
+:root[data-theme="dark"] .ov-graph-mount .summary-index { color: #a7c1bd !important; }
+:root[data-theme="dark"] .ov-graph-mount .stage-footer { border-top-color: #8fd8ca2c !important; }
+
+/* =====================================================================
+   5 · TIMELINE
+   css/timeline.css scopes every lane colour to a --tl-* token, so the card
+   only has to be handed the dark set. Its geometry, the px values the
+   renderer reads back and every interaction stay exactly where they are.
+   ===================================================================== */
+:root[data-theme="dark"] .tlc {
+  --tl-bg:          var(--panel);
+  --tl-bg-soft:     var(--bg-2);
+  --tl-bg-raised:   var(--panel-2);
+  --tl-fg:          var(--text);
+  --tl-fg-2:        var(--text-2);
+  --tl-fg-3:        var(--muted);
+  --tl-line:        var(--line);
+  --tl-line-2:      var(--line-2);
+  --tl-line-hover:  var(--line-3);
+  --tl-grid:        rgba(52, 246, 193, 0.08);
+  --tl-grid-strong: rgba(52, 246, 193, 0.18);
+
+  /* lane colours — one per category row */
+  --tl-figures:     var(--teal-soft);
+  --tl-companions:  var(--teal);
+  --tl-tabiun:      var(--blue);
+  --tl-scholars:    var(--purple);
+  --tl-books:       var(--gold);
+  --tl-events:      var(--red);
+  --tl-places:      var(--cyan);
+  --tl-dynasties:   var(--orange);
+
+  /* historical period accents (the period bar) */
+  --tl-era-1:       #a49ac4;
+  --tl-era-2:       var(--teal-soft);
+  --tl-era-3:       var(--teal);
+  --tl-era-4:       var(--gold);
+  --tl-era-5:       var(--purple);
+  --tl-era-6:       #b9b2d8;
+
+  --tl-accent:      var(--teal);
+  --tl-switch-off:  rgba(255, 255, 255, 0.18);
+  --tl-sel:         #ffffff;
+  --tl-tip-bg:      rgba(4, 15, 22, 0.97);
+  --tl-tip-fg:      var(--text);
+  --tl-tip-line:    var(--line-2);
+  --tl-tip-mute:    var(--muted);
+
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* =====================================================================
+   6 · PLATFORM
+   Native chrome, text selection, the shared tooltip, and the React Flow
+   canvas the Graph route mounts — the library reads its chrome out of these
+   variables, so a dark page hands it dark controls.
+   ===================================================================== */
+:root[data-theme="dark"] ::selection { color: #eafff8; background: #176753; }
+:root[data-theme="dark"] .chrono-tooltip {
+  background: #0b1d22;
+  border-color: var(--line-2);
+  color: var(--text);
+}
+
+:root[data-theme="dark"] .react-flow {
+  --xy-background-color-default: var(--bg-2);
+  --xy-background-pattern-dots-color-default: color-mix(in srgb, var(--teal) 22%, transparent);
+  --xy-background-pattern-lines-color-default: color-mix(in srgb, var(--line-2) 60%, transparent);
+  --xy-controls-button-background-color-default: var(--panel-2);
+  --xy-controls-button-background-color-hover-default: var(--panel-3);
+  --xy-controls-button-color-default: var(--text-2);
+  --xy-controls-button-color-hover-default: var(--text);
+  --xy-controls-button-border-color-default: var(--line-2);
+  --xy-controls-box-shadow-default: var(--shadow-sm);
+  --xy-minimap-background-color-default: var(--panel);
+  --xy-minimap-mask-background-color-default: color-mix(in srgb, var(--bg) 62%, transparent);
+  --xy-minimap-node-background-color-default: var(--line-2);
+  --xy-edge-stroke-default: var(--line-3);
+  --xy-edge-stroke-selected-default: var(--teal);
+  --xy-handle-background-color-default: var(--panel-3);
+  --xy-handle-border-color-default: var(--line-2);
+  --xy-attribution-background-color-default: transparent;
+  --xy-selection-background-color-default: color-mix(in srgb, var(--teal) 12%, transparent);
+  --xy-selection-border-default: 1px dotted var(--teal);
+}
