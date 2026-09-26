@@ -363,44 +363,6 @@ body::after {
   background-size: 7px 7px;
   mask-image: linear-gradient(130deg, transparent, #000, transparent);
 }
-
-/* Daylight cloud field — sampled from the reference's white cloud towers,
-   blue-green shadow edges and fresh meadow horizon. It stays abstract so the
-   archive remains the subject, while translucent chrome lets the atmosphere
-   show through without reducing text contrast. */
-:root:not([data-theme="dark"]) body {
-  background:
-    linear-gradient(180deg, #edf9f5 0%, #e7f6f0 46%, #dcefe5 72%, #cce7d5 100%);
-  background-attachment: fixed;
-}
-:root:not([data-theme="dark"]) body::before {
-  opacity: 1;
-  background:
-    radial-gradient(circle 6vw at 0% 18%, rgba(255,255,255,.95) 0 54%, rgba(226,246,239,.64) 73%, transparent 100%),
-    radial-gradient(circle 7vw at 7% 13%, rgba(255,255,255,.98) 0 54%, rgba(226,246,239,.66) 74%, transparent 100%),
-    radial-gradient(circle 9vw at 16% 10%, rgba(255,255,255,.98) 0 55%, rgba(218,242,234,.64) 75%, transparent 100%),
-    radial-gradient(circle 7vw at 25% 16%, rgba(255,255,255,.94) 0 54%, rgba(211,239,229,.58) 74%, transparent 100%),
-    radial-gradient(circle 5vw at 32% 21%, rgba(255,255,255,.90) 0 54%, rgba(202,234,223,.50) 75%, transparent 100%),
-    radial-gradient(ellipse 25vw 7vw at 15% 24%, rgba(248,255,252,.82) 0 55%, rgba(166,213,197,.36) 78%, transparent 100%),
-    radial-gradient(circle 6vw at 63% 19%, rgba(255,255,255,.92) 0 54%, rgba(219,243,235,.60) 74%, transparent 100%),
-    radial-gradient(circle 8vw at 72% 13%, rgba(255,255,255,.97) 0 55%, rgba(218,242,234,.64) 75%, transparent 100%),
-    radial-gradient(circle 10vw at 82% 10%, rgba(255,255,255,.99) 0 54%, rgba(211,239,229,.62) 74%, transparent 100%),
-    radial-gradient(circle 7vw at 91% 17%, rgba(255,255,255,.95) 0 54%, rgba(202,235,223,.56) 74%, transparent 100%),
-    radial-gradient(circle 5vw at 99% 22%, rgba(255,255,255,.91) 0 54%, rgba(193,229,216,.48) 75%, transparent 100%),
-    radial-gradient(ellipse 27vw 7vw at 83% 25%, rgba(248,255,252,.82) 0 55%, rgba(155,208,190,.36) 78%, transparent 100%),
-    linear-gradient(180deg, rgba(207,239,230,.28), transparent 48%);
-  background-repeat: no-repeat;
-  filter: drop-shadow(0 24px 34px rgba(56,126,101,.10));
-}
-:root:not([data-theme="dark"]) body::after {
-  opacity: 1;
-  background:
-    radial-gradient(ellipse 42% 21% at 16% 108%, rgba(73,157,103,.20), transparent 72%),
-    radial-gradient(ellipse 55% 24% at 84% 108%, rgba(51,143,91,.18), transparent 74%),
-    linear-gradient(180deg, transparent 54%, rgba(239,250,244,.16) 68%, rgba(125,191,146,.17) 100%);
-  background-size: auto;
-  mask-image: none;
-}
 :root[data-atmosphere="off"] body::before, :root[data-atmosphere="off"] body::after { display: none; }
 [hidden] { display: none !important; }
 button, a, input, select { -webkit-tap-highlight-color: transparent; }
