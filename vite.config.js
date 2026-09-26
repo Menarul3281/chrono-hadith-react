@@ -2,7 +2,9 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  base: '/chrono-hadith-react/',
+  // Hash routing keeps every view on index.html, so relative assets work from
+  // both a root deployment (Vercel) and the GitHub Pages project subdirectory.
+  base: './',
   plugins: [react()],
   server: {
     host: '127.0.0.1',
