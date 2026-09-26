@@ -619,6 +619,45 @@ body.rail-expanded .rail-nav, body.rail-expanded .rail-tools { justify-items: st
 .rail-switch { flex: 0 0 auto; }
 .rail-switch .nav-label { display: block; }
 .rail-brand { flex: 0 0 auto; }
+
+/* Theme is an action button; FX remains a preference switch. The sun and moon
+   share one stable footprint so changing theme never moves the rail. */
+.theme-toggle-icon {
+  position: relative;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  color: var(--ch-gold);
+  transition: color 220ms var(--ease), filter 220ms var(--ease);
+}
+.theme-icon {
+  position: absolute;
+  inset: 0;
+  width: 20px;
+  height: 20px;
+  transform-origin: 50% 50%;
+  transition: opacity 260ms var(--ease), transform 420ms cubic-bezier(.22, 1, .36, 1);
+}
+.theme-icon-sun { opacity: 1; transform: rotate(0deg) scale(1); }
+.theme-icon-moon { opacity: 0; transform: rotate(-38deg) scale(.55); }
+.theme-toggle[data-theme-state="dark"] .theme-toggle-icon {
+  color: var(--teal-soft);
+  filter: drop-shadow(0 0 7px color-mix(in srgb, var(--teal) 55%, transparent));
+}
+.theme-toggle[data-theme-state="dark"] .theme-icon-sun {
+  opacity: 0;
+  transform: rotate(72deg) scale(.45);
+}
+.theme-toggle[data-theme-state="dark"] .theme-icon-moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+.theme-toggle:hover .theme-toggle-icon { filter: drop-shadow(0 0 7px currentColor); }
+.theme-toggle:focus-visible { outline: 2px solid var(--ch-teal); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-icon, .theme-toggle-icon { transition: none; }
+}
 /* Preserve the standalone graph's browser-default type metrics inside the app. */
 .ov-graph-mount { font-size: 16px; line-height: normal; }
 .band-id .topbar-title { flex-wrap: nowrap; }

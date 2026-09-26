@@ -48,8 +48,17 @@ export const shellMarkup = `
         <button aria-label="Filters" class="nav-item rail-btn" data-action="filters" data-tooltip="Filters" style="--n:7" type="button">
           <span class="nav-icon" data-icon="filters"></span><span class="nav-label">Filters</span>
         </button>
-        <button aria-label="Switch to dark theme" aria-pressed="false" class="nav-item rail-btn theme-toggle" data-theme-toggle data-tooltip="Switch to dark theme" style="--n:8" type="button">
-          <span aria-hidden="true" class="nav-icon" data-theme-icon>☼</span><span class="nav-label" data-theme-label>Light theme</span>
+        <button aria-label="Switch to dark theme" aria-pressed="false" class="nav-item rail-btn theme-toggle" data-theme-state="light" data-theme-toggle data-tooltip="Switch to dark theme" style="--n:8" type="button">
+          <span class="theme-toggle-icon" aria-hidden="true">
+            <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
+              <circle cx="12" cy="12" r="3.5"/>
+              <path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/>
+            </svg>
+            <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+              <path d="M20.4 15.2A8.6 8.6 0 0 1 8.8 3.6 8.7 8.7 0 1 0 20.4 15.2Z"/>
+            </svg>
+          </span>
+          <span class="nav-label" data-theme-label>Light mode</span>
         </button>
         <label class="rail-switch" data-tooltip="Grain and atmosphere" style="--n:9">
           <input type="checkbox" data-grain-toggle checked />

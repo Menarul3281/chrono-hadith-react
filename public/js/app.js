@@ -282,11 +282,6 @@
     if (!btn) return;
     showToast(`${btn.dataset.action} — coming soon`);
   });
-  document.querySelector('[data-grain-toggle]')?.addEventListener('change', (ev) => {
-    document.body.classList.toggle('no-fx', !ev.target.checked);
-    document.documentElement.dataset.atmosphere = ev.target.checked ? 'on' : 'off';
-    if (typeof SiteChrome !== 'undefined') SiteChrome.setPreference('atmosphere', ev.target.checked);
-  });
   const topbar = document.querySelector('.topbar');
   const sidebarEl = document.getElementById('sidebar');
   const navToggle = topbar?.querySelector('[data-nav-toggle]');

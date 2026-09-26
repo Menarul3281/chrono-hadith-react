@@ -19,37 +19,38 @@ const SiteChrome = (() => {
 
   function applyPreferences(save = false, onlyControl = null) {
     const root = document.documentElement;
-    root.dataset.theme = preferences.theme;
-    document.body.dataset.theme = preferences.theme;
-    root.style.colorScheme = preferences.theme;
-    if (preferences.atmosphere) document.body.classList.remove('no-fx');
-    else document.body.classList.add('no-fx');
-    root.dataset.atmosphere = preferences.atmosphere ? 'on' : 'off';
-    root.dataset.motion = preferences.motion ? 'on' : 'off';
     if (!onlyControl || onlyControl === 'theme') {
+      root.dataset.theme = preferences.theme;
+      document.body.dataset.theme = preferences.theme;
+      root.style.colorScheme = preferences.theme;
       const toggle = document.querySelector('[data-theme-toggle]');
       const dark = preferences.theme === 'dark';
       if (toggle) {
+        toggle.dataset.themeState = preferences.theme;
         toggle.setAttribute('aria-pressed', String(dark));
         toggle.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} theme`);
         toggle.dataset.tooltip = `Switch to ${dark ? 'light' : 'dark'} theme`;
         const label = toggle.querySelector('[data-theme-label]');
-        if (label) label.textContent = `${dark ? 'Dark' : 'Light'} theme`;
-        const icon = toggle.querySelector('[data-theme-icon]');
-        if (icon) icon.textContent = dark ? '☾' : '☼';
+        if (label) label.textContent = `${dark ? 'Dark' : 'Light'} mode`;
       }
     }
     if (!onlyControl || onlyControl === 'atmosphere') {
+      if (preferences.atmosphere) document.body.classList.remove('no-fx');
+      else document.body.classList.add('no-fx');
+      root.dataset.atmosphere = preferences.atmosphere ? 'on' : 'off';
       document.querySelectorAll('[data-grain-toggle]').forEach((input) => {
         if ('checked' in input && input.checked !== preferences.atmosphere) {
           input.checked = preferences.atmosphere;
         }
       });
+      const atmosphere = document.querySelector('[data-atmosphere]');
+      if (atmosphere) atmosphere.checked = preferences.atmosphere;
     }
-    const atmosphere = document.querySelector('[data-atmosphere]');
-    const motion = document.querySelector('[data-motion]');
-    if (atmosphere) atmosphere.checked = preferences.atmosphere;
-    if (motion) motion.checked = preferences.motion;
+    if (!onlyControl || onlyControl === 'motion') {
+      root.dataset.motion = preferences.motion ? 'on' : 'off';
+      const motion = document.querySelector('[data-motion]');
+      if (motion) motion.checked = preferences.motion;
+    }
     if (save) {
       try { localStorage.setItem(KEY, JSON.stringify(preferences)); } catch { /* Session-only preferences. */ }
     }
@@ -121,6 +122,11 @@ const SiteChrome = (() => {
     for (const key of ['atmosphere', 'motion']) {
       document.querySelector(`[data-${key}]`)?.addEventListener('change', (event) => setPreference(key, event.target.checked));
     }
+    document.addEventListener('change', (event) => {
+      const control = event.target.closest?.('[data-grain-toggle]');
+      if (!control) return;
+      setPreference('atmosphere', control.checked);
+    });
     const expand = document.querySelector('[data-rail-expand]');
     expand?.addEventListener('click', () => {
       setRailExpanded(!document.body.classList.contains('rail-expanded'));
