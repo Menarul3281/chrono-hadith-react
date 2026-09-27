@@ -13,3 +13,7 @@ _verify.html
 _check.mjs
 _cdp-out/
 shot-*.png
+# Headless browser profiles used for visual QA. These contain cookies,
+# history and login databases, so they must never enter the repository.
+.edge-audit/
+.kilo/

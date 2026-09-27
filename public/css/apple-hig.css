@@ -1,0 +1,352 @@
+/* ========================================================================
+   APPLE-HIG QUALITY FLOOR
+
+   Chrono-Hadith is a web atlas, not an iOS imitation. This final layer
+   translates Apple's principles into browser-native behavior: semantic
+   colors, readable type, generous hit regions, familiar scrolling, clear
+   focus, adaptive layout, restrained material, and accessibility settings.
+   The archive board remains the signature; functional chrome stays quiet.
+   ======================================================================== */
+
+:root {
+  --f-body: 15px;
+  --f-small: 13px;
+  --f-tiny: 11px;
+  --control-h: 36px;
+  --touch-h: 44px;
+  --focus-ring: #006f64;
+
+  /* #007a6e is 5.16:1 on --panel and 4.84:1 on --bg. The former accent
+     (#008577) fell to 4.20:1 on the page field when used as small text. */
+  --teal: #007a6e;
+  --ch-teal: var(--teal);
+}
+
+:root[data-theme="dark"] {
+  --focus-ring: #8ef0d3;
+}
+
+html {
+  /* Keep the browser's familiar, interactive scrollbar. */
+  scrollbar-width: auto;
+  scroll-padding-top: 24px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: auto;
+  height: auto;
+}
+
+body {
+  font-size: var(--f-body);
+  line-height: 1.55;
+}
+
+:where(a, button, input, select, textarea, summary, [role="button"], [tabindex]):focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+:where(button, [role="button"], a) {
+  touch-action: manipulation;
+}
+
+/* Functional material belongs to floating navigation and transient controls.
+   Content panels stay opaque so hierarchy and text remain stable. */
+:is(.dsh-side, .dsh-panel, .gph-panel, .gph-rail, .tlc-detail,
+    .hadith-card, .side-card, .figure-card, .narrator-hero,
+    .hd-card, .bk-card, .bk-row, .dy-card, .plc-frame) {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+:is(.dsh-side, .dsh-panel, .gph-panel, .gph-rail, .tlc-detail,
+    .ov8-explore-card, .ov8-scholar) {
+  background-color: var(--panel);
+}
+
+/* Desktop controls are comfortably clickable; pointer affordances remain
+   compact enough for the atlas's dense analytical views. */
+:is(.top-action, .band-btn, .overview-ribbon-meta, .dsh-btn, .dsh-chip,
+    .filter-chip, .route-tabs a, .tlc-btn, .tlc-tab, .ev-tab,
+    .dsh-view-btn, .picker-chip, .tps-chip, .hero-btn, .cite-btn,
+    .gph-zoom button, .plc-zoom button, .dym-zoom button, .ev-map-ctrl button) {
+  min-height: var(--control-h);
+}
+
+:is(.top-action, .dsh-iconbtn, .display-close, .bk-star, .sidebar-close,
+    .dsh-view-btn, .gph-zoom button, .plc-zoom button, .dym-zoom button,
+    .ev-map-ctrl button) {
+  min-width: var(--control-h);
+}
+
+.display-close {
+  width: var(--control-h);
+  height: var(--control-h);
+}
+
+/* Utility copy may be compact, but never microscopic. */
+:is(.brand-sub, .band-tag, .overview-ribbon-label,
+    .overview-ribbon-subcopy, .overview-ribbon-source,
+    .ov8-kicker, .ov8-card-sub, .ov8-hub-root, .ov8-hub-sub,
+    .ov8-stage-head .ov8-kicker, .ov8-tilt, .ov8-tagline, .dsh-kicker,
+    .dsh-group-title, .dsh-footnote, .dsh-range-readout,
+    .tps-row-sub, .tps-row-meta, .tps-foot, .picker-item-meta,
+    .picker-item-ref, .figure-card-meta, .figure-card-generation,
+    .ev-facts, .tiny, .display-note,
+    .ov-graph-mount .stage-toolbar, .ov-graph-mount .stage-footer,
+    .ov-graph-mount .node-copy small, .ov-graph-mount .root-overline,
+    .ov-graph-mount .root small, .ov-graph-mount .mobile-categories-title,
+    .ov-graph-mount .summary-copy small, .ov-graph-mount .summary-index) {
+  font-size: max(11px, .6875rem);
+  line-height: 1.45;
+}
+
+.ov8-tagline {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+:is(.topbar-sub, .dsh-prose, .hadith-translation, .hd-card-en,
+    .narrator-hero-bio, .ev-desc, .bk-row-note) {
+  line-height: 1.6;
+}
+
+/* Accent-filled states use a readable foreground in both appearances. */
+:root:not([data-theme="dark"]) :is(.picker-chip.active, .tps-chip.active) {
+  color: #fff;
+}
+
+:root[data-theme="dark"] :is(.picker-chip.active, .tps-chip.active) {
+  color: #062018;
+}
+
+/* Selected navigation is indicated by shape and weight as well as color. */
+:is(.nav-item.active, .route-tabs a[aria-current="page"],
+    .dsh-tab.active, .filter-chip.active, .dsh-chip.active,
+    .tlc-tab.active, .ev-tab[aria-selected="true"]) {
+  font-weight: 700;
+}
+
+.nav-item.active::before {
+  width: 3px;
+  border-radius: 999px;
+}
+
+/* Search behaves like a familiar browser field, with a large enough entry
+   area and no color-only focus state. */
+.topbar-search {
+  min-height: 40px;
+}
+
+.topbar-search:focus-within {
+  border-color: var(--focus-ring);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus-ring) 18%, transparent);
+}
+
+.topbar-search input {
+  font-size: 14px;
+}
+
+/* The overview schematic is the one intentionally bold moment. Keep the board
+   legible and contained as the viewport narrows. */
+.ov8-stage,
+.ov8-board,
+.ov8-stage-head {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ov8-stage-head {
+  flex-wrap: wrap;
+}
+
+.ov8-card-label,
+.ov8-hub-name {
+  line-height: 1.25;
+}
+
+/* Route shells can contain maps and canvases, but the document itself must not
+   become wider than the viewport. Horizontal navigation stays locally
+   scrollable instead of clipping the whole page. */
+.main,
+.page,
+.dsh,
+.dsh-body,
+.gph,
+.tlc,
+.ov8 {
+  max-width: 100%;
+}
+
+.route-tabs {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+}
+
+.route-tabs a {
+  flex: 0 0 auto;
+}
+
+/* Browser zoom and large text can reflow content rather than hiding it. */
+@media (max-width: 900px) {
+  :root { --control-h: var(--touch-h); }
+
+  .main > .page,
+  .main > .page.page-wide {
+    padding: 22px 16px 48px;
+  }
+
+  :is(.top-action, .band-btn, .dsh-btn, .dsh-chip, .filter-chip,
+      .route-tabs a, .tlc-btn, .tlc-tab, .ev-tab, .dsh-view-btn,
+      .picker-chip, .tps-chip, .hero-btn, .cite-btn, .display-close,
+      .sidebar-close, .nav-item, .rail-btn) {
+    min-height: var(--touch-h);
+  }
+
+  :is(.top-action, .dsh-iconbtn, .display-close, .bk-star, .sidebar-close,
+      .dsh-view-btn) {
+    min-width: var(--touch-h);
+  }
+
+  .overview-ribbon {
+    padding: 14px 14px 14px 60px;
+  }
+
+  .overview-ribbon-meta {
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .overview-ribbon-search-zone,
+  .overview-ribbon-search,
+  .overview-ribbon-field {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .ov8-stage {
+    width: 100%;
+    max-width: 100% !important;
+    margin-inline: 0;
+  }
+
+  .ov8-stage-head {
+    align-items: flex-start;
+  }
+
+  .ov8-board {
+    width: 100%;
+    transform: none;
+  }
+
+  .ov-graph-mount .stage-toolbar {
+    width: 100%;
+    height: auto;
+    min-height: var(--touch-h);
+    padding-inline: 8px;
+  }
+
+  /* Compact layouts already flatten the schematic and replace its peripheral
+     nodes with a readable button grid, so the 3D accessory has no useful job. */
+  .ov-graph-mount #tiltToggle {
+    display: none;
+  }
+
+  .ov-graph-mount .mobile-button-grid .node-copy small {
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  .dsh-side,
+  .dsh-panel {
+    max-height: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .ov8-title {
+    font-size: clamp(38px, 13vw, 54px);
+    line-height: .98;
+  }
+
+  .ov8-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ov8-actions .dsh-btn {
+    width: 100%;
+  }
+
+  .ov8-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ov8-stat {
+    min-width: 0;
+  }
+}
+
+/* Respect accessibility appearance settings even though the web can't query
+   Apple's native Reduce Transparency API directly on every browser. */
+@media (prefers-reduced-transparency: reduce) {
+  :is(.atlas-band, .overview-ribbon, .sidebar.rail, .topbar,
+      .tps-panel, .picker-panel, .display-panel) {
+    background: var(--panel);
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  body::before,
+  body::after,
+  .fx-grain {
+    display: none !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --line: #6f9489;
+    --line-2: #416f62;
+    --muted: #31574f;
+    --muted-2: #31574f;
+  }
+
+  :root[data-theme="dark"] {
+    --line: #6f9e8e;
+    --line-2: #8fc3b1;
+    --muted: #c6e6d9;
+    --muted-2: #c6e6d9;
+  }
+
+  body::after,
+  .fx-grain {
+    display: none;
+  }
+}
+
+@media (forced-colors: active) {
+  * { forced-color-adjust: auto; }
+  body::before,
+  body::after,
+  .fx-grain { display: none !important; }
+  :where(a, button, input, select, textarea, summary, [role="button"], [tabindex]):focus-visible {
+    outline-color: Highlight;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .ov8-hub,
+  .overview-ribbon-dot,
+  .overview-ribbon-arabic,
+  .overview-ribbon-verse::after {
+    animation: none !important;
+  }
+}

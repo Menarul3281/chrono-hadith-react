@@ -335,27 +335,6 @@
     });
   }
 
-  const rail = document.getElementById('scrollRail');
-  const thumb = document.getElementById('scrollRailThumb');
-  let railTimer;
-  function updateRail() {
-    const scrolled = window.scrollY;
-    const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-    const ratio = scrolled / max;
-    const railH = rail.clientHeight;
-    const thumbH = Math.min(railH, Math.max(40, (window.innerHeight / document.documentElement.scrollHeight) * railH));
-    thumb.style.height = thumbH + 'px';
-    thumb.style.transform = `translateY(${ratio * (railH - thumbH)}px)`;
-  }
-  window.addEventListener('scroll', () => {
-    rail.classList.add('active');
-    updateRail();
-    clearTimeout(railTimer);
-    railTimer = setTimeout(() => rail.classList.remove('active'), 1200);
-  }, { passive: true });
-  window.addEventListener('resize', updateRail);
-  updateRail();
-
   window.showToast = showToast;
   function showToast(msg) {
     const t = document.getElementById('toast');

@@ -27,3 +27,31 @@ Run `npm.cmd run build` from this directory. The former regression test files we
 The production build passed after restoring declared dependencies and aligning `@vitejs/plugin-react` with Vite 8. Browser visual and interactive QA could not run because no browser connection was available; desktop and mobile rendering still need visual verification.
 
 The app still uses the existing incremental React/legacy architecture. Settings and the global Filters button remain existing “coming soon” controls; this review does not turn them into new features or change the historical dataset. The interface currently ships with one fixed light palette.
+
+## Apple design pass · 2026-09-26
+
+### Summary
+
+Overall rating after the pass: **Good**. Chrono-Hadith's thesis is now explicit in the interface: help readers see how Islamic knowledge travels through people, places, reports, and time. Its memorable element remains the interactive archive board; the work deliberately avoids turning the site into an imitation of a native Apple app.
+
+This is a React web experience, so Apple's guidance was translated into browser-native CSS, ARIA, responsive breakpoints, system appearance preferences, and familiar scrolling. Platform-specific iOS and macOS conventions were not applied where they would feel foreign on the web.
+
+### Improvements implemented
+
+- **Critical · Legibility and contrast:** raised shared body, small, and utility type floors; changed the light accent from `#008577` to `#007a6e` (5.16:1 on `#f8fffc`, 4.84:1 on `#eef8f7`); and added readable foregrounds for accent-filled states. This follows `accessibility.md › Vision` and `typography.md › Ensuring legibility`.
+- **Critical · Control size:** established 36 px desktop controls and 44 px compact/touch controls for navigation, buttons, tabs, chips, dialog dismissal, and map/graph actions. This follows `accessibility.md › Mobility`.
+- **High · Adaptability:** constrained route shells to the viewport, made route tabs locally scrollable, let text/toolbars reflow, stacked overview actions at compact widths, and removed the functionless compact 3D accessory. This follows `layout.md › Adaptability`.
+- **High · Material hierarchy:** reserved translucency and blur for floating navigation or transient controls and made content panels opaque. This follows `materials.md › Liquid Glass`.
+- **High · Appearance:** applies the saved or system light/dark preference before first paint and adds high-contrast, reduced-transparency, forced-color, and reduced-motion responses. This follows `dark-mode.md › Best practices`, `dark-mode.md › Dark Mode colors`, and `motion.md › Best practices`.
+- **Medium · Familiarity:** restored the browser's native scrollbar and removed the decorative duplicate scroll rail. This follows `design-principles.md › Familiarity` and `design-principles.md › Simplicity`.
+- **Medium · Non-color cues:** strengthened selected navigation with weight and a persistent shape, in addition to accent color. This follows `accessibility.md › Vision`.
+
+### Craft notes
+
+The plan passed the specificity check: the same solution would not fit a generic knowledge dashboard because the graph board, archival typography, Arabic material, mint field, and restrained gold signal all come from this subject. The one accessory removed was the compact-width 3D toggle, where it added decoration without useful control. Branding now defers more consistently to the records, following `branding.md › Best practices`.
+
+### Verification
+
+- Production build passes with Vite 8.
+- Headless Edge visual QA completed at 1440 × 1200 and 390 × 844 for the overview, plus desktop graph, figures, and dynasties routes.
+- Light and dark tokens both meet the shared text contrast floor; the remaining category colors are paired with labels or shapes and aren't the sole carrier of meaning.

@@ -79,7 +79,6 @@ export const shellMarkup = `
   </div>
 
   <div class="fx-grain" aria-hidden="true"></div>
-  <div aria-hidden="true" class="scroll-rail" id="scrollRail"><div class="scroll-rail-thumb" id="scrollRailThumb"></div></div>
   <div aria-live="polite" class="toast" id="toast" role="status"></div>
 `;
 
