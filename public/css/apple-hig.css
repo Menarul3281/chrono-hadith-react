@@ -360,3 +360,17 @@ body {
   -webkit-background-clip: initial;
   filter: drop-shadow(0 0 4px rgba(28,64,49,.35)) drop-shadow(0 0 12px rgba(28,64,49,.15));
 }
+
+/* Primary action buttons: a light mint plate carrying dark ink, in both
+   themes. The shared hover rule mixes teal into --panel, and --panel is
+   near-black in dark mode, so hovering used to swap the plate for a dark one
+   and leave the dark ink unreadable — the button dimmed instead of lighting
+   up. Hover now brightens the same mint plate the resting state uses, and the
+   glow is keyed to the mint so it reads as light rather than as a dark edge. */
+:root[data-theme="dark"] .dsh-btn.primary:hover,
+:root[data-theme="dark"] .dsh-btn.primary:focus-visible {
+  background: color-mix(in srgb, var(--ch-mint) 72%, #ffffff);
+  border-color: #7eceb5;
+  color: #0b3a2d;
+  box-shadow: 0 0 22px color-mix(in srgb, var(--ch-mint) 42%, transparent);
+}
