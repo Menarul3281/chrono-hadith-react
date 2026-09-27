@@ -1290,32 +1290,6 @@ svg {
   color: var(--ch-faint);
 }
 
-/* ---------------- scroll rail + toast ---------------- */
-
-.scroll-rail {
-  position: fixed;
-  right: 7px;
-  top: 12%;
-  bottom: 12%;
-  width: 3px;
-  z-index: 45;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
-  opacity: 0;
-  transition: opacity 180ms ease;
-}
-
-.scroll-rail.active {
-  opacity: 1;
-}
-
-.scroll-rail-thumb {
-  width: 100%;
-  border-radius: 999px;
-  background: linear-gradient(180deg, var(--ch-teal), rgba(52, 246, 193, 0.35));
-  box-shadow: 0 0 14px rgba(52, 246, 193, 0.24);
-}
-
 .toast {
   position: fixed;
   left: 50%;

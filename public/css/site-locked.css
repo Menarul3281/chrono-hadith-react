@@ -173,7 +173,6 @@ body {
   color: var(--text);
   box-shadow: var(--shadow-md);
 }
-.scroll-rail-thumb { background: color-mix(in srgb, var(--teal) 55%, transparent); }
 
 /* The record picker: one plate with mint chips, as on the board. */
 .picker-button {
