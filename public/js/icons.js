@@ -1,8 +1,10 @@
 /* Icon loader.
-   For each element with [data-icon], tries assets/icons/<name>.png.
-   If the file is missing, swaps in a built-in SVG placeholder.
-   To use your Flaticon PNGs: drop them in assets/icons/ with these filenames
-   and they will be picked up automatically. No code changes needed. */
+   For each element with [data-icon], renders the inline SVG above.
+   These are drawn with currentColor, so they follow the active theme and need
+   no separate asset, request or colour variant.
+   To use raster icons instead, render them in renderInto below. Do not probe
+   for optional files with a failing request: the archive must not spend a
+   request per icon on every page load just to discover an asset is absent. */
 
 const Icons = (() => {
   const FALLBACKS = {
@@ -52,15 +54,7 @@ const Icons = (() => {
       el.setAttribute('aria-hidden', 'true');
     }
 
-    const img = new Image();
-    img.onload = () => {
-      el.style.backgroundImage = `url("${img.src}")`;
-      el.innerHTML = '';
-    };
-    img.onerror = () => {
-      el.innerHTML = FALLBACKS[name] || FALLBACKS.overview;
-    };
-    img.src = `./assets/icons/${name}.png`;
+    el.innerHTML = FALLBACKS[name] || FALLBACKS.overview;
   }
 
   function init(root = document) {
