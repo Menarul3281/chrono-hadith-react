@@ -24,9 +24,9 @@
 
 Run `npm.cmd run build` from this directory. The former regression test files were removed during repository cleanup.
 
-The production build passed after restoring declared dependencies and aligning `@vitejs/plugin-react` with Vite 8. Browser visual and interactive QA could not run because no browser connection was available; desktop and mobile rendering still need visual verification.
+The production build passed after restoring declared dependencies and aligning `@vitejs/plugin-react` with Vite 8. Browser visual QA was performed with a headless Edge session at 1440 × 1200 and 390 × 844 across the overview, graph, figures and dynasties routes (see the Apple design pass below); no browser session was connected for interactive regression, so live keyboard/animation flows still need a manual check.
 
-The app still uses the existing incremental React/legacy architecture. Settings and the global Filters button remain existing “coming soon” controls; this review does not turn them into new features or change the historical dataset. The interface currently ships with one fixed light palette.
+The app still uses the existing incremental React/legacy architecture. Settings and the global Filters button remain existing “coming soon” controls; this review does not turn them into new features or change the historical dataset. The dark theme added in this pass is not yet visible: the toggle, the pre-paint attribute and the dark colour tokens all work, but `public/css/theme-dark.css` is not linked from `index.html`, so the dark palette never loads and text and surfaces keep their hard-coded light values. The interface therefore still renders its light palette only.
 
 ## Apple design pass · 2026-09-26
 
