@@ -350,3 +350,13 @@ body {
     animation: none !important;
   }
 }
+
+/* Top-header Arabic verse: solid dark green in light mode. In dark mode the
+   verse keeps its golden gradient untouched. */
+:root:not([data-theme="dark"]) .overview-ribbon-arabic {
+  color: #1c4031;
+  background-image: none;
+  background-clip: initial;
+  -webkit-background-clip: initial;
+  filter: drop-shadow(0 0 4px rgba(28,64,49,.35)) drop-shadow(0 0 12px rgba(28,64,49,.15));
+}
