@@ -48,6 +48,11 @@ const Theme = (() => {
   function apply(next, save) {
     mode = MODES.includes(next) ? next : preferred();
     document.documentElement.dataset.theme = mode;
+    // The existing light-theme surface overrides in css/overview-locked.css are
+    // scoped to body[data-theme="light"], so the attribute is mirrored here.
+    // Both attributes are written together; nothing else may write them.
+    document.body.dataset.theme = mode;
+    document.documentElement.style.colorScheme = mode;
     if (save) {
       try { localStorage.setItem(KEY, mode); } catch { /* Session-only choice. */ }
     }

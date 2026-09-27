@@ -1,7 +1,10 @@
-/* Shared presentation controls. Storage is optional: blocked storage must not prevent boot. */
+/* Shared presentation controls. Storage is optional: blocked storage must not prevent boot.
+   The theme is not owned here. js/theme.js owns it exclusively, and this module
+   used to reset it to light on every boot because it initialised afterwards. */
 const SiteChrome = (() => {
   const KEY = 'chrono.display.v1';
-  const defaults = { theme: 'light', atmosphere: true, motion: true };
+  const LEGACY_THEME_KEY = 'chrono.display.v1';
+  const defaults = { atmosphere: true, motion: true };
   let preferences = { ...defaults };
   let initialized = false;
   let returnFocus = null;
@@ -10,30 +13,23 @@ const SiteChrome = (() => {
     try {
       const value = JSON.parse(localStorage.getItem(KEY));
       return {
-        theme: value?.theme === 'dark' || value?.theme === 'circuit' ? 'dark' : 'light',
         atmosphere: typeof value?.atmosphere === 'boolean' ? value.atmosphere : true,
         motion: typeof value?.motion === 'boolean' ? value.motion : true,
       };
     } catch { return { ...defaults }; }
   }
 
+  /* A reader who chose dark under the old owner keeps that choice. This is the
+     only place the legacy key is read, and only to hand the value over. */
+  function migrateLegacyTheme() {
+    try {
+      const legacy = JSON.parse(localStorage.getItem(LEGACY_THEME_KEY));
+      if (legacy?.theme === 'dark' && window.Theme) Theme.set('dark');
+    } catch { /* Storage is optional. */ }
+  }
+
   function applyPreferences(save = false, onlyControl = null) {
     const root = document.documentElement;
-    if (!onlyControl || onlyControl === 'theme') {
-      root.dataset.theme = preferences.theme;
-      document.body.dataset.theme = preferences.theme;
-      root.style.colorScheme = preferences.theme;
-      const toggle = document.querySelector('[data-theme-toggle]');
-      const dark = preferences.theme === 'dark';
-      if (toggle) {
-        toggle.dataset.themeState = preferences.theme;
-        toggle.setAttribute('aria-pressed', String(dark));
-        toggle.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} theme`);
-        toggle.dataset.tooltip = `Switch to ${dark ? 'light' : 'dark'} theme`;
-        const label = toggle.querySelector('[data-theme-label]');
-        if (label) label.textContent = `${dark ? 'Dark' : 'Light'} mode`;
-      }
-    }
     if (!onlyControl || onlyControl === 'atmosphere') {
       if (preferences.atmosphere) document.body.classList.remove('no-fx');
       else document.body.classList.add('no-fx');
@@ -57,7 +53,9 @@ const SiteChrome = (() => {
   }
 
   function setPreference(key, value) {
-    if (key === 'theme' && !['light', 'dark'].includes(value)) return;
+    // Kept in the public shape for callers that still ask for the theme, but it
+    // is forwarded to its owner instead of being applied here.
+    if (key === 'theme') { window.Theme?.set(value); return; }
     if (['motion', 'atmosphere'].includes(key) && typeof value !== 'boolean') return;
     if (!(key in defaults)) return;
     if (preferences[key] === value) return;
@@ -98,6 +96,7 @@ const SiteChrome = (() => {
     if (initialized) return;
     initialized = true;
     preferences = readPreferences();
+    migrateLegacyTheme();
     applyPreferences(true);
     syncRouteTabs();
     window.addEventListener('hashchange', syncRouteTabs);
@@ -117,8 +116,9 @@ const SiteChrome = (() => {
       });
     });
     document.querySelector('[data-display-close]')?.addEventListener('click', closeDisplay);
-    document.querySelector('[data-theme-toggle]')?.addEventListener('click', () =>
-      setPreference('theme', preferences.theme === 'light' ? 'dark' : 'light'));
+    // The theme toggle is bound by js/theme.js only. Binding it here as well
+    // made one click travel through two owners that each flipped their own
+    // stored value, which left the attributes disagreeing.
     for (const key of ['atmosphere', 'motion']) {
       document.querySelector(`[data-${key}]`)?.addEventListener('change', (event) => setPreference(key, event.target.checked));
     }
