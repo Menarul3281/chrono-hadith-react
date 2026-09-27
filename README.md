@@ -59,11 +59,11 @@ The project combines:
 - A board view and a table view of the same records.
 - Stable grid placement designed to reduce card overlap.
 - Relationship paths connecting figures, sources, places, themes, events, and books.
-- SVG/canvas fallbacks for graph surfaces that cannot mount React Flow.
+- An SVG fallback renderer for graph surfaces that cannot mount React Flow.
 
 ### 🗓️ Historical exploration
 
-- Timeline lanes for figures, events, dynasties, places, and books.
+- Timeline lanes for figures, events, dynasties, places, and selected hadith collections.
 - Event records with era, context, significance, participants, and citations.
 - Place records with coordinates and uncertainty markers.
 - Dynasty and ruler records with dates, capitals, regions, and sources.
@@ -102,7 +102,7 @@ Search adapts to the current section and can match fields such as:
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) 22 or newer is recommended.
+- [Node.js](https://nodejs.org/) 22.12 or newer is recommended (20.19 or newer is also supported).
 - npm is included with Node.js.
 
 ### Install and run

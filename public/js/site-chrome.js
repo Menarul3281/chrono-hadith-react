@@ -3,7 +3,7 @@
    used to reset it to light on every boot because it initialised afterwards. */
 const SiteChrome = (() => {
   const KEY = 'chrono.display.v1';
-  const LEGACY_THEME_KEY = 'chrono.display.v1';
+  const THEME_KEY = 'chrono.theme.v1';
   const defaults = { atmosphere: true, motion: true };
   let preferences = { ...defaults };
   let initialized = false;
@@ -23,8 +23,9 @@ const SiteChrome = (() => {
      only place the legacy key is read, and only to hand the value over. */
   function migrateLegacyTheme() {
     try {
-      const legacy = JSON.parse(localStorage.getItem(LEGACY_THEME_KEY));
-      if (legacy?.theme === 'dark' && window.Theme) Theme.set('dark');
+      if (localStorage.getItem(THEME_KEY)) return;
+      const legacy = JSON.parse(localStorage.getItem(KEY));
+      if (['light', 'dark'].includes(legacy?.theme) && typeof Theme !== 'undefined') Theme.set(legacy.theme);
     } catch { /* Storage is optional. */ }
   }
 
@@ -55,7 +56,10 @@ const SiteChrome = (() => {
   function setPreference(key, value) {
     // Kept in the public shape for callers that still ask for the theme, but it
     // is forwarded to its owner instead of being applied here.
-    if (key === 'theme') { window.Theme?.set(value); return; }
+    if (key === 'theme') {
+      if (typeof Theme !== 'undefined') Theme.set(value);
+      return;
+    }
     if (['motion', 'atmosphere'].includes(key) && typeof value !== 'boolean') return;
     if (!(key in defaults)) return;
     if (preferences[key] === value) return;
