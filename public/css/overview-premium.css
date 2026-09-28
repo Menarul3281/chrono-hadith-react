@@ -273,3 +273,29 @@ body[data-route="overview"] .ov8-footer-btn:hover{
   .ov8-stat{width:auto}
   .ov8-scholar{padding:24px 18px;border-radius:22px}
 }
+
+
+/* Pass 5 · performance and motion restraint */
+.ov8-explore,.ov8-scholar,.ov8-footer{content-visibility:auto;contain-intrinsic-size:auto 420px}
+.ov-graph-mount{contain:layout paint style}
+.ov8-explore-card,.ov8-scholar,.ov8-footer{transform:translateZ(0)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .ov8-hero,.ov8-explore-card,.ov8-scholar,.ov8-footer,
+  body[data-route="overview"] .overview-ribbon,body[data-route="overview"] .sidebar.rail{background:var(--panel)}
+}
+@media(max-width:700px){
+  .ov8-hero,.ov8-explore-card,.ov8-scholar,.ov8-footer{
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)
+  }
+  body[data-route="overview"] .overview-ribbon,
+  body[data-route="overview"] .sidebar.rail{
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)
+  }
+  .ov8-particles{display:none}
+}
+@media(prefers-reduced-transparency:reduce){
+  .ov8-hero,.ov8-explore-card,.ov8-scholar,.ov8-footer,
+  body[data-route="overview"] .overview-ribbon,body[data-route="overview"] .sidebar.rail{
+    backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:var(--panel)!important
+  }
+}
