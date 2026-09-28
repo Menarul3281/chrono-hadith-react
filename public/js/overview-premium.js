@@ -1,39 +1,96 @@
 (() => {
-  const rootSel = '.ov8';
-  const revealSel = '.ov8-hero-copy,.ov-graph-mount,.ov8-explore-title,.ov8-explore-sub,.ov8-explore-card,.ov8-scholar,.ov8-footer';
+  const ROOT = '[data-ovx-root]';
+  const REVEALS = [
+    '.ovx-hero-copy',
+    '.ovx-index',
+    '.ovx-section-heading',
+    '.ovx-lens-card',
+    '.ovx-chain-intro',
+    '.ovx-chain-panel',
+    '.ovx-record-card',
+    '.ovx-feature',
+    '.ovx-integrity-head',
+    '.ovx-integrity-grid',
+    '.ovx-footer'
+  ].join(',');
+
   const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const motionEnabled = () => document.documentElement.dataset.motion !== 'off';
 
-  function enhance(root){
-    if(!root || root.dataset.premiumOverview==='1') return;
-    root.dataset.premiumOverview='1';
-    root.classList.add('ov8-premium-ready');
+  function installChainFocus(root) {
+    const panel = root.querySelector('.ovx-chain-panel');
+    if (!panel || panel.dataset.chainFocus === '1') return;
+    panel.dataset.chainFocus = '1';
+    const steps = [...panel.querySelectorAll('.ovx-chain-step')];
 
-    const hero=root.querySelector('.ov8-hero');
-    if(hero && !reduced()){
-      let raf=0,x=50,y=20;
-      const paint=()=>{raf=0;root.style.setProperty('--ov-mx',x+'%');root.style.setProperty('--ov-my',y+'%')};
-      hero.addEventListener('pointermove',e=>{
-        const r=hero.getBoundingClientRect();
-        x=Math.max(0,Math.min(100,(e.clientX-r.left)/r.width*100));
-        y=Math.max(0,Math.min(100,(e.clientY-r.top)/r.height*100));
-        if(!raf) raf=requestAnimationFrame(paint);
-      },{passive:true});
-      hero.addEventListener('pointerleave',()=>{x=50;y=20;if(!raf) raf=requestAnimationFrame(paint)},{passive:true});
-    }
+    const activate = (step) => {
+      steps.forEach((item) => item.classList.toggle('is-active', item === step));
+      panel.classList.add('has-chain-focus');
+    };
 
-    const items=[...root.querySelectorAll(revealSel)];
-    items.forEach((el,i)=>{el.classList.add('ov8-premium-reveal');el.style.setProperty('--ov-reveal-delay',Math.min(i*45,220)+'ms')});
-    if(reduced() || !('IntersectionObserver' in window)){items.forEach(el=>el.classList.add('is-visible'));return}
-    const io=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');io.unobserve(entry.target)}}),{threshold:.12,rootMargin:'0px 0px -7% 0px'});
-    items.forEach(el=>io.observe(el));
-    requestAnimationFrame(()=>root.querySelectorAll('.ov8-hero-copy,.ov-graph-mount').forEach(el=>el.classList.add('is-visible')));
+    const clear = () => {
+      steps.forEach((item) => item.classList.remove('is-active'));
+      panel.classList.remove('has-chain-focus');
+    };
+
+    steps.forEach((step) => {
+      step.addEventListener('pointerenter', () => activate(step), { passive: true });
+      step.addEventListener('pointerleave', clear, { passive: true });
+      step.addEventListener('focusin', () => activate(step));
+      step.addEventListener('focusout', (event) => {
+        if (!step.contains(event.relatedTarget)) clear();
+      });
+    });
+
+    panel.addEventListener('pointerleave', clear, { passive: true });
   }
 
-  const scan=node=>{
-    if(node.matches?.(rootSel)) enhance(node);
-    node.querySelectorAll?.(rootSel).forEach(enhance);
-  };
-  scan(document);
-  const host=document.getElementById('page')||document.body;
-  new MutationObserver(records=>records.forEach(r=>r.addedNodes.forEach(n=>{if(n.nodeType===1)scan(n)}))).observe(host,{childList:true,subtree:true});
+  function installReveals(root) {
+    const items = [...root.querySelectorAll(REVEALS)];
+    items.forEach((item) => item.classList.add('ovx-reveal'));
+
+    if (reduced() || !motionEnabled() || !('IntersectionObserver' in window)) {
+      items.forEach((item) => item.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    }, { threshold: .08, rootMargin: '0px 0px -5% 0px' });
+
+    items.forEach((item) => observer.observe(item));
+    root.querySelectorAll('.ovx-hero-copy,.ovx-index').forEach((item) => item.classList.add('is-visible'));
+  }
+
+  function enhance(root) {
+    if (!root || root.dataset.ovxEnhanced === '1') return;
+    root.dataset.ovxEnhanced = '1';
+    root.classList.add('ovx-enhanced');
+    installChainFocus(root);
+    installReveals(root);
+  }
+
+  function scan(scope = document) {
+    if (scope.matches?.(ROOT)) enhance(scope);
+    scope.querySelectorAll?.(ROOT).forEach(enhance);
+  }
+
+  scan();
+
+  window.addEventListener('chrono:overview-rendered', () => scan(document));
+
+  const page = document.getElementById('page');
+  if (page) {
+    new MutationObserver((records) => {
+      for (const record of records) {
+        for (const node of record.addedNodes) {
+          if (node.nodeType === Node.ELEMENT_NODE) scan(node);
+        }
+      }
+    }).observe(page, { childList: true, subtree: true });
+  }
 })();
