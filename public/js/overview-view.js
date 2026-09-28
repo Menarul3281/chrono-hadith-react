@@ -53,18 +53,18 @@ const OverviewView = (() => {
   }
 
   const EXPLORE = [
-    { id: 'explore:history', kicker: '01 / HISTORICAL CONTEXT', title: 'Moments in time.',
-      desc: 'Browse events in chronological order and discover how they connect across the record.',
+    { id: 'explore:history', kicker: '01 / HISTORICAL CONTEXT', title: 'Trace the timeline.',
+      desc: 'See people, places, and events in sequence—then open the records behind them.',
       cta: 'EXPLORE HISTORY ↗', href: '#history?view=timeline' },
-    { id: 'explore:graph', kicker: '02 / NETWORK', title: 'Follow the connections.',
-      desc: 'Open people, places, and works from a single point of reference.',
+    { id: 'explore:graph', kicker: '02 / NETWORK', title: 'Follow the chain.',
+      desc: 'Move from one record to the people, places, works, and evidence connected to it.',
       cta: 'EXPLORE GRAPH ↗', href: '#graph' },
   ];
   function exploreHtml() {
     return `
       <section class="ov8-explore" aria-labelledby="ov8ExploreTitle">
         <h2 class="ov8-explore-title" id="ov8ExploreTitle">EXPLORE THE RECORD</h2>
-        <p class="ov8-explore-sub">Discover the stories. Trace historical moments and the people and records associated with them.</p>
+        <p class="ov8-explore-sub">Move through the record by time, transmission, and connection.</p>
         <div class="ov8-explore-grid">
           ${EXPLORE.map((c) => `
             <article class="ov8-explore-card">
@@ -103,14 +103,14 @@ const OverviewView = (() => {
         <section class="ov8-hero">
           <div class="ov8-hero-copy">
             <p class="ov8-kicker">THE ISLAMIC KNOWLEDGE NETWORK / 01</p>
-            <h1 class="ov8-title">See how<br>knowledge<br><em>travels.</em></h1>
-            <p class="ov8-lead">From the Prophet ﷺ to the people who learned, narrated, and preserved knowledge. Explore the archive through a clear visual system.</p>
+            <h1 class="ov8-title">Knowledge,<br><em>connected.</em></h1>
+            <p class="ov8-lead">Trace how knowledge moved across people, places, generations, and books—from the Prophet ﷺ through the preserved record.</p>
             <div class="ov8-cta">
-              <a class="dsh-btn primary" href="#graph">ENTER THE GRAPH ↗</a>
-              <a class="dsh-btn" href="#figures">BROWSE NARRATORS →</a>
+              <a class="dsh-btn primary" href="#graph">EXPLORE THE GRAPH ↗</a>
+              <a class="dsh-btn" href="#figures">BROWSE FIGURES →</a>
             </div>
             ${statsHtml()}
-            <p class="ov8-tagline">PEOPLE / PLACES / EVENTS / CHAINS / A RICHER UNDERSTANDING</p>
+            <p class="ov8-tagline">PEOPLE · PLACES · EVENTS · CHAINS · SOURCES</p>
           </div>
           <div class="ov-graph-mount" id="ovGraphMount"></div>
         </section>
