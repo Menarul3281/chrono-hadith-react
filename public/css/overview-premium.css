@@ -342,6 +342,10 @@ body.no-fx[data-route="overview"] .ovx::before,
 .ovx-btn-primary:hover {
   border-color: var(--ovx-accent);
   background: var(--ovx-accent);
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .ovx-btn-primary:hover {
   color: #07110f;
 }
 
