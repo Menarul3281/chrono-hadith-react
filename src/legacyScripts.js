@@ -22,7 +22,6 @@ export const legacyScripts = [
   "hadiths-view.js",
   "places-view.js",
   "graph-view.js",
-  "overview-graph.js",
   "overview-view.js",
   "overview-premium.js",
   "overview-critic.js",
