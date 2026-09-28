@@ -192,3 +192,36 @@ body[data-route="overview"] .rail .nav-item:hover{transform:translateY(-1px);bac
   .ov8-premium-ready .ov8-premium-reveal,.ov8-premium-ready .ov8-premium-reveal.is-visible{opacity:1;transform:none;filter:none;transition:none}
   .ov8-explore-card,.ov8 .dsh-btn,.ov-graph-mount,body[data-route="overview"] .rail .nav-item{transition-duration:0s!important}
 }
+
+
+/* Pass 3 · interaction and accessibility */
+body[data-route="overview"] .ov8 :is(a,button,[role="button"]):focus-visible{
+  outline:3px solid color-mix(in srgb,var(--teal) 72%,white);
+  outline-offset:4px;
+  box-shadow:0 0 0 7px color-mix(in srgb,var(--teal) 12%,transparent);
+}
+body[data-route="overview"] .ov8 :is(a,button,[role="button"]){
+  -webkit-tap-highlight-color:transparent;
+}
+body[data-route="overview"] .ov8 .dsh-btn,
+body[data-route="overview"] .ov8-footer-btn{
+  min-height:44px;
+}
+body[data-route="overview"] .ov8-footer-btn{
+  display:inline-flex;align-items:center;padding-inline:8px;border-radius:10px;
+  transition:background .2s var(--ov-ease),color .2s var(--ov-ease),transform .24s var(--ov-spring)
+}
+body[data-route="overview"] .ov8-footer-btn:hover{
+  background:color-mix(in srgb,var(--panel-2) 72%,transparent);transform:translateY(-1px)
+}
+@media(hover:hover) and (pointer:fine){
+  .ov8-explore-card::after{
+    content:"";position:absolute;inset:-1px;pointer-events:none;border-radius:inherit;
+    background:linear-gradient(110deg,transparent 20%,rgba(255,255,255,.18) 44%,transparent 64%);
+    transform:translateX(-120%);transition:transform .75s var(--ov-spring)
+  }
+  .ov8-explore-card:hover::after{transform:translateX(120%)}
+}
+@media(hover:none){
+  .ov8-explore-card:hover,.ov8 .dsh-btn:hover,body[data-route="overview"] .rail .nav-item:hover{transform:none}
+}
