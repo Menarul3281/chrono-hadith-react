@@ -24,6 +24,8 @@ export const legacyScripts = [
   "graph-view.js",
   "overview-graph.js",
   "overview-view.js",
+  "overview-premium.js",
+  "overview-critic.js",
   "motion.js",
   "tooltips.js",
   "topsearch.js",
