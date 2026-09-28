@@ -144,7 +144,7 @@ const OverviewView = (() => {
     const fx = document.createElement('div');
     fx.className = 'ov8-particles';
     fx.setAttribute('aria-hidden', 'true');
-    for (let i = 0; i < 26; i++) {
+    for (let i = 0; i < 14; i++) {
       const p = document.createElement('span');
       p.style.left = (Math.random() * 100).toFixed(2) + '%';
       p.style.animationDuration = (14 + Math.random() * 16).toFixed(2) + 's';
