@@ -225,3 +225,51 @@ body[data-route="overview"] .ov8-footer-btn:hover{
 @media(hover:none){
   .ov8-explore-card:hover,.ov8 .dsh-btn:hover,body[data-route="overview"] .rail .nav-item:hover{transform:none}
 }
+
+
+/* Pass 4 · theme and responsive parity */
+:root[data-theme="dark"] body[data-route="overview"] .overview-ribbon,
+:root[data-theme="dark"] body[data-route="overview"] .sidebar.rail{
+  box-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 18px 48px rgba(0,0,0,.28)
+}
+:root[data-theme="dark"] .ov8-hero::before{
+  background:
+    linear-gradient(115deg,rgba(255,255,255,.02),transparent 26% 74%,rgba(255,255,255,.012)),
+    radial-gradient(500px 360px at 12% 12%,rgba(117,231,199,.05),transparent 74%)
+}
+:root[data-theme="dark"] .ov8-explore-card:hover{
+  box-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 30px 64px rgba(0,0,0,.32)
+}
+:root:not([data-theme="dark"]) .ov8-scholar,
+:root:not([data-theme="dark"]) .ov8-explore-card,
+:root:not([data-theme="dark"]) .ov8-hero{
+  background:color-mix(in srgb,#ffffff 78%,var(--panel) 22%)
+}
+@media(min-width:1100px) and (max-width:1380px){
+  .ov8-hero{grid-template-columns:minmax(330px,.9fr) minmax(500px,1.1fr);padding:38px;gap:38px}
+  .ov8-title{font-size:clamp(52px,5.3vw,76px)}
+  .ov8-lead{font-size:16px}
+  .ov-graph-mount{max-width:760px}
+}
+@media(max-width:900px){
+  body[data-route="overview"] .overview-ribbon-verse{display:none}
+  body[data-route="overview"] .overview-ribbon-meta{max-width:calc(100% - 118px)}
+  .ov8-explore-grid{grid-template-columns:1fr}
+  .ov8-explore-card{min-height:230px}
+}
+@media(max-width:700px){
+  .ov8-kicker{font-size:10px;letter-spacing:.085em}
+  .ov8-tagline{display:none}
+  .ov8-stats{border-radius:14px}
+  .ov8-stat{padding:11px 12px}
+  .ov8-stat b{font-size:18px}
+  .ov8-scholar-desc,.ov8-explore-card-desc{font-size:15px}
+}
+@media(max-width:430px){
+  body[data-route="overview"] .main>.page{padding-inline:10px}
+  .ov8-hero{padding:22px 16px;border-radius:22px}
+  .ov8-title{font-size:clamp(40px,14vw,52px)}
+  .ov8-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ov8-stat{width:auto}
+  .ov8-scholar{padding:24px 18px;border-radius:22px}
+}
